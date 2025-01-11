@@ -35,6 +35,12 @@ body {
     cursor: pointer;
     animation: spin 30s infinite linear;
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+.planet * {
+    user-select: none;
 }
 
 .click {
