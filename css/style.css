@@ -34,7 +34,7 @@ body {
     transition: .2s ease all;
     cursor: pointer;
     animation: spin 30s infinite linear;
-    pointer-events: none;
+    user-select: none;
 }
 
 .click {
