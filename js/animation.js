@@ -26,8 +26,8 @@ clickArea.addEventListener('click', (e) => {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    circle.style.left = `${x}px`;
-    circle.style.top = `${y}px`;
+    circle.style.left = `${x - 10}px`;
+    circle.style.top = `${y - 20}px`;
 
     clickArea.appendChild(circle);
 

@@ -33,7 +33,7 @@ body {
     height: 10em;
     transition: .2s ease all;
     cursor: pointer;
-    animation: spin 30s infinite linear;
+    animation: spin 35s infinite linear;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
     outline: none;
@@ -118,6 +118,17 @@ body {
     border-radius: .5em;
 }
 
+.fly-info {
+    position: absolute;
+    display: none;
+    background-color: #edae49;
+    border: 2px solid #000000;
+    border-radius: .5em;
+    color: black;
+    z-index: 1000;
+    transition: .1s ease all;
+}
+
 .buttons {
     display: flex;
     flex-direction: column;
@@ -141,6 +152,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     gap: .1em;
     font-size: 1.5rem;
     border: none;
@@ -165,6 +177,17 @@ body {
     transition: .5s ease all;
 }
 
+.buttons button .top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons .btn-flex .descricao {
+    font-size: 15px;
+    width: 100%;
+}
+
 .buttons .btn-flex p {
     display: flex;
     align-items: center;
@@ -179,5 +202,5 @@ body {
 }
 
 .buttons .btn-flex .preco {
-    font-size: 20px;
+    font-size: 15px;
 }

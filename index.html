@@ -14,6 +14,14 @@
 </head>
 
 <body>
+    <audio id="musica" loop>
+        <source src="sounds/Intergalactic Grooves.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+    <audio id="click-sound">
+        <source src="sounds/click.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
     <div class="jogo">
         <section class="hero">
             <div class="planet" id="btn">
@@ -24,21 +32,34 @@
         </section>
         <section class="upgrades">
             <div class="info">
-                <p id="score">Planetas: 0</p>
-                <p id="passive_score">Ganho passivo: 0/s</p>
-                <p id="valor-click">Valor do clique: 1</p>
+                <div class="fly-info"></div>
+                <p id="planetas-div"><i class="material-icons">public</i><br><span id="score">0</span></p>
+                <p id="miner-div"><i class="material-icons">engineering</i><br><span id="passive_score">0/s</span></p>
+                <p id="valor-click-div"><i class="material-icons">ads_click</i><br><span id="valor-click">1</span></p>
             </div>
             <div class="buttons">
                 <div class="btn-flex">
-                    <button id="miner"><i class="material-icons">engineering</i>Minerador <div class="preco"
-                            id="miner_preco">
-                            (10)</div>
+                    <button id="miner">
+                        <div class="top">
+                            <i class="material-icons">engineering</i>Minerador <div class="preco" id="miner_preco">
+                                (10)</div>
+                        </div>
+                        <div class="bottom">
+                            <p class="descricao">O minerador minera junto com você te dando mais poder de clique</p>
+                        </div>
                     </button>
                     <p id="count-btn-miner">0x</p>
                 </div>
                 <div class="btn-flex">
-                    <button id="laser"><i class="fa-solid fa-gun"></i>Laser <div class="preco" id="laser_preco">(100)
-                        </div></button>
+                    <button id="laser">
+                        <div class="top">
+                            <i class="fa-solid fa-gun"></i>Laser <div class="preco" id="laser_preco">(100)
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <p class="descricao">O laser atira sozinho para você</p>
+                        </div>
+                    </button>
                     <p id="count-btn-laser">0x</p>
                 </div>
             </div>

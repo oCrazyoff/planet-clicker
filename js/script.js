@@ -18,6 +18,25 @@ let count_miner_display = document.getElementById("count-btn-miner");
 let count_miner = 0;
 btn_miner.disabled = true;
 
+//inicia a musica
+document.addEventListener('click', () => {
+    const audio = document.getElementById("musica");
+    if (audio) {
+        audio.volume = 0.1;
+        audio.play();
+    }
+});
+
+//som de click
+btn_click.addEventListener("click", () => {
+    const click_sound = document.getElementById("click-sound");
+    if (click_sound) {
+        click_sound.volume = 0.1;
+        click_sound.currentTime = 0;
+        click_sound.play();
+    }
+})
+
 //Remover cache do css
 const link = document.querySelector('link[rel="stylesheet"]');
 
@@ -25,6 +44,52 @@ if (link) {
     link.href = link.href.split('?')[0] + '?v=' + new Date().getTime();
 }
 
+//mostra as informações flutuantes
+let info_div = document.querySelector(".fly-info");
+let div_planetas = document.getElementById("planetas-div");
+let div_miner = document.getElementById("miner-div");
+let div_click = document.getElementById("valor-click-div");
+div_planetas.addEventListener("mouseover", (event) => {
+    info_div.textContent = "Planetas obtidos";
+    info_div.style.display = "block";
+})
+
+div_planetas.addEventListener("mousemove", (event) => {
+    info_div.style.left = `${event.pageX + 10}px`;
+    info_div.style.top = `${event.pageY + 10}px`;
+});
+
+div_planetas.addEventListener("mouseout", (event) => {
+    info_div.style.display = "none";
+});
+
+div_miner.addEventListener("mouseover", (event) => {
+    info_div.textContent = "Ganho por segundo";
+    info_div.style.display = "block";
+})
+
+div_miner.addEventListener("mousemove", (event) => {
+    info_div.style.left = `${event.pageX + 10}px`;
+    info_div.style.top = `${event.pageY + 10}px`;
+});
+
+div_miner.addEventListener("mouseout", (event) => {
+    info_div.style.display = "none";
+});
+
+div_click.addEventListener("mouseover", (event) => {
+    info_div.textContent = "Poder do clique";
+    info_div.style.display = "block";
+})
+
+div_click.addEventListener("mousemove", (event) => {
+    info_div.style.left = `${event.pageX + 10}px`;
+    info_div.style.top = `${event.pageY + 10}px`;
+});
+
+div_click.addEventListener("mouseout", (event) => {
+    info_div.style.display = "none";
+});
 
 // Carrega o progresso do jogo
 function carregarProgresso() {
@@ -39,9 +104,9 @@ function carregarProgresso() {
         count_miner = progresso.count_miner || 0;
 
         // Atualiza a interface com os dados carregados
-        planetas.textContent = "Planetas: " + formatarNumero(pontos);
-        valor_click_display.textContent = "Valor do clique: " + formatarNumero(valor_click);
-        passive_score.textContent = "Ganho passivo: " + formatarNumero(ganho_passivo) + "/s";
+        planetas.textContent = formatarNumero(pontos);
+        valor_click_display.textContent = formatarNumero(valor_click);
+        passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
         laser_preco_display.textContent = "(" + formatarNumero(laser_preco) + ")";
         count_laser_display.textContent = count_laser + "x";
         miner_preco_display.textContent = "(" + formatarNumero(miner_preco) + ")";
@@ -79,7 +144,7 @@ function verificarPoderes() {
 
 btn_click.addEventListener("click", () => {
     pontos += valor_click;
-    planetas.textContent = "Planetas: " + formatarNumero(pontos);
+    planetas.textContent = formatarNumero(pontos);
     verificarPoderes();
     salvarProgresso();
 });
@@ -92,9 +157,9 @@ btn_laser.addEventListener("click", () => {
             ganho_passivo += ganho_passivo / 2;
         }
         count_laser += 1;
-        passive_score.textContent = "Ganho passivo: " + formatarNumero(ganho_passivo) + "/s";
+        passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
         pontos -= laser_preco;
-        planetas.textContent = "Planetas: " + formatarNumero(pontos);
+        planetas.textContent = formatarNumero(pontos);
         laser_preco = laser_preco + (laser_preco * 2);
         laser_preco_display.textContent = "(" + formatarNumero(laser_preco) + ")";
         count_laser_display.textContent = count_laser + "x";
@@ -108,10 +173,10 @@ btn_miner.addEventListener("click", () => {
         count_miner += 1;
         valor_click += valor_click / 2;
         pontos -= miner_preco;
-        planetas.textContent = "Planetas: " + formatarNumero(pontos);
+        planetas.textContent = formatarNumero(pontos);
         miner_preco += miner_preco / 2;
         miner_preco_display.textContent = "(" + formatarNumero(miner_preco) + ")";
-        valor_click_display.textContent = "Valor do clique: " + formatarNumero(valor_click);
+        valor_click_display.textContent = formatarNumero(valor_click);
         count_miner_display.textContent = count_miner + "x";
         salvarProgresso();
     }
@@ -120,7 +185,7 @@ btn_miner.addEventListener("click", () => {
 
 function atualizarPontosPassivos() {
     pontos += ganho_passivo;
-    planetas.textContent = "Planetas: " + formatarNumero(pontos);
+    planetas.textContent = formatarNumero(pontos);
     verificarPoderes();
     salvarProgresso();
 }
