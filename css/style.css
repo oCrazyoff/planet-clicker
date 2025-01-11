@@ -8,6 +8,8 @@
 body {
     height: 100dvh;
     width: 100%;
+    overflow: hidden;
+    background-color: #000814;
 }
 
 .game {
@@ -25,7 +27,10 @@ body {
     background-image: url(https://static.vecteezy.com/system/resources/previews/001/377/019/original/galaxy-background-with-stars-and-nebula-free-vector.jpg);
     background-position: center;
     background-repeat: no-repeat;
+    height: 35dvh;
     background-size: cover;
+    position: relative;
+    overflow: hidden;
 }
 
 .planet {
@@ -38,6 +43,87 @@ body {
     -webkit-tap-highlight-color: transparent;
     outline: none;
 }
+
+.img-foguete {
+    opacity: 0;
+    width: 10em;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    transition: .2s ease-in-out all;
+    animation: voar 30s infinite;
+}
+
+@keyframes voar {
+    0% {
+        top: 100%;
+    }
+
+    20% {
+        top: -150%;
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(180deg);
+    }
+
+    90% {
+        top: -100%;
+        transform: rotate(180deg);
+    }
+
+    100% {
+        top: 150%;
+        transform: rotate(180deg);
+    }
+}
+
+.img-foguete img {
+    width: 100%;
+}
+
+.bonus {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: #0077b6;
+    border: 2px solid #000814;
+    border-radius: .5em;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    position: absolute;
+    pointer-events: none;
+    animation: aparecer 30s infinite;
+}
+
+@keyframes aparecer {
+    0% {
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 1;
+    }
+
+    10% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+
+.bonus::before {
+    content: "add_circle";
+    font-family: 'Material Icons';
+    font-size: 24px;
+    vertical-align: middle;
+}
+
 
 .planet * {
     user-select: none;
@@ -130,6 +216,12 @@ body {
     transition: .1s ease all;
 }
 
+.buttons-scroll {
+    width: 100%;
+    max-height: 55.5dvh;
+    overflow-y: auto;
+}
+
 .buttons {
     display: flex;
     flex-direction: column;
@@ -212,4 +304,18 @@ body {
 
 .buttons .btn-flex .preco {
     font-size: 1em;
+}
+
+#reset-btn {
+    background-color: #9d0208;
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    width: 100%;
+    text-align: center;
+}
+
+#reset-btn i {
+    color: white;
+    margin-right: .5em;
 }

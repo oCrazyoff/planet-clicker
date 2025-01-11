@@ -33,6 +33,11 @@
                 <img
                     src="https://th.bing.com/th/id/R.5264daf3c450582421fc4b0ff3467221?rik=blmf9VQ7278LCA&pid=ImgRaw&r=0">
             </div>
+            <div id="bonus-div" class="bonus"></div>
+            <div id="img-foguete" class="img-foguete">
+                <img
+                    src="https://th.bing.com/th/id/R.f99a89983ee64a6a9691fd6a77c6889a?rik=QJzygW0JmcF6UA&riu=http%3a%2f%2fwww.onsoluti.com.br%2fimagens%2ffoguete-site-em-breve.gif&ehk=JFw4UEjY5UpjYBc2bxASD5g627%2bCi7uCOXjsOax4v9Y%3d&risl=&pid=ImgRaw&r=0">
+            </div>
         </section>
         <section class="upgrades">
             <div class="info">
@@ -41,30 +46,51 @@
                 <p id="miner-div"><i class="material-icons">engineering</i><br><span id="passive_score">0/s</span></p>
                 <p id="valor-click-div"><i class="material-icons">ads_click</i><br><span id="valor-click">1</span></p>
             </div>
-            <div class="buttons">
-                <div class="btn-flex">
-                    <button id="miner">
-                        <div class="top">
-                            <i class="material-icons">engineering</i>Minerador <div class="preco" id="miner_preco">
-                                (10)</div>
-                        </div>
-                        <div class="bottom">
-                            <p class="descricao">O minerador minera junto com você te dando mais poder de clique</p>
-                        </div>
-                    </button>
-                    <p id="count-btn-miner">0x</p>
-                </div>
-                <div class="btn-flex">
-                    <button id="laser">
-                        <div class="top">
-                            <i class="fa-solid fa-gun"></i>Laser <div class="preco" id="laser_preco">(100)
+            <div class="buttons-scroll">
+                <div class="buttons">
+                    <div class="btn-flex">
+                        <button id="miner">
+                            <div class="top">
+                                <i class="material-icons">engineering</i>Minerador <div class="preco" id="miner_preco">
+                                    (10)</div>
                             </div>
-                        </div>
-                        <div class="bottom">
-                            <p class="descricao">O laser atira sozinho para você</p>
+                            <div class="bottom">
+                                <p class="descricao">Minera junto com você</p>
+                            </div>
+                        </button>
+                        <p id="count-btn-miner">0x</p>
+                    </div>
+                    <div class="btn-flex">
+                        <button id="laser">
+                            <div class="top">
+                                <i class="fa-solid fa-gun"></i>Laser <div class="preco" id="laser_preco">(100)
+                                </div>
+                            </div>
+                            <div class="bottom">
+                                <p class="descricao">Atira sozinho pra você</p>
+                            </div>
+                        </button>
+                        <p id="count-btn-laser">0x</p>
+                    </div>
+                    <div class="btn-flex">
+                        <button id="foguete">
+                            <div class="top">
+                                <i class="material-icons">rocket_launch</i>Foguete <div class="preco"
+                                    id="foguete_preco">
+                                    (1K)
+                                </div>
+                            </div>
+                            <div class="bottom">
+                                <p class="descricao">Busca recursos em outros planetas</p>
+                            </div>
+                        </button>
+                        <p id="count-btn-foguete">0x</p>
+                    </div>
+                    <button id="reset-btn">
+                        <div class="top">
+                            <i class="material-icons">restart_alt</i>Resetar
                         </div>
                     </button>
-                    <p id="count-btn-laser">0x</p>
                 </div>
             </div>
         </section>
