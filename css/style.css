@@ -146,6 +146,7 @@ body {
     justify-content: center;
     gap: .2em;
     width: 100%;
+    min-height: 1em;
 }
 
 .buttons button {
@@ -186,6 +187,7 @@ body {
 .buttons .btn-flex .descricao {
     font-size: 15px;
     width: 100%;
+    padding: .1em;
 }
 
 .buttons .btn-flex p {
@@ -194,8 +196,7 @@ body {
     justify-content: center;
     background-color: #051923;
     color: #edae49;
-    padding: .3em;
-    height: 100%;
+    padding: .5em;
     width: 20%;
     border-radius: .5em;
     font-size: 2em;

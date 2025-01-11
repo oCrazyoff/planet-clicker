@@ -156,6 +156,11 @@ btn_laser.addEventListener("click", () => {
         } else {
             ganho_passivo += ganho_passivo / 2;
         }
+        const button_sound = document.getElementById("click-button");
+        if (button_sound) {
+            button_sound.currentTime = 0;
+            button_sound.play();
+        }
         count_laser += 1;
         passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
         pontos -= laser_preco;
@@ -170,6 +175,11 @@ btn_laser.addEventListener("click", () => {
 
 btn_miner.addEventListener("click", () => {
     if (pontos >= miner_preco) {
+        const button_sound = document.getElementById("click-button");
+        if (button_sound) {
+            button_sound.currentTime = 0;
+            button_sound.play();
+        }
         count_miner += 1;
         valor_click += valor_click / 2;
         pontos -= miner_preco;
