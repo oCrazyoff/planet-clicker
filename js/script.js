@@ -18,6 +18,14 @@ let count_miner_display = document.getElementById("count-btn-miner");
 let count_miner = 0;
 btn_miner.disabled = true;
 
+//Remover cache do css
+const link = document.querySelector('link[rel="stylesheet"]');
+
+if (link) {
+    link.href = link.href.split('?')[0] + '?v=' + new Date().getTime();
+}
+
+
 // Carrega o progresso do jogo
 function carregarProgresso() {
     const progresso = JSON.parse(localStorage.getItem("progressoJogo"));
