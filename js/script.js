@@ -9,14 +9,12 @@ let laser_preco_display = document.getElementById("laser_preco");
 let laser_preco = 100;
 let count_laser_display = document.getElementById("count-btn-laser");
 let passive_score = document.getElementById("passive_score");
-btn_laser.disabled = true;
 let count_laser = 0;
 let btn_miner = document.getElementById("miner");
 let miner_preco = 10;
 let miner_preco_display = document.getElementById("miner_preco");
 let count_miner_display = document.getElementById("count-btn-miner");
 let count_miner = 0;
-btn_miner.disabled = true;
 
 //inicia a musica
 document.addEventListener('click', () => {
@@ -131,14 +129,18 @@ function salvarProgresso() {
 function verificarPoderes() {
     if (pontos >= laser_preco) {
         btn_laser.disabled = false;
+        btn_laser.classList.remove("inativo");
     } else {
         btn_laser.disabled = true;
+        btn_laser.classList.add("inativo");
     }
 
     if (pontos >= miner_preco) {
         btn_miner.disabled = false;
+        btn_miner.classList.remove("inativo");
     } else {
         btn_miner.disabled = true;
+        btn_miner.classList.add("inativo");
     }
 }
 
@@ -149,10 +151,30 @@ btn_click.addEventListener("click", () => {
     salvarProgresso();
 });
 
+btn_miner.addEventListener("click", () => {
+    if (pontos >= miner_preco) {
+        const button_sound = document.getElementById("click-button");
+        if (button_sound) {
+            button_sound.currentTime = 0;
+            button_sound.play();
+        }
+        count_miner += 1;
+        valor_click += valor_click * 10 / 100;
+        pontos -= miner_preco;
+        planetas.textContent = formatarNumero(pontos);
+        miner_preco += miner_preco * 50 / 100;
+        miner_preco_display.textContent = "(" + formatarNumero(miner_preco) + ")";
+        valor_click_display.textContent = formatarNumero(valor_click);
+        count_miner_display.textContent = count_miner + "x";
+        salvarProgresso();
+    }
+    verificarPoderes();
+});
+
 btn_laser.addEventListener("click", () => {
     if (pontos >= laser_preco) {
-        if (ganho_passivo < 10) {
-            ganho_passivo += 10;
+        if (ganho_passivo < 1) {
+            ganho_passivo += 1;
         } else {
             ganho_passivo += ganho_passivo / 2;
         }
@@ -165,29 +187,9 @@ btn_laser.addEventListener("click", () => {
         passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
         pontos -= laser_preco;
         planetas.textContent = formatarNumero(pontos);
-        laser_preco = laser_preco + (laser_preco * 2);
+        laser_preco += laser_preco * 50 / 100;
         laser_preco_display.textContent = "(" + formatarNumero(laser_preco) + ")";
         count_laser_display.textContent = count_laser + "x";
-        salvarProgresso();
-    }
-    verificarPoderes();
-});
-
-btn_miner.addEventListener("click", () => {
-    if (pontos >= miner_preco) {
-        const button_sound = document.getElementById("click-button");
-        if (button_sound) {
-            button_sound.currentTime = 0;
-            button_sound.play();
-        }
-        count_miner += 1;
-        valor_click += valor_click / 2;
-        pontos -= miner_preco;
-        planetas.textContent = formatarNumero(pontos);
-        miner_preco += miner_preco / 2;
-        miner_preco_display.textContent = "(" + formatarNumero(miner_preco) + ")";
-        valor_click_display.textContent = formatarNumero(valor_click);
-        count_miner_display.textContent = count_miner + "x";
         salvarProgresso();
     }
     verificarPoderes();
@@ -201,15 +203,33 @@ function atualizarPontosPassivos() {
 }
 
 function formatarNumero(num) {
-    if (num >= 1e9) {
-        return (num / 1e9).toFixed(1) + " Bilhões";
+    let resultado;
+    if (num >= 1e15) {
+        resultado = (num / 1e15).toFixed(2) + "Q";
+    } else if (num >= 1e12) {
+        resultado = (num / 1e12).toFixed(2) + "T";
+    } else if (num >= 1e9) {
+        resultado = (num / 1e9).toFixed(2) + "B";
     } else if (num >= 1e6) {
-        return (num / 1e6).toFixed(1) + " Milhões";
+        resultado = (num / 1e6).toFixed(2) + "M";
     } else if (num >= 1e3) {
-        return (num / 1e3).toFixed(1) + " Mil";
+        resultado = (num / 1e3).toFixed(2) + "K";
     } else {
-        return num.toFixed(2);
+        resultado = num.toFixed(2);
     }
+    resultado = resultado.replace('.', ',');
+
+    const parts = resultado.split(',');
+    if (parts[0].length > 3) {
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+    resultado = parts.join(',');
+
+    if (resultado.indexOf(',00') !== -1) {
+        resultado = resultado.replace(',00', '');
+    }
+
+    return resultado;
 }
 
 setInterval(atualizarPontosPassivos, 1000);
