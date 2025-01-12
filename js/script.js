@@ -87,6 +87,39 @@ document.getElementById("reset-btn").addEventListener("click", () => {
     resetarProgresso();
 });
 
+// Função para adicionar muitos recursos
+function ativarHack() {
+    // Aumenta os recursos principais
+    pontos += 1e12; // Adiciona 1 trilhão de pontos
+    valor_click += 1e6; // Aumenta o valor do clique em 1 milhão
+    ganho_passivo += 1e8; // Aumenta o ganho passivo em 100 milhões
+    count_laser += 100; // Adiciona 100 lasers
+    count_miner += 500; // Adiciona 500 miners
+    count_foguete += 50; // Adiciona 50 foguetes
+
+    // Atualiza os preços para manter a progressão
+    laser_preco *= 10;
+    miner_preco *= 10;
+    foguete_preco *= 10;
+
+    // Atualiza a interface com os novos valores
+    planetas.textContent = formatarNumero(pontos);
+    valor_click_display.textContent = formatarNumero(valor_click);
+    passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
+    laser_preco_display.textContent = "(" + formatarNumero(laser_preco) + ")";
+    count_laser_display.textContent = count_laser + "x";
+    miner_preco_display.textContent = "(" + formatarNumero(miner_preco) + ")";
+    count_miner_display.textContent = count_miner + "x";
+    foguete_preco_display.textContent = "(" + formatarNumero(foguete_preco) + ")";
+    count_foguete_display.textContent = count_foguete + "x";
+}
+
+// Adiciona um evento de clique no botão de hack
+document.getElementById("hack-btn").addEventListener("click", () => {
+    ativarHack();
+});
+
+
 
 // Carrega o progresso do jogo
 function carregarProgresso() {
@@ -293,12 +326,40 @@ btn_foguete.addEventListener("click", () => {
 });
 
 
-
-//padronização dos numero
+//padronização dos numeros
 function formatarNumero(num) {
     let resultado;
     if (num >= 1e15) {
-        resultado = (num / 1e15).toFixed(2) + "Q";
+        const sufixosLetras = ["", "K", "M", "B", "T", "Q"];
+        let sufixosIndex = 5;
+
+        const letrasMinusculas = "abcdefghijklmnopqrstuvwxyz";
+        const letrasMaiusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        function gerarSufixo(indice) {
+            let sufixo = "";
+            let alfabeto = letrasMinusculas + letrasMaiusculas;
+            let tamanho = alfabeto.length;
+
+            while (indice >= 0) {
+                sufixo = alfabeto[indice % tamanho] + sufixo;
+                indice = Math.floor(indice / tamanho) - 1;
+            }
+
+            return sufixo;
+        }
+
+        let valor = num;
+        while (valor >= 1000) {
+            valor /= 1000;
+            sufixosIndex++;
+        }
+
+        let sufixo = sufixosIndex < sufixosLetras.length
+            ? sufixosLetras[sufixosIndex]
+            : gerarSufixo(sufixosIndex - sufixosLetras.length);
+
+        resultado = valor.toFixed(2) + sufixo;
     } else if (num >= 1e12) {
         resultado = (num / 1e12).toFixed(2) + "T";
     } else if (num >= 1e9) {
@@ -310,6 +371,7 @@ function formatarNumero(num) {
     } else {
         resultado = num.toFixed(2);
     }
+
     resultado = resultado.replace('.', ',');
 
     const parts = resultado.split(',');
@@ -324,6 +386,7 @@ function formatarNumero(num) {
 
     return resultado;
 }
+
 
 setInterval(atualizarPontosPassivos, 1000);
 

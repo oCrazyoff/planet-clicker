@@ -200,9 +200,10 @@ body {
 .info p {
     background-color: #0077b6;
     color: white;
-    padding: .2em;
+    padding: .3em;
     border-radius: .5em;
     min-width: 5em;
+    height: 3.5em;
 }
 
 .fly-info {
@@ -239,15 +240,14 @@ body {
     justify-content: center;
     gap: .2em;
     width: 100%;
-    height: 6em;
+    height: 3em;
 }
 
 .buttons button {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: .2em;
+    justify-content: space-between;
+    gap: 1em;
     font-size: 1rem;
     border: none;
     background-color: #edae49;
@@ -269,7 +269,7 @@ body {
 }
 
 .buttons button i {
-    font-size: 1.2rem;
+    font-size: 1rem;
     background-color: #051923;
     color: #edae49;
     padding: .5em;
@@ -284,9 +284,9 @@ body {
 }
 
 .buttons .btn-flex .descricao {
-    font-size: 15px;
+    font-size: 13px;
     width: 100%;
-    padding: .1em;
+    padding: .2em;
 }
 
 .buttons .btn-flex p {
@@ -315,7 +315,28 @@ body {
     text-align: center;
 }
 
+#reset-btn .descricao {
+    color: white;
+}
+
 #reset-btn i {
+    color: white;
+    margin-right: .5em;
+}
+
+#hack-btn {
+    display: none;
+    background-color: #0077b6;
+    width: 100%;
+    font-weight: 600;
+    color: white;
+}
+
+#hack-btn .descricao {
+    color: white;
+}
+
+#hack-btn i {
     color: white;
     margin-right: .5em;
 }
