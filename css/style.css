@@ -51,7 +51,7 @@ body {
     top: 100%;
     right: 0;
     transition: .2s ease-in-out all;
-    animation: voar 30s infinite;
+    animation: voar 60s infinite;
 }
 
 @keyframes voar {
@@ -94,7 +94,7 @@ body {
     transition: opacity 0.5s ease;
     position: absolute;
     pointer-events: none;
-    animation: aparecer 30s infinite;
+    animation: aparecer 60s infinite;
 }
 
 @keyframes aparecer {
@@ -179,11 +179,27 @@ body {
 }
 
 /* upgrades */
-.upgrades {
+.melhorias {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+#btn-upgrades {
+    display: none;
+    border: none;
+    border-radius: .5em;
+    background-color: #3c096c;
+    border: 2px solid #7209b7;
+    color: white;
+    padding: .3em;
+    cursor: pointer;
+    transition: .2s ease all;
+}
+
+#btn-upgrades:hover {
+    background-color: #7209b7;
 }
 
 .info {
@@ -265,7 +281,7 @@ body {
 }
 
 .buttons button:hover i {
-    transform: rotate(360deg);
+    transform: rotate(360deg) scale(1.1);
 }
 
 .buttons button i {
@@ -274,7 +290,8 @@ body {
     color: #edae49;
     padding: .5em;
     border-radius: 50%;
-    transition: .5s ease all;
+    transition: .3s ease all;
+    margin-right: .5em;
 }
 
 .buttons button .top {
