@@ -14,6 +14,28 @@ function atualizarProgresso() {
 
 setInterval(atualizarProgresso, 10);
 
+//configurações
+let btn_musica = document.getElementById("btn-musica");
+let tem_musica = true;
+btn_musica.addEventListener("click", () => {
+    if (tem_musica == true) {
+        btn_musica.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+        const audio = document.getElementById("musica");
+        if (audio) {
+            audio.pause();
+        }
+        tem_musica = false;
+    } else {
+        btn_musica.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+        const audio = document.getElementById("musica");
+        if (audio) {
+            audio.currentTime = 0;
+            audio.play();
+        }
+        tem_musica = true;
+    }
+});
+
 //mostra as informações flutuantes
 let info_div = document.querySelector(".fly-info");
 let div_planetas = document.getElementById("planetas-div");
@@ -78,12 +100,14 @@ function resetarProgresso() {
     comprou_pic_ferro = false;
     comprou_perfuracao = false;
     comprou_propulsores = false;
+    planeta_stratosyl = false;
+    porcentagem = 0;
 
     btn_pic_ferro.style.display = "flex";
     btn_perfuracao.style.display = "flex";
     btn_propulsores.style.display = "flex";
+    img_planeta.src = "https://th.bing.com/th/id/R.5264daf3c450582421fc4b0ff3467221?rik=blmf9VQ7278LCA&pid=ImgRaw&r=0";
 
-    // Atualiza a interface para refletir o reset
     planetas.textContent = formatarNumero(pontos);
     valor_click_display.textContent = formatarNumero(valor_click);
     passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
@@ -125,6 +149,8 @@ function carregarProgresso() {
         comprou_pic_ferro = progresso.comprou_pic_ferro || false;
         comprou_perfuracao = progresso.comprou_perfuracao || false;
         comprou_propulsores = progresso.comprou_propulsores || false;
+        planeta_stratosyl = progresso.planeta_stratosyl || false;
+        porcentagem = progresso.porcentagem || 0;
 
         // Atualiza a interface com os dados carregados
         planetas.textContent = formatarNumero(pontos);
@@ -154,6 +180,8 @@ function salvarProgresso() {
         comprou_pic_ferro,
         comprou_perfuracao,
         comprou_propulsores,
+        planeta_stratosyl,
+        porcentagem,
     };
     localStorage.setItem("progressoJogo", JSON.stringify(progresso));
 }
@@ -202,6 +230,11 @@ let btn_upgrades = document.getElementById("btn-upgrades");
 let telaInicial = false;
 
 btn_upgrades.addEventListener("click", () => {
+    const menu_sound = document.getElementById("click-menus");
+    if (menu_sound) {
+        menu_sound.currentTime = 0;
+        menu_sound.play();
+    }
     if (!telaInicial) {
         btn_upgrades.innerHTML = '<i class="material-icons">arrow_back</i><br>Voltar';
         document.getElementById("botoes").style.display = "none";
@@ -251,6 +284,30 @@ function verificarUpgrades() {
 
     if (comprou_propulsores == true) {
         btn_propulsores.style.display = "none";
+    }
+}
+
+//PLANETA stratosyl
+const stratosyl_price = 5000;
+let planeta_stratosyl = false;
+const stratosyl = setInterval(function () {
+    barraProgresso(pontos, stratosyl_price);
+}, 100);
+
+//barra de progresso para o proximo planeta
+function barraProgresso(value, maxValue) {
+    const progress_bar = document.getElementById("progress-bar-next-planet");
+
+    let porcentagem = Math.min((value / maxValue) * 100, 100);
+
+    progress_bar.style.width = `${porcentagem}%`;
+
+    if (value === stratosyl_price || planeta_stratosyl == true) {
+        clearInterval(stratosyl);
+        progress_bar.style.width = '0%';
+        porcentagem = 0;
+        planeta_stratosyl = true;
+        trocarPlaneta();
     }
 }
 
@@ -325,12 +382,14 @@ function formatarNumero(num) {
 }
 
 //inicia a musica
-document.addEventListener('click', () => {
+document.addEventListener('click', function handleClick() {
     const audio = document.getElementById("musica");
     if (audio) {
         audio.volume = 0.1;
         audio.play();
     }
+
+    document.removeEventListener("click", handleClick);
 });
 
 //som de click
