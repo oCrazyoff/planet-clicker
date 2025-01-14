@@ -1,9 +1,18 @@
 //Remover cache do css
-const link = document.querySelector('link[rel="stylesheet"]');
+let link = document.querySelector('link[rel="stylesheet"]');
 
 if (link) {
     link.href = link.href.split('?')[0] + '?v=' + new Date().getTime();
 }
+
+//atualiza situações em tempo real
+function atualizarProgresso() {
+    verificarPoderes();
+    verificarUpgrades();
+    salvarProgresso();
+}
+
+setInterval(atualizarProgresso, 10);
 
 //mostra as informações flutuantes
 let info_div = document.querySelector(".fly-info");
@@ -54,7 +63,6 @@ div_click.addEventListener("mouseout", (event) => {
 
 // Função para resetar o progresso
 function resetarProgresso() {
-    // Limpa o progresso salvo no localStorage
     localStorage.removeItem("progressoJogo");
 
     // Reinicia as variáveis principais
@@ -67,6 +75,13 @@ function resetarProgresso() {
     count_miner = 0;
     foguete_preco = 1000;
     count_foguete = 0;
+    comprou_pic_ferro = false;
+    comprou_perfuracao = false;
+    comprou_propulsores = false;
+
+    btn_pic_ferro.style.display = "flex";
+    btn_perfuracao.style.display = "flex";
+    btn_propulsores.style.display = "flex";
 
     // Atualiza a interface para refletir o reset
     planetas.textContent = formatarNumero(pontos);
@@ -77,26 +92,17 @@ function resetarProgresso() {
     miner_preco_display.textContent = "(" + formatarNumero(miner_preco) + ")";
     count_miner_display.textContent = count_miner + "x";
     foguete_preco_display.textContent = "(" + formatarNumero(foguete_preco) + ")";
-    count_foguete_display.textContent = "0x";  // Atualize o display de foguetes para 0
-
-    // Caso haja outras variáveis de estado, reinicie-as conforme necessário
+    count_foguete_display.textContent = "0x";
 }
-
-// Adiciona um evento de clique no botão de reset
 document.getElementById("reset-btn").addEventListener("click", () => {
     resetarProgresso();
 });
 
-// Função para adicionar muitos recursos
+// Função hack
 function ativarHack() {
-    // Aumenta os recursos principais
     pontos += 10e15; // Adiciona 1 trilhão de pontos
-
-    // Atualiza a interface com os novos valores
     planetas.textContent = formatarNumero(pontos);
 }
-
-// Adiciona um evento de clique no botão de hack
 document.getElementById("hack-btn").addEventListener("click", () => {
     ativarHack();
 });
@@ -116,6 +122,9 @@ function carregarProgresso() {
         count_miner = progresso.count_miner || 0;
         foguete_preco = progresso.foguete_preco || 1000;
         count_foguete = progresso.count_foguete || 0;
+        comprou_pic_ferro = progresso.comprou_pic_ferro || false;
+        comprou_perfuracao = progresso.comprou_perfuracao || false;
+        comprou_propulsores = progresso.comprou_propulsores || false;
 
         // Atualiza a interface com os dados carregados
         planetas.textContent = formatarNumero(pontos);
@@ -142,6 +151,9 @@ function salvarProgresso() {
         count_miner,
         foguete_preco,
         count_foguete,
+        comprou_pic_ferro,
+        comprou_perfuracao,
+        comprou_propulsores,
     };
     localStorage.setItem("progressoJogo", JSON.stringify(progresso));
 }
@@ -185,67 +197,62 @@ btn_click.addEventListener("click", () => {
     salvarProgresso();
 });
 
-//poder minerador
-let btn_miner = document.getElementById("miner");
-let miner_preco = 10;
-let miner_preco_display = document.getElementById("miner_preco");
-let count_miner_display = document.getElementById("count-btn-miner");
-let count_miner = 0;
-let valor_click = 1;
-let valor_click_display = document.getElementById("valor-click");
+//pagina de upgrades
+let btn_upgrades = document.getElementById("btn-upgrades");
+let telaInicial = false;
 
-btn_miner.addEventListener("click", () => {
-    if (pontos >= miner_preco) {
-        const button_sound = document.getElementById("click-button");
-        if (button_sound) {
-            button_sound.currentTime = 0;
-            button_sound.play();
-        }
-        count_miner += 1;
-        valor_click += valor_click * 10 / 100;
-        pontos -= miner_preco;
-        planetas.textContent = formatarNumero(pontos);
-        miner_preco += miner_preco * 25 / 100;
-        miner_preco_display.textContent = "(" + formatarNumero(miner_preco) + ")";
-        valor_click_display.textContent = formatarNumero(valor_click);
-        count_miner_display.textContent = count_miner + "x";
-        salvarProgresso();
+btn_upgrades.addEventListener("click", () => {
+    if (!telaInicial) {
+        btn_upgrades.innerHTML = '<i class="material-icons">arrow_back</i><br>Voltar';
+        document.getElementById("botoes").style.display = "none";
+        document.querySelector(".upgrades").style.display = "flex";
+        telaInicial = true;
+    } else {
+        btn_upgrades.innerHTML = '<i class="material-icons">upgrade</i><br>Upgrades';
+        document.getElementById("botoes").style.display = "flex";
+        document.querySelector(".upgrades").style.display = "none";
+        telaInicial = false;
     }
-    verificarPoderes();
 });
 
-//poder laser
-let btn_laser = document.getElementById("laser");
-let laser_preco_display = document.getElementById("laser_preco");
-let laser_preco = 100;
-let count_laser_display = document.getElementById("count-btn-laser");
-let passive_score = document.getElementById("passive_score");
-let count_laser = 0;
-let ganho_passivo = 0;
-
-btn_laser.addEventListener("click", () => {
-    if (pontos >= laser_preco) {
-        if (ganho_passivo < 1) {
-            ganho_passivo += 1;
-        } else {
-            ganho_passivo += ganho_passivo * 25 / 100;
-        }
-        const button_sound = document.getElementById("click-button");
-        if (button_sound) {
-            button_sound.currentTime = 0;
-            button_sound.play();
-        }
-        count_laser += 1;
-        passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
-        pontos -= laser_preco;
-        planetas.textContent = formatarNumero(pontos);
-        laser_preco += laser_preco * 50 / 100;
-        laser_preco_display.textContent = "(" + formatarNumero(laser_preco) + ")";
-        count_laser_display.textContent = count_laser + "x";
-        salvarProgresso();
+//verificar upgrades
+function verificarUpgrades() {
+    if (pontos >= pic_ferro_preco) {
+        btn_pic_ferro.classList.remove("inativo");
+        btn_pic_ferro.disabled = false;
+    } else {
+        btn_pic_ferro.classList.add("inativo");
+        btn_pic_ferro.disabled = true;
     }
-    verificarPoderes();
-});
+
+    if (comprou_pic_ferro == true) {
+        btn_pic_ferro.style.display = "none";
+    }
+
+    if (pontos >= perfuracao_preco) {
+        btn_perfuracao.classList.remove("inativo");
+        btn_perfuracao.disabled = false;
+    } else {
+        btn_perfuracao.classList.add("inativo");
+        btn_perfuracao.disabled = true;
+    }
+
+    if (comprou_perfuracao == true) {
+        btn_perfuracao.style.display = "none";
+    }
+
+    if (pontos >= propulsores_preco) {
+        btn_propulsores.classList.remove("inativo");
+        btn_propulsores.disabled = false;
+    } else {
+        btn_propulsores.classList.add("inativo");
+        btn_propulsores.disabled = true;
+    }
+
+    if (comprou_propulsores == true) {
+        btn_propulsores.style.display = "none";
+    }
+}
 
 function atualizarPontosPassivos() {
     pontos += ganho_passivo;
@@ -254,108 +261,7 @@ function atualizarPontosPassivos() {
     salvarProgresso();
 }
 
-// Poder foguete
-let btn_foguete = document.getElementById("foguete");
-let foguete_preco_display = document.getElementById("foguete_preco");
-let foguete_preco = 1000;
-let count_foguete_display = document.getElementById("count-btn-foguete");
-let bonus_display = document.getElementById("bonus-div");
-let intervaloFoguete;
-let count_foguete = 0;
-
-function fogueteBonus(pontosAtuais) {
-    const bonus = Math.random() * (2 - 0.2) + 0.2;
-    return Math.floor(pontosAtuais * bonus);
-}
-
-// Função para iniciar o bônus do foguete
-function iniciarBonusFoguete() {
-    if (!intervaloFoguete) {
-        intervaloFoguete = setInterval(() => {
-            if (count_foguete > 0) {
-                console.log("Pontos atuais: ", formatarNumero(pontos));
-                console.log("Numero de foguetes: ", count_foguete);
-
-                let img_foguete = document.getElementById("img-foguete");
-                img_foguete.style.opacity = 1;
-
-                // Calcular o bônus base
-                const bonusBase = fogueteBonus(pontos);
-                console.log("Bonus sem multiplicar: ", formatarNumero(bonusBase));
-
-                // Aplica a porcentagem de foguetes ao bônus
-                const bonus = bonusBase * (1 + count_foguete / 100);
-                console.log("Bonus multiplicado: ", formatarNumero(bonus));
-
-                pontos += bonus; // Adiciona o bônus aos pontos
-                planetas.textContent = formatarNumero(pontos);
-                bonus_display.style.display = "flex";
-                bonus_display.textContent = formatarNumero(bonus);
-            }
-        }, 60000);
-    }
-}
-
-
-iniciarBonusFoguete();
-
-btn_foguete.addEventListener("click", () => {
-    if (pontos >= foguete_preco) {
-        const button_sound = document.getElementById("click-button");
-        if (button_sound) {
-            button_sound.currentTime = 0;
-            button_sound.play();
-        }
-
-        count_foguete += 1;
-        pontos -= foguete_preco;
-        planetas.textContent = formatarNumero(pontos);
-        foguete_preco += foguete_preco * 1000;
-        foguete_preco_display.textContent = "(" + formatarNumero(foguete_preco) + ")";
-        count_foguete_display.textContent = formatarNumero(count_foguete) + "x";
-
-        salvarProgresso();
-        verificarPoderes();
-    }
-});
-
-//pagina de upgrades
-let mostrandoUpgrades = false;
-const btnUpgrades = document.getElementById("btn-upgrades");
-const conteudoInicial = document.getElementById("botoes").innerHTML;
-
-// Atualização da lógica do botão de upgrades
-btnUpgrades.addEventListener("click", () => {
-    if (!mostrandoUpgrades) {
-        // Salva o progresso antes de carregar os upgrades
-        salvarProgresso();
-
-        // Carrega o conteúdo da página de upgrades
-        fetch("upgrades.html")
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById("botoes").innerHTML = html;
-                btnUpgrades.innerHTML = '<i class="material-icons">arrow_back</i><br>Voltar';
-                mostrandoUpgrades = true;
-            })
-            .catch(error => {
-                console.error("Erro:", error);
-            });
-    } else {
-        // Quando voltar para a tela inicial, carrega o progresso salvo
-        document.getElementById("botoes").innerHTML = conteudoInicial;
-        btnUpgrades.innerHTML = '<i class="material-icons">upgrade</i><br>Upgrades';
-        mostrandoUpgrades = false;
-
-        // Carrega o progresso salvo (valores atualizados)
-        carregarProgresso();
-    }
-});
-
-
-
-
-
+setInterval(atualizarPontosPassivos, 1000);
 
 //padronização dos numeros
 function formatarNumero(num) {
@@ -417,9 +323,6 @@ function formatarNumero(num) {
 
     return resultado;
 }
-
-
-setInterval(atualizarPontosPassivos, 1000);
 
 //inicia a musica
 document.addEventListener('click', () => {

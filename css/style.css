@@ -51,7 +51,6 @@ body {
     top: 100%;
     right: 0;
     transition: .2s ease-in-out all;
-    animation: voar 60s infinite;
 }
 
 @keyframes voar {
@@ -94,7 +93,6 @@ body {
     transition: opacity 0.5s ease;
     position: absolute;
     pointer-events: none;
-    animation: aparecer 60s infinite;
 }
 
 @keyframes aparecer {
@@ -178,8 +176,8 @@ body {
     height: 100%;
 }
 
-/* upgrades */
-.melhorias {
+/* pagina poderes */
+.poderes {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -187,7 +185,6 @@ body {
 }
 
 #btn-upgrades {
-    display: none;
     border: none;
     border-radius: .5em;
     background-color: #3c096c;
@@ -256,7 +253,6 @@ body {
     justify-content: center;
     gap: .2em;
     width: 100%;
-    height: 3em;
 }
 
 .buttons button {
@@ -270,7 +266,7 @@ body {
     padding: .3em;
     border-radius: .5em;
     width: 80%;
-    height: 100%;
+    height: 3em;
     cursor: pointer;
     transition: .2s ease all;
 }
@@ -312,11 +308,9 @@ body {
     justify-content: center;
     background-color: #051923;
     color: #edae49;
-    padding: .5em;
     width: 20%;
-    height: 100%;
+    height: 3em;
     border-radius: .5em;
-    font-size: 2em;
 }
 
 .buttons .btn-flex .preco {
@@ -356,4 +350,37 @@ body {
 #hack-btn i {
     color: white;
     margin-right: .5em;
+}
+
+/* pagina upgrades */
+.upgrades {
+    display: none;
+}
+
+#upgrade button {
+    background-color: #3d0066;
+    border: 2px solid #5c0099;
+    color: white;
+    width: 100%;
+    height: 4em;
+}
+
+#upgrade button:hover {
+    background-color: #5c0099;
+}
+
+#upgrade button .descricao {
+    color: white;
+    padding: .5em;
+}
+
+#upgrade button i {
+    font-size: 1.2em;
+    border-radius: .5em;
+    color: white;
+    border: 1px solid #c86bfa;
+}
+
+#upgrade button:hover i {
+    border-radius: 50%;
 }
