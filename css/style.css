@@ -142,17 +142,21 @@ body {
     0% {
         top: 100%;
     }
+
     20% {
         top: -150%;
         transform: rotate(0deg);
     }
+
     25% {
         transform: rotate(180deg);
     }
+
     90% {
         top: -100%;
         transform: rotate(180deg);
     }
+
     100% {
         top: 150%;
         transform: rotate(180deg);
@@ -180,12 +184,15 @@ body {
     0% {
         opacity: 0;
     }
+
     5% {
         opacity: 1;
     }
+
     10% {
         opacity: 0;
     }
+
     100% {
         opacity: 0;
     }
@@ -210,6 +217,7 @@ body {
     from {
         rotate: 0deg;
     }
+
     to {
         rotate: 360deg;
     }
@@ -233,10 +241,12 @@ body {
         transform: scale(1);
         opacity: 0.7;
     }
+
     50% {
         transform: scale(1.5);
         opacity: 1;
     }
+
     100% {
         transform: scale(0);
         opacity: 0;
