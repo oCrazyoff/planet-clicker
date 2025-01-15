@@ -11,5 +11,3 @@ function trocarPlaneta() {
         info_planeta.innerHTML = "Este é Stratosyl, o planeta dourado que você encontrou na sua segunda espedição <span>Dobra sua produção</span>"
     }
 }
-
-trocarPlaneta();

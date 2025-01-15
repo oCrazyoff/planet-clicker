@@ -12,7 +12,7 @@ function atualizarProgresso() {
     salvarProgresso();
 }
 
-setInterval(atualizarProgresso, 100);
+setInterval(atualizarProgresso, 1000);
 
 //info do planeta
 let btn_info = document.getElementById("btn-info");
@@ -52,30 +52,29 @@ btn_musica.addEventListener("click", () => {
 
 //mostra as informações flutuantes
 let info_div = document.getElementById("fly-info");
+const info_miner = document.getElementById("info-miner");
+const info_laser = document.getElementById("info-laser");
+const info_foguete = document.getElementById("info-foguete");
 
 function adicionarInfoFlutuante(div, texto) {
-    console.log("entrou na função");
     div.addEventListener("mouseover", () => {
         info_div.textContent = texto;
-        info_div.style.display = "block";
-        console.log("adicionou mouseover");
+        info_div.style.display = "flex";
     });
 
     div.addEventListener("mousemove", (event) => {
-        info_div.style.left = `${event.pageX + 10}px`;
-        info_div.style.top = `${event.pageY + 10}px`;
-        console.log("adicionou mousemove");
+        info_div.style.left = `${event.pageX - 250}px`;
+        info_div.style.top = `${event.pageY - 130}px`;
     });
 
     div.addEventListener("mouseout", () => {
         info_div.style.display = "none";
-        console.log("adicionou mouseout");
     });
 }
 
-adicionarInfoFlutuante(count_miner_display, "Mineradores obtidos");
-adicionarInfoFlutuante(count_laser_display, "Lasers obtidos");
-adicionarInfoFlutuante(count_foguete_display, "Foguetes obtidos");
+adicionarInfoFlutuante(info_miner, "Mineram junto com você, aumentando seu poder de clique em 10%");
+adicionarInfoFlutuante(info_laser, "Atiram sozinhos no planeta, aumentando seu ganho passivo em 25%");
+adicionarInfoFlutuante(info_foguete, "Busca recursos em outros planetas baseado nos seus planetas atuais, demora 30 segundos para retornar");
 
 
 // Função para resetar o progresso
@@ -126,14 +125,13 @@ document.getElementById("reset-btn").addEventListener("click", () => {
 
 // Função hack
 function ativarHack() {
-    pontos += 10e15; // Adiciona 1 trilhão de pontos
+    const input_hack = document.getElementById("number-hack");
+    const valor_hack = Number(input_hack.value);
+    pontos += valor_hack;
     planetas.textContent = formatarNumero(pontos);
-}
-document.getElementById("hack-btn").addEventListener("click", () => {
-    ativarHack();
     barraProgresso();
     trocarPlaneta();
-});
+}
 
 
 
@@ -156,6 +154,9 @@ function carregarProgresso() {
         porcentagem = progresso.porcentagem || 0;
         upgrade_planeta = progresso.upgrade_planeta || 1;
         img_planeta.src = progresso.img_planeta_src || "https://th.bing.com/th/id/R.5264daf3c450582421fc4b0ff3467221?rik=blmf9VQ7278LCA&pid=ImgRaw&r=0";
+
+
+        trocarPlaneta();
 
         // Atualiza a interface com os dados carregados
         planetas.textContent = formatarNumero(pontos);
@@ -328,16 +329,16 @@ function barraProgresso(value, maxValue) {
 }
 
 //atualizar pontos passivos
+const intervalo_atualizar = 1000;
 function atualizarPontosPassivos() {
     const ganho_por_segundo = (ganho_passivo * upgrade_planeta) * (intervalo_atualizar / 100);
 
     pontos += ganho_por_segundo;
+
     planetas.textContent = formatarNumero(pontos);
     verificarPoderes();
     salvarProgresso();
 }
-
-const intervalo_atualizar = 100;
 
 setInterval(atualizarPontosPassivos, intervalo_atualizar);
 

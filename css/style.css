@@ -3,6 +3,7 @@
     padding: 0;
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
 }
 
 body {
@@ -324,6 +325,11 @@ body {
 #fly-info {
     position: absolute;
     display: none;
+    width: 10em;
+    height: 10em;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
     background-color: #edae49;
     border: 2px solid #000000;
     border-radius: .5em;
@@ -339,6 +345,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: .2em;
+    position: relative;
 }
 
 #btn-upgrades {
@@ -355,6 +362,50 @@ body {
 #btn-upgrades:hover {
     background-color: #7209b7;
 }
+
+#btn-prestigio {
+    display: none;
+    position: absolute;
+    right: .3em;
+    border: none;
+    border-radius: .5em;
+    background-color: #c9a227;
+    color: white;
+    padding: .2em 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s ease all;
+    box-shadow: 0 0 0 2px #ffcc00 inset;
+    animation: progress-border 5s linear infinite;
+}
+
+#btn-prestigio:hover {
+    background-color: #ffcc00;
+    box-shadow: 0 0 0 2px #ffd700 inset;
+    color: #a47e1b;
+}
+
+#bar-prestigio-container {
+    position: absolute;
+    left: 0;
+    bottom: -20%;
+    background-color: rgba(0, 0, 0, 0.589);
+    height: .5em;
+    width: 100%;
+    border: 1px solid #a47e1b;
+    border-radius: 1em;
+
+}
+
+#bar-prestigio {
+    width: 0%;
+    background: radial-gradient(circle, rgba(255, 255, 36, 1) 0%, rgba(253, 199, 0, 1) 100%);
+    height: 100%;
+    transition: .2s ease all;
+}
+
+
+
 
 /* pagina poderes */
 
@@ -377,7 +428,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: .2em;
+    padding: .5em;
     gap: .2em;
     width: 100%;
     background-color: #000814;
@@ -391,7 +442,7 @@ body {
     width: 100%;
 }
 
-.buttons button {
+.btn-flex button {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -400,6 +451,7 @@ body {
     border: none;
     background-color: #edae49;
     padding: .3em;
+    overflow: hidden;
     border-radius: .5em;
     width: 90%;
     height: 3em;
@@ -412,11 +464,15 @@ body {
     opacity: .6;
 }
 
-.buttons button:hover i {
+.btn-flex button:hover {
+    transform: scale(1.01);
+}
+
+.btn-flex button:hover i {
     transform: rotate(360deg) scale(1.1);
 }
 
-.buttons button i {
+.btn-flex button i {
     font-size: 1rem;
     background-color: #051923;
     color: #edae49;
@@ -426,19 +482,28 @@ body {
     margin-right: .5em;
 }
 
-.buttons button .top {
+.btn-flex button .top {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.buttons .btn-flex .descricao {
-    font-size: 13px;
+.btn-flex button .bottom p {
     width: 100%;
-    padding: .2em;
+    padding: .5em;
 }
 
-.buttons .btn-flex p {
+.btn-flex button .count {
+    height: 2em;
+}
+
+.btn-flex button img {
+    height: 100%;
+    margin-top: 10%;
+    width: 5em;
+}
+
+.btn-flex p {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -449,8 +514,87 @@ body {
     border-radius: .5em;
 }
 
-.buttons .btn-flex .preco {
+.btn-flex .preco {
     font-size: 1em;
+}
+
+/* botões especiais */
+
+.especial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .2em;
+    width: 100%;
+}
+
+.especial button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    font-size: 1rem;
+    border: none;
+    background-color: #edae49;
+    padding: .3em;
+    border-radius: .5em;
+    width: 95%;
+    height: 3em;
+    cursor: pointer;
+    transition: .2s ease all;
+}
+
+.especial button:hover {
+    transform: scale(1.01);
+}
+
+.especial button:hover i {
+    transform: rotate(360deg) scale(1.1);
+}
+
+.especial button i {
+    font-size: 1rem;
+    background-color: #051923;
+    color: #edae49;
+    padding: .5em;
+    border-radius: 50%;
+    transition: .3s ease all;
+    margin-right: .5em;
+}
+
+.especial button .top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.especial button .bottom p {
+    padding: 0 .5em;
+    width: 100%;
+    height: 2em;
+}
+
+.especial button input {
+    border: 2px solid #051923;
+    border-radius: .5em;
+    padding: .5em;
+}
+
+.especial button img {
+    height: 100%;
+    margin-top: 10%;
+    width: 5em;
+}
+
+.especial p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #051923;
+    color: #edae49;
+    width: 5%;
+    height: 3em;
+    border-radius: .5em;
 }
 
 #reset-btn {
