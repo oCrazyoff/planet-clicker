@@ -12,7 +12,18 @@ function atualizarProgresso() {
     salvarProgresso();
 }
 
-setInterval(atualizarProgresso, 10);
+setInterval(atualizarProgresso, 100);
+
+//info do planeta
+let btn_info = document.getElementById("btn-info");
+btn_info.addEventListener("click", () => {
+    console.log("botão foi clicado");
+    if (info_planeta.style.display === "none") {
+        info_planeta.style.display = "flex";
+    } else {
+        info_planeta.style.display = "none"
+    }
+});
 
 //configurações
 let btn_musica = document.getElementById("btn-musica");
@@ -100,8 +111,12 @@ function resetarProgresso() {
     comprou_pic_ferro = false;
     comprou_perfuracao = false;
     comprou_propulsores = false;
-    planeta_stratosyl = false;
+    upgrade_planeta = 1;
     porcentagem = 0;
+
+    //planetas
+    trocarPlaneta();
+    intervalo_stratosyl();
 
     btn_pic_ferro.style.display = "flex";
     btn_perfuracao.style.display = "flex";
@@ -129,6 +144,8 @@ function ativarHack() {
 }
 document.getElementById("hack-btn").addEventListener("click", () => {
     ativarHack();
+    barraProgresso();
+    trocarPlaneta();
 });
 
 
@@ -149,8 +166,9 @@ function carregarProgresso() {
         comprou_pic_ferro = progresso.comprou_pic_ferro || false;
         comprou_perfuracao = progresso.comprou_perfuracao || false;
         comprou_propulsores = progresso.comprou_propulsores || false;
-        planeta_stratosyl = progresso.planeta_stratosyl || false;
         porcentagem = progresso.porcentagem || 0;
+        upgrade_planeta = progresso.upgrade_planeta || 1;
+        img_planeta.src = progresso.img_planeta_src || "https://th.bing.com/th/id/R.5264daf3c450582421fc4b0ff3467221?rik=blmf9VQ7278LCA&pid=ImgRaw&r=0";
 
         // Atualiza a interface com os dados carregados
         planetas.textContent = formatarNumero(pontos);
@@ -180,8 +198,9 @@ function salvarProgresso() {
         comprou_pic_ferro,
         comprou_perfuracao,
         comprou_propulsores,
-        planeta_stratosyl,
         porcentagem,
+        upgrade_planeta,
+        img_planeta_src: img_planeta.src,
     };
     localStorage.setItem("progressoJogo", JSON.stringify(progresso));
 }
@@ -219,7 +238,7 @@ let planetas = document.getElementById("score");
 let pontos = 0;
 
 btn_click.addEventListener("click", () => {
-    pontos += valor_click;
+    pontos += valor_click * upgrade_planeta;
     planetas.textContent = formatarNumero(pontos);
     verificarPoderes();
     salvarProgresso();
@@ -289,10 +308,23 @@ function verificarUpgrades() {
 
 //PLANETA stratosyl
 const stratosyl_price = 5000;
-let planeta_stratosyl = false;
-const stratosyl = setInterval(function () {
-    barraProgresso(pontos, stratosyl_price);
-}, 100);
+let stratosyl;
+
+function intervalo_stratosyl() {
+    if (pontos < stratosyl_price) {
+        stratosyl = setInterval(function() {
+            barraProgresso(pontos, stratosyl_price);
+            if (pontos >= stratosyl_price) {
+                clearInterval(stratosyl);
+                barraProgresso();
+                console.log("Dentro do if")
+            }
+            console.log("Dentro do intervalo");
+        }, 100);
+    }
+}
+
+intervalo_stratosyl();
 
 //barra de progresso para o proximo planeta
 function barraProgresso(value, maxValue) {
@@ -302,17 +334,16 @@ function barraProgresso(value, maxValue) {
 
     progress_bar.style.width = `${porcentagem}%`;
 
-    if (value === stratosyl_price || planeta_stratosyl == true) {
-        clearInterval(stratosyl);
+
+    if (pontos >= stratosyl_price) {
         progress_bar.style.width = '0%';
         porcentagem = 0;
-        planeta_stratosyl = true;
         trocarPlaneta();
     }
 }
 
 function atualizarPontosPassivos() {
-    pontos += ganho_passivo;
+    pontos += ganho_passivo * upgrade_planeta;
     planetas.textContent = formatarNumero(pontos);
     verificarPoderes();
     salvarProgresso();
@@ -349,9 +380,9 @@ function formatarNumero(num) {
             sufixosIndex++;
         }
 
-        let sufixo = sufixosIndex < sufixosLetras.length
-            ? sufixosLetras[sufixosIndex]
-            : gerarSufixo(sufixosIndex - sufixosLetras.length);
+        let sufixo = sufixosIndex < sufixosLetras.length ?
+            sufixosLetras[sufixosIndex] :
+            gerarSufixo(sufixosIndex - sufixosLetras.length);
 
         resultado = valor.toFixed(2) + sufixo;
     } else if (num >= 1e12) {

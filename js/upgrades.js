@@ -1,4 +1,3 @@
-
 //UPGRADE picareta de ferro
 let btn_pic_ferro = document.getElementById("btn-pic-ferro");
 let pic_ferro_preco = 500;
