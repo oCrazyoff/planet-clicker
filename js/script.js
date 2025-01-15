@@ -17,7 +17,6 @@ setInterval(atualizarProgresso, 100);
 //info do planeta
 let btn_info = document.getElementById("btn-info");
 btn_info.addEventListener("click", () => {
-    console.log("botão foi clicado");
     if (info_planeta.style.display === "none") {
         info_planeta.style.display = "flex";
     } else {
@@ -134,7 +133,10 @@ function resetarProgresso() {
     count_foguete_display.textContent = "0x";
 }
 document.getElementById("reset-btn").addEventListener("click", () => {
-    resetarProgresso();
+    const confirmacao = window.confirm("Você realmente quer resetar?");
+    if (confirmacao) {
+        resetarProgresso();
+    }
 });
 
 // Função hack
@@ -317,9 +319,7 @@ function intervalo_stratosyl() {
             if (pontos >= stratosyl_price) {
                 clearInterval(stratosyl);
                 barraProgresso();
-                console.log("Dentro do if")
             }
-            console.log("Dentro do intervalo");
         }, 100);
     }
 }
