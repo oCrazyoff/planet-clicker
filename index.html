@@ -14,6 +14,7 @@
 </head>
 
 <body>
+    <div id="fly-info">MACACO</div>
     <audio id="musica" loop>
         <source src="sounds/Intergalactic Grooves.mp3" type="audio/mpeg">
         Seu navegador não suporta o elemento de áudio.
@@ -56,19 +57,21 @@
             <div id="progress-container-next-planet">
                 <div id="progress-bar-next-planet"></div>
             </div>
+            <div class="info">
+                <p id="planetas-div"><span id="score">0</span>planetas</p>
+                <p id="valor-click-div"><span id="valor-click">1</span>por click</p>
+                <p id="passive-div">
+                    <span id="passive_score">0/s</span>
+                    ganho passivo
+                </p>
+            </div>
+        </section>
+        <section class="menus">
+            <button id="btn-upgrades">
+                <i class="material-icons">upgrade</i><br>Upgrades
+            </button>
         </section>
         <section class="poderes">
-            <div class="info">
-                <div class="fly-info"></div>
-                <button id="btn-upgrades">
-                    <i class="material-icons">upgrade</i><br>Upgrades
-                </button>
-                <p id="planetas-div"><i class="material-icons">public</i><span id="score">0</span></p>
-                <p id="miner-div"><i class="material-icons">trending_up</i>
-                    <span id="passive_score">0/s</span>
-                </p>
-                <p id="valor-click-div"><i class="material-icons">ads_click</i><span id="valor-click">1</span></p>
-            </div>
             <div class="scroll" id="botoes">
                 <div class="buttons">
                     <div class="btn-flex">
@@ -164,10 +167,10 @@
                             <div class="top">
                                 <i class="fas fa-fire"></i>
                                 Propulsores melhores <div class="preco" id="miner_preco">
-                                    (100K)</div>
+                                    (50K)</div>
                             </div>
                             <div class="bottom">
-                                <p class="descricao">Foguete demora 30 segundos</p>
+                                <p class="descricao">Foguete demora 15 segundos</p>
                             </div>
                         </button>
                     </div>

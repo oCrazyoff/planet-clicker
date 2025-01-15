@@ -24,6 +24,10 @@ btn_info.addEventListener("click", () => {
     }
 });
 
+let div_planetas = document.getElementById("planetas-div");
+let div_passive = document.getElementById("passive-div");
+let div_click = document.getElementById("valor-click-div");
+
 //configurações
 let btn_musica = document.getElementById("btn-musica");
 let tem_musica = true;
@@ -47,51 +51,32 @@ btn_musica.addEventListener("click", () => {
 });
 
 //mostra as informações flutuantes
-let info_div = document.querySelector(".fly-info");
-let div_planetas = document.getElementById("planetas-div");
-let div_miner = document.getElementById("miner-div");
-let div_click = document.getElementById("valor-click-div");
-div_planetas.addEventListener("mouseover", (event) => {
-    info_div.textContent = "Planetas obtidos";
-    info_div.style.display = "block";
-})
+let info_div = document.getElementById("fly-info");
 
-div_planetas.addEventListener("mousemove", (event) => {
-    info_div.style.left = `${event.pageX + 10}px`;
-    info_div.style.top = `${event.pageY + 10}px`;
-});
+function adicionarInfoFlutuante(div, texto) {
+    console.log("entrou na função");
+    div.addEventListener("mouseover", () => {
+        info_div.textContent = texto;
+        info_div.style.display = "block";
+        console.log("adicionou mouseover");
+    });
 
-div_planetas.addEventListener("mouseout", (event) => {
-    info_div.style.display = "none";
-});
+    div.addEventListener("mousemove", (event) => {
+        info_div.style.left = `${event.pageX + 10}px`;
+        info_div.style.top = `${event.pageY + 10}px`;
+        console.log("adicionou mousemove");
+    });
 
-div_miner.addEventListener("mouseover", (event) => {
-    info_div.textContent = "Ganho passivo";
-    info_div.style.display = "block";
-})
+    div.addEventListener("mouseout", () => {
+        info_div.style.display = "none";
+        console.log("adicionou mouseout");
+    });
+}
 
-div_miner.addEventListener("mousemove", (event) => {
-    info_div.style.left = `${event.pageX + 10}px`;
-    info_div.style.top = `${event.pageY + 10}px`;
-});
+adicionarInfoFlutuante(count_miner_display, "Mineradores obtidos");
+adicionarInfoFlutuante(count_laser_display, "Lasers obtidos");
+adicionarInfoFlutuante(count_foguete_display, "Foguetes obtidos");
 
-div_miner.addEventListener("mouseout", (event) => {
-    info_div.style.display = "none";
-});
-
-div_click.addEventListener("mouseover", (event) => {
-    info_div.textContent = "Poder do clique";
-    info_div.style.display = "block";
-})
-
-div_click.addEventListener("mousemove", (event) => {
-    info_div.style.left = `${event.pageX + 10}px`;
-    info_div.style.top = `${event.pageY + 10}px`;
-});
-
-div_click.addEventListener("mouseout", (event) => {
-    info_div.style.display = "none";
-});
 
 // Função para resetar o progresso
 function resetarProgresso() {
@@ -342,14 +327,19 @@ function barraProgresso(value, maxValue) {
     }
 }
 
+//atualizar pontos passivos
 function atualizarPontosPassivos() {
-    pontos += ganho_passivo * upgrade_planeta;
+    const ganho_por_segundo = (ganho_passivo * upgrade_planeta) * (intervalo_atualizar / 100);
+
+    pontos += ganho_por_segundo;
     planetas.textContent = formatarNumero(pontos);
     verificarPoderes();
     salvarProgresso();
 }
 
-setInterval(atualizarPontosPassivos, 1000);
+const intervalo_atualizar = 100;
+
+setInterval(atualizarPontosPassivos, intervalo_atualizar);
 
 //padronização dos numeros
 function formatarNumero(num) {

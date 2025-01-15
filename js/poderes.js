@@ -72,7 +72,7 @@ let count_foguete_display = document.getElementById("count-btn-foguete");
 let bonus_display = document.getElementById("bonus-div");
 let intervaloFoguete;
 let count_foguete = 0;
-let tempo_foguete = 60000;
+let tempo_foguete = 30000;
 
 function fogueteBonus(pontosAtuais) {
     const bonus = Math.random() * (2 - 0.2) + 0.2;
@@ -85,22 +85,25 @@ function iniciarBonusFoguete() {
         clearInterval(intervaloFoguete);
     }
 
-    intervaloFoguete = setInterval(() => {
-        if (count_foguete > 0) {
-            let img_foguete = document.getElementById("img-foguete");
-            img_foguete.style.opacity = 1;
-            img_foguete.style.animation = "voar " + tempo_foguete + "ms infinite";
+    let img_foguete = document.getElementById("img-foguete");
+    bonus_display.style.display = "none";
+    img_foguete.style.display = "none";
 
-            const bonusBase = fogueteBonus(pontos);
-            const bonus = bonusBase * (1 + count_foguete / 100);
+    if (count_foguete > 0) {
+        intervaloFoguete = setInterval(() => {
+                img_foguete.style.display = "flex";
+                img_foguete.style.animation = "voar " + tempo_foguete + "ms infinite";
 
-            pontos += bonus;
-            planetas.textContent = formatarNumero(pontos);
-            bonus_display.style.display = "flex";
-            bonus_display.style.animation = "aparecer " + tempo_foguete + "ms infinite";
-            bonus_display.textContent = formatarNumero(bonus);
-        }
-    }, tempo_foguete);
+                const bonusBase = fogueteBonus(pontos);
+                const bonus = bonusBase * (1 + count_foguete / 100);
+
+                pontos += bonus;
+                planetas.textContent = formatarNumero(pontos);
+                bonus_display.style.display = "flex";
+                bonus_display.style.animation = "aparecer " + tempo_foguete + "ms infinite";
+                bonus_display.textContent = formatarNumero(bonus);
+            }, tempo_foguete);
+    }
 }
 
 iniciarBonusFoguete();

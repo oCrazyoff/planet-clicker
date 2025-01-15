@@ -130,7 +130,7 @@ body {
 }
 
 .img-foguete {
-    opacity: 0;
+    display: none;
     width: 10em;
     position: absolute;
     top: 100%;
@@ -258,14 +258,87 @@ body {
     height: 100%;
 }
 
-
-/* pagina poderes */
-
-.poderes {
+/* infos */
+.info {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    bottom: 5%;
     display: flex;
     flex-direction: column;
+    align-items: left;
+    justify-content: end;
+    gap: .5em;
+    pointer-events: none;
+}
+
+.info p {
+    font-weight: 100;
+}
+
+.info p span {
+    font-weight: 900;
+}
+
+#planetas-div {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%);
+    width: fit-content;
+    background-color: #000000a1;
+    color: white;
+    padding: .3em;
+    font-size: 20px;
+    border-radius: 1em;
+    display: flex;
     align-items: center;
     justify-content: center;
+    gap: .5em;
+}
+
+#passive-div {
+    width: fit-content;
+    background-color: #000000a1;
+    color: white;
+    padding: .3em;
+    border-radius: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5em;
+}
+
+#valor-click-div {
+    width: fit-content;
+    background-color: #000000a1;
+    color: white;
+    padding: .3em;
+    border-radius: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5em;
+}
+
+#fly-info {
+    position: absolute;
+    display: none;
+    background-color: #edae49;
+    border: 2px solid #000000;
+    border-radius: .5em;
+    color: black;
+    z-index: 1000;
+    transition: .1s ease all;
+}
+
+
+/* menus */
+.menus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .2em;
 }
 
 #btn-upgrades {
@@ -283,39 +356,13 @@ body {
     background-color: #7209b7;
 }
 
-.info {
+/* pagina poderes */
+
+.poderes {
     display: flex;
-    padding: .2em;
-    gap: .2em;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    width: 100%;
-    background-color: #000814;
-}
-
-.info p {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    background-color: #0077b6;
-    color: white;
-    padding: .3em;
-    border-radius: .5em;
-    width: 5em;
-    height: 3.5em;
-}
-
-.fly-info {
-    position: absolute;
-    display: none;
-    background-color: #edae49;
-    border: 2px solid #000000;
-    border-radius: .5em;
-    color: black;
-    z-index: 1000;
-    transition: .1s ease all;
 }
 
 .scroll {

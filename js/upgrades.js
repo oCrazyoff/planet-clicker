@@ -36,14 +36,14 @@ btn_perfuracao.addEventListener("click", () => {
         upgrade_laser += 2 / 100;
         ganho_passivo += ganho_passivo * upgrade_laser;
         pontos -= perfuracao_preco;
-        passive_score.textContent = formatarNumero(ganho_passivo);
+        passive_score.textContent = formatarNumero(ganho_passivo)+"/s";
         planetas.textContent = formatarNumero(pontos);
     }
 });
 
 //UPGRADE propulsores melhores
 let btn_propulsores = document.getElementById("propulsores");
-let propulsores_preco = 100000;
+let propulsores_preco = 5000;
 let comprou_propulsores = false;
 
 btn_propulsores.addEventListener("click", () => {
@@ -54,7 +54,7 @@ btn_propulsores.addEventListener("click", () => {
             upgrade_sound.play();
         }
         comprou_propulsores = true;
-        tempo_foguete = 30000;
+        tempo_foguete = 15000;
         pontos -= propulsores_preco;
         planetas.textContent = formatarNumero(pontos);
         iniciarBonusFoguete();
