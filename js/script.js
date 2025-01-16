@@ -12,7 +12,7 @@ function atualizarProgresso() {
     salvarProgresso();
 }
 
-setInterval(atualizarProgresso, 1000);
+setInterval(atualizarProgresso, 100);
 
 //info do planeta
 let btn_info = document.getElementById("btn-info");
@@ -54,6 +54,8 @@ btn_musica.addEventListener("click", () => {
 let info_div = document.getElementById("fly-info");
 const info_miner = document.getElementById("info-miner");
 const info_laser = document.getElementById("info-laser");
+const info_sonda = document.getElementById("info-sonda");
+const info_luva = document.getElementById("info-luva");
 const info_foguete = document.getElementById("info-foguete");
 
 function adicionarInfoFlutuante(div, texto) {
@@ -74,6 +76,8 @@ function adicionarInfoFlutuante(div, texto) {
 
 adicionarInfoFlutuante(info_miner, "Mineram junto com você, aumentando seu poder de clique em 10%");
 adicionarInfoFlutuante(info_laser, "Atiram sozinhos no planeta, aumentando seu ganho passivo em 25%");
+adicionarInfoFlutuante(info_sonda, "Explora o Universo e gera planetas automaticamente, melhorando 30% do ganho passivo")
+adicionarInfoFlutuante(info_luva, "Utilizando a luva gravitacional seu clique fica muito mais forte, melhora seu poder de clique em 20%");
 adicionarInfoFlutuante(info_foguete, "Busca recursos em outros planetas baseado nos seus planetas atuais, demora 30 segundos para retornar");
 
 
@@ -85,12 +89,23 @@ function resetarProgresso() {
     pontos = 0;
     valor_click = 1;
     ganho_passivo = 0;
+    //laser
     laser_preco = 100;
     count_laser = 0;
+    //miner
     miner_preco = 10;
     count_miner = 0;
+    //foguete
     foguete_preco = 1000;
     count_foguete = 0;
+    //sonda
+    count_sonda = 0;
+    sonda_preco = 500;
+    //luva
+    count_luva = 0;
+    luva_preco = 750;
+    //upgrade
+    comprou_cafe = false;
     comprou_pic_ferro = false;
     comprou_perfuracao = false;
     comprou_propulsores = false;
@@ -101,6 +116,8 @@ function resetarProgresso() {
     trocarPlaneta();
     intervalo_stratosyl();
 
+    //mostrar upgrades
+    btn_cafe.style.display = "flex";
     btn_pic_ferro.style.display = "flex";
     btn_perfuracao.style.display = "flex";
     btn_propulsores.style.display = "flex";
@@ -109,10 +126,19 @@ function resetarProgresso() {
     planetas.textContent = formatarNumero(pontos);
     valor_click_display.textContent = formatarNumero(valor_click);
     passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
+    //laser
     laser_preco_display.textContent = "(" + formatarNumero(laser_preco) + ")";
     count_laser_display.textContent = count_laser;
+    //miner
     miner_preco_display.textContent = "(" + formatarNumero(miner_preco) + ")";
     count_miner_display.textContent = count_miner;
+    //sonda
+    sonda_preco_display.textContent = "(" + formatarNumero(sonda_preco) + ")";
+    count_sonda_display.textContent = count_sonda;
+    //luva
+    luva_preco_display.textContent = "(" + formatarNumero(luva_preco) + ")";
+    count_luva_display.textContent = count_luva;
+    //foguete
     foguete_preco_display.textContent = "(" + formatarNumero(foguete_preco) + ")";
     count_foguete_display.textContent = "0";
 }
@@ -142,15 +168,27 @@ function carregarProgresso() {
         pontos = progresso.pontos || 0;
         valor_click = progresso.valor_click || 1;
         ganho_passivo = progresso.ganho_passivo || 0;
+        //laser
         laser_preco = progresso.laser_preco || 100;
         count_laser = progresso.count_laser || 0;
+        //miner
         miner_preco = progresso.miner_preco || 10;
         count_miner = progresso.count_miner || 0;
+        //sonda
+        sonda_preco = progresso.sonda_preco || 500;
+        count_sonda = progresso.count_sonda || 0;
+        //luva
+        luva_preco = progresso.luva_preco || 750;
+        count_luva = progresso.count_luva || 0;
+        //foguete
         foguete_preco = progresso.foguete_preco || 1000;
         count_foguete = progresso.count_foguete || 0;
+        //upgrades
+        comprou_cafe = progresso.comprou_cafe || false;
         comprou_pic_ferro = progresso.comprou_pic_ferro || false;
         comprou_perfuracao = progresso.comprou_perfuracao || false;
         comprou_propulsores = progresso.comprou_propulsores || false;
+        //novo planeta
         porcentagem = progresso.porcentagem || 0;
         upgrade_planeta = progresso.upgrade_planeta || 1;
         img_planeta.src = progresso.img_planeta_src || "https://th.bing.com/th/id/R.5264daf3c450582421fc4b0ff3467221?rik=blmf9VQ7278LCA&pid=ImgRaw&r=0";
@@ -162,10 +200,19 @@ function carregarProgresso() {
         planetas.textContent = formatarNumero(pontos);
         valor_click_display.textContent = formatarNumero(valor_click);
         passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
+        //laser
         laser_preco_display.textContent = "(" + formatarNumero(laser_preco) + ")";
         count_laser_display.textContent = count_laser;
+        //miner
         miner_preco_display.textContent = "(" + formatarNumero(miner_preco) + ")";
         count_miner_display.textContent = count_miner;
+        //sonda
+        sonda_preco_display.textContent = "(" + formatarNumero(sonda_preco) + ")";
+        count_sonda_display.textContent = count_sonda;
+        //luva
+        luva_preco_display.textContent = "(" + formatarNumero(luva_preco) + ")";
+        count_luva_display.textContent = count_luva;
+        //foguete
         foguete_preco_display.textContent = "(" + formatarNumero(foguete_preco) + ")";
         count_foguete_display.textContent = formatarNumero(count_foguete);
     }
@@ -177,12 +224,23 @@ function salvarProgresso() {
         pontos,
         valor_click,
         ganho_passivo,
+        //laser
         laser_preco,
         count_laser,
+        //miner
         miner_preco,
         count_miner,
+        //sonda
+        sonda_preco,
+        count_sonda,
+        //luva
+        luva_preco,
+        count_luva,
+        //foguete
         foguete_preco,
         count_foguete,
+        //upgrades
+        comprou_cafe,
         comprou_pic_ferro,
         comprou_perfuracao,
         comprou_propulsores,
@@ -195,6 +253,7 @@ function salvarProgresso() {
 
 //validação de preços dos poderes
 function verificarPoderes() {
+    //laser
     if (pontos >= laser_preco) {
         btn_laser.disabled = false;
         btn_laser.classList.remove("inativo");
@@ -203,6 +262,7 @@ function verificarPoderes() {
         btn_laser.classList.add("inativo");
     }
 
+    //miner
     if (pontos >= miner_preco) {
         btn_miner.disabled = false;
         btn_miner.classList.remove("inativo");
@@ -211,6 +271,25 @@ function verificarPoderes() {
         btn_miner.classList.add("inativo");
     }
 
+    //sonda
+    if (pontos >= sonda_preco) {
+        btn_sonda.disabled = false;
+        btn_sonda.classList.remove("inativo");
+    } else {
+        btn_sonda.disabled = true;
+        btn_sonda.classList.add("inativo");
+    }
+
+    //luva gravitacional
+    if (pontos >= luva_preco) {
+        btn_luva.disabled = false;
+        btn_luva.classList.remove("inativo");
+    } else {
+        btn_luva.disabled = true;
+        btn_luva.classList.add("inativo");
+    }
+
+    //foguete
     if (pontos >= foguete_preco) {
         btn_foguete.disabled = false;
         btn_foguete.classList.remove("inativo");
@@ -228,8 +307,6 @@ let pontos = 0;
 btn_click.addEventListener("click", () => {
     pontos += valor_click * upgrade_planeta;
     planetas.textContent = formatarNumero(pontos);
-    verificarPoderes();
-    salvarProgresso();
 });
 
 //pagina de upgrades
@@ -244,12 +321,12 @@ btn_upgrades.addEventListener("click", () => {
     }
     if (!telaInicial) {
         btn_upgrades.innerHTML = '<i class="material-icons">arrow_back</i><br>Voltar';
-        document.getElementById("botoes").style.display = "none";
+        document.querySelector(".poderes").style.display = "none";
         document.querySelector(".upgrades").style.display = "flex";
         telaInicial = true;
     } else {
         btn_upgrades.innerHTML = '<i class="material-icons">upgrade</i><br>Upgrades';
-        document.getElementById("botoes").style.display = "flex";
+        document.querySelector(".poderes").style.display = "flex";
         document.querySelector(".upgrades").style.display = "none";
         telaInicial = false;
     }
@@ -257,6 +334,20 @@ btn_upgrades.addEventListener("click", () => {
 
 //verificar upgrades
 function verificarUpgrades() {
+    //café
+    if (pontos >= cafe_preco) {
+        btn_cafe.classList.remove("inativo");
+        btn_cafe.disabled = false;
+    } else {
+        btn_cafe.classList.add("inativo");
+        btn_cafe.disabled = true;
+    }
+
+    if (comprou_cafe == true) {
+        btn_cafe.style.display = "none";
+    }
+
+    //picareta de ferro
     if (pontos >= pic_ferro_preco) {
         btn_pic_ferro.classList.remove("inativo");
         btn_pic_ferro.disabled = false;
@@ -269,6 +360,7 @@ function verificarUpgrades() {
         btn_pic_ferro.style.display = "none";
     }
 
+    //perfuração
     if (pontos >= perfuracao_preco) {
         btn_perfuracao.classList.remove("inativo");
         btn_perfuracao.disabled = false;
@@ -281,6 +373,7 @@ function verificarUpgrades() {
         btn_perfuracao.style.display = "none";
     }
 
+    //propulsores
     if (pontos >= propulsores_preco) {
         btn_propulsores.classList.remove("inativo");
         btn_propulsores.disabled = false;
@@ -300,7 +393,7 @@ let stratosyl;
 
 function intervalo_stratosyl() {
     if (pontos < stratosyl_price) {
-        stratosyl = setInterval(function() {
+        stratosyl = setInterval(function () {
             barraProgresso(pontos, stratosyl_price);
             if (pontos >= stratosyl_price) {
                 clearInterval(stratosyl);
@@ -329,15 +422,13 @@ function barraProgresso(value, maxValue) {
 }
 
 //atualizar pontos passivos
-const intervalo_atualizar = 1000;
+const intervalo_atualizar = 100;
 function atualizarPontosPassivos() {
     const ganho_por_segundo = (ganho_passivo * upgrade_planeta) * (intervalo_atualizar / 100);
 
     pontos += ganho_por_segundo;
 
     planetas.textContent = formatarNumero(pontos);
-    verificarPoderes();
-    salvarProgresso();
 }
 
 setInterval(atualizarPontosPassivos, intervalo_atualizar);
