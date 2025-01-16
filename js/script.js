@@ -110,11 +110,11 @@ function resetarProgresso() {
     valor_click_display.textContent = formatarNumero(valor_click);
     passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
     laser_preco_display.textContent = "(" + formatarNumero(laser_preco) + ")";
-    count_laser_display.textContent = count_laser + "x";
+    count_laser_display.textContent = count_laser;
     miner_preco_display.textContent = "(" + formatarNumero(miner_preco) + ")";
-    count_miner_display.textContent = count_miner + "x";
+    count_miner_display.textContent = count_miner;
     foguete_preco_display.textContent = "(" + formatarNumero(foguete_preco) + ")";
-    count_foguete_display.textContent = "0x";
+    count_foguete_display.textContent = "0";
 }
 document.getElementById("reset-btn").addEventListener("click", () => {
     const confirmacao = window.confirm("Você realmente quer resetar?");
@@ -163,11 +163,11 @@ function carregarProgresso() {
         valor_click_display.textContent = formatarNumero(valor_click);
         passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
         laser_preco_display.textContent = "(" + formatarNumero(laser_preco) + ")";
-        count_laser_display.textContent = count_laser + "x";
+        count_laser_display.textContent = count_laser;
         miner_preco_display.textContent = "(" + formatarNumero(miner_preco) + ")";
-        count_miner_display.textContent = count_miner + "x";
+        count_miner_display.textContent = count_miner;
         foguete_preco_display.textContent = "(" + formatarNumero(foguete_preco) + ")";
-        count_foguete_display.textContent = formatarNumero(count_foguete) + "x";
+        count_foguete_display.textContent = formatarNumero(count_foguete);
     }
 }
 
