@@ -648,17 +648,17 @@ body {
     height: 4em;
 }
 
-#melhoria-inst button{
+#melhoria-inst button {
     background-color: #eff7f6;
     border: 2px solid #adb5bd;
     color: #8d99ae;
 }
 
-#melhoria-inst button:hover{
+#melhoria-inst button:hover {
     background-color: #dee2e6 !important;
 }
 
-#melhoria-inst button .descricao{
+#melhoria-inst button .descricao {
     background-color: #8d99ae;
 }
 

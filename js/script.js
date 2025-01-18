@@ -185,6 +185,7 @@ function carregarProgresso() {
         count_foguete = progresso.count_foguete || 0;
         //upgrades
         comprou_cafe = progresso.comprou_cafe || false;
+        comprou_pilula = progresso.comprou_pilula || false;
         comprou_pic_ferro = progresso.comprou_pic_ferro || false;
         comprou_perfuracao = progresso.comprou_perfuracao || false;
         comprou_propulsores = progresso.comprou_propulsores || false;
@@ -241,6 +242,7 @@ function salvarProgresso() {
         count_foguete,
         //upgrades
         comprou_cafe,
+        comprou_pilula,
         comprou_pic_ferro,
         comprou_perfuracao,
         comprou_propulsores,
@@ -345,6 +347,19 @@ function verificarUpgrades() {
 
     if (comprou_cafe == true) {
         btn_cafe.style.display = "none";
+    }
+
+    //pilulas
+    if (pontos >= pilula_preco) {
+        btn_pilula.classList.remove("inativo");
+        btn_pilula.disabled = false;
+    } else {
+        btn_pilula.classList.add("inativo");
+        btn_pilula.disabled = true;
+    }
+
+    if (comprou_pilula == true) {
+        btn_pilula.style.display = "none";
     }
 
     //picareta de ferro
@@ -517,3 +532,4 @@ btn_click.addEventListener("click", () => {
 
 // Carrega o progresso ao iniciar o jogo
 carregarProgresso();
+resetarProgresso();

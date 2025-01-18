@@ -11,24 +11,33 @@ btn_cafe.addEventListener("click", () => {
             upgrade_sound.currentTime = 0;
             upgrade_sound.play();
         }
+        valor_click += valor_click * 50 / 100;
+        valor_click_display.textContent = formatarNumero(valor_click);
         comprou_cafe = true;
-        let vezes_miner = count_miner * 2;
-        let i = 0;
-        let preco_miner_antigo = miner_preco;
-        while (i < vezes_miner) {
-            btn_miner.click();
-            i++;
-        }
         pontos -= cafe_preco;
-        if (pontos < 0) {
-            pontos = 0;
-        }
-        miner_preco = preco_miner_antigo;
-        miner_preco_display.textContent = "(" + formatarNumero(miner_preco) + ")";
         planetas.textContent = formatarNumero(pontos);
     }
 });
 
+//UPGRADE pilulas
+let btn_pilula = document.getElementById("btn-pilula");
+let pilula_preco = 750;
+let comprou_pilula = false;
+
+btn_pilula.addEventListener("click", () => {
+    if (pontos >= pilula_preco) {
+        const upgrade_sound = document.getElementById("click-upgrade");
+        if (upgrade_sound) {
+            upgrade_sound.currentTime = 0;
+            upgrade_sound.play();
+        }
+        ganho_passivo += 5;
+        passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
+        comprou_pilula = true;
+        pontos -= pilula_preco;
+        planetas.textContent = formatarNumero(pontos);
+    }
+});
 //MELHORIAS PERMANENTES
 //UPGRADE picareta de ferro
 let btn_pic_ferro = document.getElementById("btn-pic-ferro");
