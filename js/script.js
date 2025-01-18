@@ -532,4 +532,3 @@ btn_click.addEventListener("click", () => {
 
 // Carrega o progresso ao iniciar o jogo
 carregarProgresso();
-resetarProgresso();
