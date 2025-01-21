@@ -452,7 +452,7 @@ setInterval(atualizarPontosPassivos, intervalo_atualizar);
 function formatarNumero(num) {
     let resultado;
     if (num >= 1e15) {
-        const sufixosLetras = ["", "K", "M", "B", "T", "Q"];
+        const sufixosLetras = ["", "Mil", "Milhões", "Bilhões", "Trilhões", "Quadrilhões"];
         let sufixosIndex = 5;
 
         const letrasMinusculas = "abcdefghijklmnopqrstuvwxyz";
@@ -483,13 +483,13 @@ function formatarNumero(num) {
 
         resultado = valor.toFixed(2) + sufixo;
     } else if (num >= 1e12) {
-        resultado = (num / 1e12).toFixed(2) + "T";
+        resultado = (num / 1e12).toFixed(2) + "Trilhões";
     } else if (num >= 1e9) {
-        resultado = (num / 1e9).toFixed(2) + "B";
+        resultado = (num / 1e9).toFixed(2) + "Bilhões";
     } else if (num >= 1e6) {
-        resultado = (num / 1e6).toFixed(2) + "M";
+        resultado = (num / 1e6).toFixed(2) + "Milhões";
     } else if (num >= 1e3) {
-        resultado = (num / 1e3).toFixed(2) + "K";
+        resultado = (num / 1e3).toFixed(2) + "Mil";
     } else {
         resultado = num.toFixed(2);
     }
