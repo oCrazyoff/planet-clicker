@@ -96,16 +96,17 @@ function resetarProgresso() {
     miner_preco = 10;
     count_miner = 0;
     //foguete
-    foguete_preco = 1000;
+    foguete_preco = 3000;
     count_foguete = 0;
     //sonda
     count_sonda = 0;
-    sonda_preco = 500;
+    sonda_preco = 750;
     //luva
     count_luva = 0;
-    luva_preco = 750;
+    luva_preco = 500;
     //upgrade
     comprou_cafe = false;
+    comprou_pilula = false;
     comprou_pic_ferro = false;
     comprou_perfuracao = false;
     comprou_propulsores = false;
@@ -118,6 +119,7 @@ function resetarProgresso() {
 
     //mostrar upgrades
     btn_cafe.style.display = "flex";
+    btn_pilula.style.display = "flex";
     btn_pic_ferro.style.display = "flex";
     btn_perfuracao.style.display = "flex";
     btn_propulsores.style.display = "flex";
@@ -175,13 +177,13 @@ function carregarProgresso() {
         miner_preco = progresso.miner_preco || 10;
         count_miner = progresso.count_miner || 0;
         //sonda
-        sonda_preco = progresso.sonda_preco || 500;
+        sonda_preco = progresso.sonda_preco || 750;
         count_sonda = progresso.count_sonda || 0;
         //luva
-        luva_preco = progresso.luva_preco || 750;
+        luva_preco = progresso.luva_preco || 500;
         count_luva = progresso.count_luva || 0;
         //foguete
-        foguete_preco = progresso.foguete_preco || 1000;
+        foguete_preco = progresso.foguete_preco || 3000;
         count_foguete = progresso.count_foguete || 0;
         //upgrades
         comprou_cafe = progresso.comprou_cafe || false;

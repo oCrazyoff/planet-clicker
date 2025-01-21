@@ -63,7 +63,7 @@ btn_laser.addEventListener("click", () => {
 //poder sonda
 let btn_sonda = document.getElementById("btn-sonda");
 let sonda_preco_display = document.getElementById("sonda-preco");
-let sonda_preco = 500;
+let sonda_preco = 750;
 let count_sonda_display = document.getElementById("count-btn-sonda");
 let count_sonda = 0;
 let upgrade_sonda = 0;
@@ -90,7 +90,7 @@ btn_sonda.addEventListener("click", () => {
 //poder luva gravitacional
 let btn_luva = document.getElementById("btn-luva");
 let luva_preco_display = document.getElementById("luva-preco");
-let luva_preco = 750;
+let luva_preco = 500;
 let count_luva_display = document.getElementById("count-btn-luva");
 let count_luva = 0;
 let upgrade_luva = 0;
@@ -117,7 +117,7 @@ btn_luva.addEventListener("click", () => {
 // Poder foguete
 let btn_foguete = document.getElementById("btn-foguete");
 let foguete_preco_display = document.getElementById("foguete-preco");
-let foguete_preco = 1000;
+let foguete_preco = 3000;
 let count_foguete_display = document.getElementById("count-btn-foguete");
 let bonus_display = document.getElementById("bonus-div");
 let intervaloFoguete;
