@@ -54,7 +54,7 @@ btn_laser.addEventListener("click", () => {
         passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
         pontos -= laser_preco;
         planetas.textContent = formatarNumero(pontos);
-        laser_preco += laser_preco * 50 / 100;
+        laser_preco += laser_preco * 65 / 100;
         laser_preco_display.textContent = "(" + formatarNumero(laser_preco) + ")";
         count_laser_display.textContent = count_laser;
     }
@@ -81,7 +81,7 @@ btn_sonda.addEventListener("click", () => {
         passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
         pontos -= sonda_preco;
         planetas.textContent = formatarNumero(pontos);
-        sonda_preco += sonda_preco * 80 / 100;
+        sonda_preco += sonda_preco * 200 / 100;
         sonda_preco_display.textContent = "(" + formatarNumero(sonda_preco) + ")";
         count_sonda_display.textContent = count_sonda;
     }
@@ -108,9 +108,63 @@ btn_luva.addEventListener("click", () => {
         valor_click_display.textContent = formatarNumero(valor_click);
         pontos -= luva_preco;
         planetas.textContent = formatarNumero(pontos);
-        luva_preco += luva_preco * 65 / 100;
+        luva_preco += luva_preco * 150 / 100;
         luva_preco_display.textContent = "(" + formatarNumero(luva_preco) + ")";
         count_luva_display.textContent = count_luva;
+    }
+});
+
+//Poder Coletor orbital
+let btn_coletor = document.getElementById("btn-coletor");
+let coletor_preco_display = document.getElementById("coletor-preco");
+let coletor_preco = 1000;
+let count_coletor_display = document.getElementById("count-btn-coletor");
+let count_coletor = 0;
+let upgrade_coletor = 0;
+
+btn_coletor.addEventListener("click", () => {
+    if (pontos >= coletor_preco) {
+        valor_click += valor_click * 30 / 100;
+        valor_click += valor_click * upgrade_coletor;
+        const button_sound = document.getElementById("click-button");
+        if (button_sound) {
+            button_sound.currentTime = 0;
+            button_sound.play();
+        }
+        count_coletor += 1;
+        valor_click_display.textContent = formatarNumero(valor_click);
+        pontos -= coletor_preco;
+        planetas.textContent = formatarNumero(pontos);
+        coletor_preco += coletor_preco * 275 / 100;
+        coletor_preco_display.textContent = "(" + formatarNumero(coletor_preco) + ")";
+        count_coletor_display.textContent = count_coletor;
+    }
+});
+
+//poder usina
+let btn_usina = document.getElementById("btn-usina");
+let usina_preco_display = document.getElementById("usina-preco");
+let usina_preco = 2000;
+let count_usina_display = document.getElementById("count-btn-usina");
+let count_usina = 0;
+let upgrade_usina = 0;
+
+btn_usina.addEventListener("click", () => {
+    if (pontos >= usina_preco) {
+        ganho_passivo += ganho_passivo * 35 / 100;
+        ganho_passivo += ganho_passivo * upgrade_usina;
+        const button_sound = document.getElementById("click-button");
+        if (button_sound) {
+            button_sound.currentTime = 0;
+            button_sound.play();
+        }
+        count_usina += 1;
+        passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
+        pontos -= usina_preco;
+        planetas.textContent = formatarNumero(pontos);
+        usina_preco += usina_preco * 400 / 100;
+        usina_preco_display.textContent = "(" + formatarNumero(usina_preco) + ")";
+        count_usina_display.textContent = count_usina;
     }
 });
 
@@ -169,7 +223,7 @@ btn_foguete.addEventListener("click", () => {
         count_foguete += 1;
         pontos -= foguete_preco;
         planetas.textContent = formatarNumero(pontos);
-        foguete_preco += foguete_preco * 350 / 100;
+        foguete_preco += foguete_preco * 500 / 100;
         foguete_preco_display.textContent = "(" + formatarNumero(foguete_preco) + ")";
         count_foguete_display.textContent = formatarNumero(count_foguete);
 

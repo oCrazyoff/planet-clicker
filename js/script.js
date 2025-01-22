@@ -56,6 +56,8 @@ const info_miner = document.getElementById("info-miner");
 const info_laser = document.getElementById("info-laser");
 const info_sonda = document.getElementById("info-sonda");
 const info_luva = document.getElementById("info-luva");
+const info_coletor = document.getElementById("info-coletor");
+const info_usina = document.getElementById("info-usina");
 const info_foguete = document.getElementById("info-foguete");
 
 function adicionarInfoFlutuante(div, texto) {
@@ -78,6 +80,8 @@ adicionarInfoFlutuante(info_miner, "Mineram junto com você, aumentando seu pode
 adicionarInfoFlutuante(info_laser, "Atiram sozinhos no planeta, aumentando seu ganho passivo em 25%");
 adicionarInfoFlutuante(info_sonda, "Explora o Universo e gera planetas automaticamente, melhorando 30% do ganho passivo")
 adicionarInfoFlutuante(info_luva, "Utilizando a luva gravitacional seu clique fica muito mais forte, melhora seu poder de clique em 20%");
+adicionarInfoFlutuante(info_coletor, "O Coletor Orbital é muito poderoso funciona ao clickar, melhorando seu poder de clique em 30%");
+adicionarInfoFlutuante(info_usina, "A Usina de Matéria Escura processa e coleta matéria escura sozinha, melhora 35% do seu ganho passivo");
 adicionarInfoFlutuante(info_foguete, "Busca recursos em outros planetas baseado nos seus planetas atuais, demora 30 segundos para retornar");
 
 
@@ -104,6 +108,12 @@ function resetarProgresso() {
     //luva
     count_luva = 0;
     luva_preco = 500;
+    //coletor orbital
+    count_coletor = 0;
+    coletor_preco = 1000;
+    //usinda materia escura
+    count_usina = 0;
+    usina_preco = 2000;
     //upgrade
     comprou_cafe = false;
     comprou_pilula = false;
@@ -140,6 +150,12 @@ function resetarProgresso() {
     //luva
     luva_preco_display.textContent = "(" + formatarNumero(luva_preco) + ")";
     count_luva_display.textContent = count_luva;
+    //coletor orbital
+    coletor_preco_display.textContent = "(" + formatarNumero(coletor_preco) + ")";
+    count_coletor_display.textContent = count_coletor;
+    //usina materia escura
+    usina_preco_display.textContent = "(" + formatarNumero(usina_preco) + ")";
+    count_usina_display.textContent = count_usina;
     //foguete
     foguete_preco_display.textContent = "(" + formatarNumero(foguete_preco) + ")";
     count_foguete_display.textContent = "0";
@@ -182,6 +198,12 @@ function carregarProgresso() {
         //luva
         luva_preco = progresso.luva_preco || 500;
         count_luva = progresso.count_luva || 0;
+        //coletor orbital
+        coletor_preco = progresso.coletor_preco || 1000;
+        count_coletor = progresso.count_coletor || 0;
+        //usina materia escura
+        usina_preco = progresso.usina_preco || 2000;
+        count_usina = progresso.count_usina || 0;
         //foguete
         foguete_preco = progresso.foguete_preco || 3000;
         count_foguete = progresso.count_foguete || 0;
@@ -215,6 +237,12 @@ function carregarProgresso() {
         //luva
         luva_preco_display.textContent = "(" + formatarNumero(luva_preco) + ")";
         count_luva_display.textContent = count_luva;
+        //coletor orbital
+        coletor_preco_display.textContent = "(" + formatarNumero(coletor_preco) + ")";
+        count_coletor_display.textContent = count_coletor;
+        //usina materia escura
+        usina_preco_display.textContent = "(" + formatarNumero(usina_preco) + ")";
+        count_usina_display.textContent = count_usina;
         //foguete
         foguete_preco_display.textContent = "(" + formatarNumero(foguete_preco) + ")";
         count_foguete_display.textContent = formatarNumero(count_foguete);
@@ -239,6 +267,12 @@ function salvarProgresso() {
         //luva
         luva_preco,
         count_luva,
+        //coletor orbital
+        coletor_preco,
+        count_coletor,
+        //usina materia escura
+        usina_preco,
+        count_usina,
         //foguete
         foguete_preco,
         count_foguete,
@@ -291,6 +325,23 @@ function verificarPoderes() {
     } else {
         btn_luva.disabled = true;
         btn_luva.classList.add("inativo");
+    }
+
+    //coletor orbital
+    if (pontos >= coletor_preco) {
+        btn_coletor.disabled = false;
+        btn_coletor.classList.remove("inativo");
+    } else {
+        btn_coletor.disabled = true;
+        btn_coletor.classList.add("inativo");
+    }
+    //usina materia escura
+    if (pontos >= usina_preco) {
+        btn_usina.disabled = false;
+        btn_usina.classList.remove("inativo");
+    } else {
+        btn_usina.disabled = true;
+        btn_usina.classList.add("inativo");
     }
 
     //foguete
