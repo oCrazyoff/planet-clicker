@@ -161,6 +161,7 @@ function resetarProgresso() {
     usina_preco_display.textContent = "(" + formatarNumero(usina_preco) + ")";
     count_usina_display.textContent = count_usina;
     //foguete
+    iniciarBonusFoguete();
     foguete_preco_display.textContent = "(" + formatarNumero(foguete_preco) + ")";
     count_foguete_display.textContent = "0";
 }
