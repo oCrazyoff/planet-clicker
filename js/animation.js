@@ -10,6 +10,7 @@ const backgrounds = [
     'url("https://icon-library.com/images/planets-icon/planets-icon-10.jpg")',
     'url("https://cdn-icons-png.flaticon.com/512/315/315274.png")',
     'url("https://www.freeiconspng.com/uploads/planet-icon-png-25.png")',
+    'url("https://static.vecteezy.com/system/resources/previews/024/596/370/non_2x/pink-planet-illustration-free-png.png")',
 ];
 
 clickArea.addEventListener('click', (e) => {

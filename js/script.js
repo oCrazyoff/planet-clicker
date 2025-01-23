@@ -120,12 +120,17 @@ function resetarProgresso() {
     comprou_pic_ferro = false;
     comprou_perfuracao = false;
     comprou_propulsores = false;
-    upgrade_planeta = 1;
+    upgrade_passivo_planeta = 1;
+    upgrade_click_planeta = 1;
     porcentagem = 0;
 
     //planetas
+    img_planeta.src = "https://th.bing.com/th/id/R.5264daf3c450582421fc4b0ff3467221?rik=blmf9VQ7278LCA&pid=ImgRaw&r=0";
+    info_planeta.innerHTML = "Esse é Aqualis, o primeiro planeta que você encontrou em suas jornadas espaciais. <span>Não tem nenhum atributo</span>";
+    atual_planeta = "Aqualis";
     trocarPlaneta();
     intervalo_stratosyl();
+    intervalo_rosalia();
 
     //mostrar upgrades
     btn_cafe.style.display = "flex";
@@ -133,7 +138,6 @@ function resetarProgresso() {
     btn_pic_ferro.style.display = "flex";
     btn_perfuracao.style.display = "flex";
     btn_propulsores.style.display = "flex";
-    img_planeta.src = "https://th.bing.com/th/id/R.5264daf3c450582421fc4b0ff3467221?rik=blmf9VQ7278LCA&pid=ImgRaw&r=0";
 
     planetas.textContent = formatarNumero(pontos);
     valor_click_display.textContent = formatarNumero(valor_click);
@@ -215,7 +219,10 @@ function carregarProgresso() {
         comprou_propulsores = progresso.comprou_propulsores || false;
         //novo planeta
         porcentagem = progresso.porcentagem || 0;
-        upgrade_planeta = progresso.upgrade_planeta || 1;
+        upgrade_passivo_planeta = progresso.upgrade_passivo_planeta || 1;
+        upgrade_click_planeta = progresso.upgrade_click_planeta || 1;
+        info_planeta.innerHTML = progresso.info_planeta || "Esse é Aqualis, o primeiro planeta que você encontrou em suas jornadas espaciais. <span>Não tem nenhum atributo</span>";
+        atual_planeta = progresso.atual_planeta || "Aqualis";
         img_planeta.src = progresso.img_planeta_src || "https://th.bing.com/th/id/R.5264daf3c450582421fc4b0ff3467221?rik=blmf9VQ7278LCA&pid=ImgRaw&r=0";
 
 
@@ -282,8 +289,12 @@ function salvarProgresso() {
         comprou_pic_ferro,
         comprou_perfuracao,
         comprou_propulsores,
+        //planetas
         porcentagem,
-        upgrade_planeta,
+        upgrade_passivo_planeta,
+        upgrade_click_planeta,
+        atual_planeta,
+        info_planeta: info_planeta.innerHTML,
         img_planeta_src: img_planeta.src,
     };
     localStorage.setItem("progressoJogo", JSON.stringify(progresso));
@@ -360,7 +371,7 @@ let planetas = document.getElementById("score");
 let pontos = 0;
 
 btn_click.addEventListener("click", () => {
-    pontos += valor_click * upgrade_planeta;
+    pontos += valor_click * upgrade_click_planeta;
     planetas.textContent = formatarNumero(pontos);
 });
 
@@ -460,18 +471,39 @@ const stratosyl_price = 5000;
 let stratosyl;
 
 function intervalo_stratosyl() {
-    if (pontos < stratosyl_price) {
+    if (pontos < stratosyl_price && atual_planeta == "Aqualis") {
         stratosyl = setInterval(function () {
             barraProgresso(pontos, stratosyl_price);
             if (pontos >= stratosyl_price) {
                 clearInterval(stratosyl);
-                barraProgresso();
+                barraProgresso(pontos, rosalia_price);
+                trocarPlaneta();
+                intervalo_rosalia();
             }
         }, 100);
     }
 }
 
 intervalo_stratosyl();
+
+//PLANETA rosalia
+const rosalia_price = 15000;
+let rosalia;
+
+function intervalo_rosalia() {
+    if (pontos > stratosyl_price && atual_planeta == "Stratosyl") {
+        rosalia = setInterval(function () {
+            barraProgresso(pontos, rosalia_price);
+            if (pontos >= rosalia_price) {
+                clearInterval(rosalia);
+                barraProgresso(0, 100);
+                trocarPlaneta();
+            }
+        }, 100);
+    }
+}
+
+intervalo_rosalia();
 
 //barra de progresso para o proximo planeta
 function barraProgresso(value, maxValue) {
@@ -480,19 +512,12 @@ function barraProgresso(value, maxValue) {
     let porcentagem = Math.min((value / maxValue) * 100, 100);
 
     progress_bar.style.width = `${porcentagem}%`;
-
-
-    if (pontos >= stratosyl_price) {
-        progress_bar.style.width = '0%';
-        porcentagem = 0;
-        trocarPlaneta();
-    }
 }
 
 //atualizar pontos passivos
 const intervalo_atualizar = 100;
 function atualizarPontosPassivos() {
-    const ganho_por_segundo = (ganho_passivo * upgrade_planeta) * (intervalo_atualizar / 100);
+    const ganho_por_segundo = (ganho_passivo * upgrade_passivo_planeta) * (intervalo_atualizar / 100);
 
     pontos += ganho_por_segundo;
 
