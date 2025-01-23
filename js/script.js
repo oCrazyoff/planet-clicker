@@ -488,7 +488,7 @@ function intervalo_stratosyl() {
 intervalo_stratosyl();
 
 //PLANETA rosalia
-const rosalia_price = 15000;
+const rosalia_price = 100000;
 let rosalia;
 
 function intervalo_rosalia() {
