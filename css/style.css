@@ -621,6 +621,7 @@ body {
 }
 
 #hack-btn {
+    display: none;
     background-color: #0077b6;
     width: 100%;
     font-weight: 600;
