@@ -364,7 +364,6 @@ body {
 }
 
 #btn-prestigio {
-    display: none;
     position: absolute;
     right: .3em;
     border: none;
@@ -386,12 +385,10 @@ body {
 }
 
 #bar-prestigio-container {
-    position: absolute;
-    left: 0;
-    bottom: -20%;
     background-color: rgba(0, 0, 0, 0.589);
     height: .5em;
-    width: 100%;
+    transform: translate(-15%);
+    width: 140%;
     border: 1px solid #a47e1b;
     border-radius: 1em;
 
@@ -404,7 +401,14 @@ body {
     transition: .2s ease all;
 }
 
-
+#pontos-prestigio{
+    position: absolute;
+    top: -3%;
+    left: -10px;
+    background-color: #76520e;
+    padding: .1em .5em;
+    border-radius: .5em;
+}
 
 
 /* pagina poderes */
@@ -617,7 +621,6 @@ body {
 }
 
 #hack-btn {
-    display: none;
     background-color: #0077b6;
     width: 100%;
     font-weight: 600;

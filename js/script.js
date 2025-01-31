@@ -76,12 +76,12 @@ function adicionarInfoFlutuante(div, texto) {
     });
 }
 
-adicionarInfoFlutuante(info_miner, "Mineram junto com você, aumentando seu poder de clique em 10%");
-adicionarInfoFlutuante(info_laser, "Atiram sozinhos no planeta, aumentando seu ganho passivo em 25%");
-adicionarInfoFlutuante(info_sonda, "Explora o Universo e gera planetas automaticamente, melhorando 30% do ganho passivo")
-adicionarInfoFlutuante(info_luva, "Utilizando a luva gravitacional seu clique fica muito mais forte, melhora seu poder de clique em 20%");
-adicionarInfoFlutuante(info_coletor, "O Coletor Orbital é muito poderoso funciona ao clickar, melhorando seu poder de clique em 30%");
-adicionarInfoFlutuante(info_usina, "A Usina de Matéria Escura processa e coleta matéria escura sozinha, melhora 35% do seu ganho passivo");
+adicionarInfoFlutuante(info_miner, "Mineram junto com você, aumentando seu poder de clique em 0.5");
+adicionarInfoFlutuante(info_laser, "Atiram sozinhos no planeta, aumentando seu ganho passivo em 0.5");
+adicionarInfoFlutuante(info_sonda, "Explora o Universo e gera planetas automaticamente, aumentando 1 do ganho passivo")
+adicionarInfoFlutuante(info_luva, "Utilizando a luva gravitacional seu clique fica muito mais forte, melhora seu poder de clique em 1");
+adicionarInfoFlutuante(info_coletor, "O Coletor Orbital é muito poderoso funciona ao clickar, melhorando seu poder de clique em 1.5");
+adicionarInfoFlutuante(info_usina, "A Usina de Matéria Escura processa e coleta matéria escura sozinha, melhora 1.5 do seu ganho passivo");
 adicionarInfoFlutuante(info_foguete, "Busca recursos em outros planetas baseado nos seus planetas atuais, demora 30 segundos para retornar");
 
 
@@ -131,6 +131,11 @@ function resetarProgresso() {
     trocarPlaneta();
     intervalo_stratosyl();
     intervalo_rosalia();
+
+    //legado
+    pontos_prestigio = 0;
+    max_pontos_prestigio = 1000;
+    atualizarInterface();
 
     //mostrar upgrades
     btn_cafe.style.display = "flex";
@@ -226,6 +231,10 @@ function carregarProgresso() {
         atual_planeta = progresso.atual_planeta || "Aqualis";
         img_planeta.src = progresso.img_planeta_src || "https://th.bing.com/th/id/R.5264daf3c450582421fc4b0ff3467221?rik=blmf9VQ7278LCA&pid=ImgRaw&r=0";
 
+        //legado
+        pontos_prestigio = progresso.pontos_prestigio || 0;
+        max_pontos_prestigio = progresso.max_pontos_prestigio || 1000;
+        atualizarInterface();
 
         trocarPlaneta();
 
@@ -290,6 +299,11 @@ function salvarProgresso() {
         comprou_pic_ferro,
         comprou_perfuracao,
         comprou_propulsores,
+
+        //legado
+        pontos_prestigio,
+        max_pontos_prestigio,
+
         //planetas
         porcentagem,
         upgrade_passivo_planeta,

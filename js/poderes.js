@@ -16,11 +16,11 @@ btn_miner.addEventListener("click", () => {
             button_sound.play();
         }
         count_miner += 1;
-        valor_click += valor_click * 10 / 100;
+        valor_click += 0.5;
         valor_click += valor_click * upgrade_miner;
         pontos -= miner_preco;
         planetas.textContent = formatarNumero(pontos);
-        miner_preco += miner_preco * 25 / 100;
+        miner_preco += (miner_preco * 25 / 100) + (miner_preco * count_miner / 100);
         miner_preco_display.textContent = "(" + formatarNumero(miner_preco) + ")";
         valor_click_display.textContent = formatarNumero(valor_click);
         count_miner_display.textContent = count_miner;
@@ -39,12 +39,9 @@ let upgrade_laser = 0;
 
 btn_laser.addEventListener("click", () => {
     if (pontos >= laser_preco) {
-        if (ganho_passivo < 1) {
-            ganho_passivo += 1;
-        } else {
-            ganho_passivo += ganho_passivo * 25 / 100;
-            ganho_passivo += ganho_passivo * upgrade_laser;
-        }
+        ganho_passivo += 0.5;
+        ganho_passivo += ganho_passivo * upgrade_laser;
+
         const button_sound = document.getElementById("click-button");
         if (button_sound) {
             button_sound.currentTime = 0;
@@ -54,7 +51,7 @@ btn_laser.addEventListener("click", () => {
         passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
         pontos -= laser_preco;
         planetas.textContent = formatarNumero(pontos);
-        laser_preco += laser_preco * 65 / 100;
+        laser_preco += (laser_preco * 30 / 100) + (laser_preco * count_laser / 100);
         laser_preco_display.textContent = "(" + formatarNumero(laser_preco) + ")";
         count_laser_display.textContent = count_laser;
     }
@@ -70,7 +67,7 @@ let upgrade_sonda = 0;
 
 btn_sonda.addEventListener("click", () => {
     if (pontos >= sonda_preco) {
-        ganho_passivo += ganho_passivo * 30 / 100;
+        ganho_passivo += 1;
         ganho_passivo += ganho_passivo * upgrade_sonda;
         const button_sound = document.getElementById("click-button");
         if (button_sound) {
@@ -81,7 +78,7 @@ btn_sonda.addEventListener("click", () => {
         passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
         pontos -= sonda_preco;
         planetas.textContent = formatarNumero(pontos);
-        sonda_preco += sonda_preco * 200 / 100;
+        sonda_preco += (sonda_preco * 35 / 100) + (sonda_preco * count_sonda / 100);
         sonda_preco_display.textContent = "(" + formatarNumero(sonda_preco) + ")";
         count_sonda_display.textContent = count_sonda;
     }
@@ -97,7 +94,7 @@ let upgrade_luva = 0;
 
 btn_luva.addEventListener("click", () => {
     if (pontos >= luva_preco) {
-        valor_click += valor_click * 20 / 100;
+        valor_click += 1;
         valor_click += valor_click * upgrade_luva;
         const button_sound = document.getElementById("click-button");
         if (button_sound) {
@@ -108,7 +105,7 @@ btn_luva.addEventListener("click", () => {
         valor_click_display.textContent = formatarNumero(valor_click);
         pontos -= luva_preco;
         planetas.textContent = formatarNumero(pontos);
-        luva_preco += luva_preco * 150 / 100;
+        luva_preco += (luva_preco * 35 / 100) + (luva_preco * count_luva / 100);
         luva_preco_display.textContent = "(" + formatarNumero(luva_preco) + ")";
         count_luva_display.textContent = count_luva;
     }
@@ -124,7 +121,7 @@ let upgrade_coletor = 0;
 
 btn_coletor.addEventListener("click", () => {
     if (pontos >= coletor_preco) {
-        valor_click += valor_click * 30 / 100;
+        valor_click += 1.5;
         valor_click += valor_click * upgrade_coletor;
         const button_sound = document.getElementById("click-button");
         if (button_sound) {
@@ -135,7 +132,7 @@ btn_coletor.addEventListener("click", () => {
         valor_click_display.textContent = formatarNumero(valor_click);
         pontos -= coletor_preco;
         planetas.textContent = formatarNumero(pontos);
-        coletor_preco += coletor_preco * 275 / 100;
+        coletor_preco += (coletor_preco * 40 / 100) + (coletor_preco * count_coletor / 100);
         coletor_preco_display.textContent = "(" + formatarNumero(coletor_preco) + ")";
         count_coletor_display.textContent = count_coletor;
     }
@@ -151,7 +148,7 @@ let upgrade_usina = 0;
 
 btn_usina.addEventListener("click", () => {
     if (pontos >= usina_preco) {
-        ganho_passivo += ganho_passivo * 35 / 100;
+        ganho_passivo += 1.5;
         ganho_passivo += ganho_passivo * upgrade_usina;
         const button_sound = document.getElementById("click-button");
         if (button_sound) {
@@ -162,7 +159,7 @@ btn_usina.addEventListener("click", () => {
         passive_score.textContent = formatarNumero(ganho_passivo) + "/s";
         pontos -= usina_preco;
         planetas.textContent = formatarNumero(pontos);
-        usina_preco += usina_preco * 400 / 100;
+        usina_preco += (usina_preco * 45 / 100) + (usina_preco * count_usina / 100);
         usina_preco_display.textContent = "(" + formatarNumero(usina_preco) + ")";
         count_usina_display.textContent = count_usina;
     }
@@ -223,7 +220,7 @@ btn_foguete.addEventListener("click", () => {
         count_foguete += 1;
         pontos -= foguete_preco;
         planetas.textContent = formatarNumero(pontos);
-        foguete_preco += foguete_preco * 500 / 100;
+        foguete_preco += (foguete_preco * 500 / 100) + (foguete_preco * count_foguete / 100);
         foguete_preco_display.textContent = "(" + formatarNumero(foguete_preco) + ")";
         count_foguete_display.textContent = formatarNumero(count_foguete);
 
