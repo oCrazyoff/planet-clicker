@@ -27,7 +27,7 @@ atualizarInterface();
 
 document.getElementById("btn-prestigio").addEventListener("click", () => {
     if (pontos_prestigio > 0) {
-        window.location.href = "/arvore_legado.html";
+        window.location.href = "arvore_legado.html";
     } else {
         alert("Você não tem pontos de prestígio suficientes!");
     }
