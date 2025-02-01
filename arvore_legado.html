@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Árvore de Habilidades</title>
+    <link rel="stylesheet" href="css/arvore_legado.css">
+</head>
+
+<body>
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+    <h1>Árvore de Habilidades</h1>
+    <div id="pontos-prestigio-container">
+        Pontos de Prestígio: <span id="pontos-prestigio">0</span>
+    </div>
+    <div id="habilidades">
+        <div class="habilidade" data-custo="1" data-info="Aumenta a produção em 10%">
+            <button style="top: 30%; left: 48%;" onclick="comprarHabilidade(1)" onmouseover="mostrarInfo(event)"
+                onmouseout="esconderInfo()">
+                <img src="https://cdn-icons-png.flaticon.com/512/1534/1534067.png" alt="">
+            </button>
+        </div>
+        <span id="info"></span>
+    </div>
+    <div class="voltar-principal">
+        <button onclick="window.location.href='index.html'" onclick="resetarProgresso()">Voltar</button>
+        <span>Você perderá todo seu progresso!</span>
+    </div>
+    <script>
+        // Função para mostrar o info
+        function mostrarInfo(event) {
+            const info = document.getElementById("info");
+            const habilidade = event.currentTarget.parentElement;
+            const mensagem = habilidade.getAttribute("data-info");
+
+            info.textContent = mensagem;
+            info.style.left = `${event.pageX + 10}px`;
+            info.style.top = `${event.pageY + 10}px`;
+            info.style.display = "block";
+        }
+
+        // Função para esconder o info
+        function esconderInfo() {
+            const info = document.getElementById("info");
+            info.style.display = "none";
+        }
+    </script>
+    <script src="js/arvore_legado.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

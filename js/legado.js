@@ -1,5 +1,5 @@
 let pontos_prestigio = 0;
-let max_pontos_prestigio = 1000;
+let max_pontos_prestigio = (pontos_prestigio === 0) ? 10 : pontos_prestigio * 10;
 
 function barraProgressoLegado(value, maxValue) {
     const progress_bar = document.getElementById("bar-prestigio");
@@ -10,7 +10,7 @@ function barraProgressoLegado(value, maxValue) {
 
     if (porcentagem >= 100) {
         pontos_prestigio++;
-        max_pontos_prestigio *= 1.5;
+        max_pontos_prestigio *= 10;
         atualizarInterface();
     }
 }
@@ -24,3 +24,11 @@ setInterval(() => {
 }, 100);
 
 atualizarInterface();
+
+document.getElementById("btn-prestigio").addEventListener("click", () => {
+    if (pontos_prestigio > 0) {
+        window.location.href = "../arvore_legado.html";
+    } else {
+        alert("Você não tem pontos de prestígio suficientes!");
+    }
+});

@@ -132,11 +132,6 @@ function resetarProgresso() {
     intervalo_stratosyl();
     intervalo_rosalia();
 
-    //legado
-    pontos_prestigio = 0;
-    max_pontos_prestigio = 1000;
-    atualizarInterface();
-
     //mostrar upgrades
     btn_cafe.style.display = "flex";
     btn_pilula.style.display = "flex";
@@ -233,7 +228,7 @@ function carregarProgresso() {
 
         //legado
         pontos_prestigio = progresso.pontos_prestigio || 0;
-        max_pontos_prestigio = progresso.max_pontos_prestigio || 1000;
+        max_pontos_prestigio = progresso.max_pontos_prestigio || 10;
         atualizarInterface();
 
         trocarPlaneta();
