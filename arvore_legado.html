@@ -17,11 +17,72 @@
         Pontos de Prestígio: <span id="pontos-prestigio">0</span>
     </div>
     <div id="habilidades">
-        <div class="habilidade" data-custo="1" data-info="Aumenta a produção em 10%">
-            <button style="top: 30%; left: 48%;" onclick="comprarHabilidade(1)" onmouseover="mostrarInfo(event)"
-                onmouseout="esconderInfo()">
-                <img src="https://cdn-icons-png.flaticon.com/512/1534/1534067.png" alt="">
-            </button>
+        <div class="container-habilidade">
+            <div id="click_dourado" class="habilidade" data-custo="1" data-info="Aumenta poder de click em 10%">
+                <button onclick="comprarHabilidade(1, 'click_dourado')" onmouseover="mostrarInfo(event)"
+                    onmouseout="esconderInfo()">
+                    <img src="https://cdn-icons-png.flaticon.com/512/304/304025.png" alt="">
+                </button>
+            </div>
+            <div class="habilidade" data-custo="0" data-info="Sem skill">
+                <button onclick="comprarHabilidade(0)" onmouseover="mostrarInfo(event)" onmouseout="esconderInfo()">
+                    <img src="https://openclipart.org/image/2400px/svg_to_png/16155/milker-X-icon.png" alt="">
+                </button>
+            </div>
+            <div class="habilidade" data-custo="0" data-info="Sem skill">
+                <button onclick="comprarHabilidade(0)" onmouseover="mostrarInfo(event)" onmouseout="esconderInfo()">
+                    <img src="https://openclipart.org/image/2400px/svg_to_png/16155/milker-X-icon.png" alt="">
+                </button>
+            </div>
+            <div class="habilidade" data-custo="0" data-info="Sem skill">
+                <button onclick="comprarHabilidade(0)" onmouseover="mostrarInfo(event)" onmouseout="esconderInfo()">
+                    <img src="https://openclipart.org/image/2400px/svg_to_png/16155/milker-X-icon.png" alt="">
+                </button>
+            </div>
+        </div>
+        <div class="container-habilidade">
+            <div class="habilidade" data-custo="0" data-info="Sem skill">
+                <button onclick="comprarHabilidade(0)" onmouseover="mostrarInfo(event)" onmouseout="esconderInfo()">
+                    <img src="https://openclipart.org/image/2400px/svg_to_png/16155/milker-X-icon.png" alt="">
+                </button>
+            </div>
+            <div class="habilidade" data-custo="0" data-info="Sem skill">
+                <button onclick="comprarHabilidade(0)" onmouseover="mostrarInfo(event)" onmouseout="esconderInfo()">
+                    <img src="https://openclipart.org/image/2400px/svg_to_png/16155/milker-X-icon.png" alt="">
+                </button>
+            </div>
+            <div class="habilidade" data-custo="0" data-info="Sem skill">
+                <button onclick="comprarHabilidade(0)" onmouseover="mostrarInfo(event)" onmouseout="esconderInfo()">
+                    <img src="https://openclipart.org/image/2400px/svg_to_png/16155/milker-X-icon.png" alt="">
+                </button>
+            </div>
+            <div class="habilidade" data-custo="0" data-info="Sem skill">
+                <button onclick="comprarHabilidade(0)" onmouseover="mostrarInfo(event)" onmouseout="esconderInfo()">
+                    <img src="https://openclipart.org/image/2400px/svg_to_png/16155/milker-X-icon.png" alt="">
+                </button>
+            </div>
+        </div>
+        <div class="container-habilidade">
+            <div class="habilidade" data-custo="0" data-info="Sem skill">
+                <button onclick="comprarHabilidade(0)" onmouseover="mostrarInfo(event)" onmouseout="esconderInfo()">
+                    <img src="https://openclipart.org/image/2400px/svg_to_png/16155/milker-X-icon.png" alt="">
+                </button>
+            </div>
+            <div class="habilidade" data-custo="0" data-info="Sem skill">
+                <button onclick="comprarHabilidade(0)" onmouseover="mostrarInfo(event)" onmouseout="esconderInfo()">
+                    <img src="https://openclipart.org/image/2400px/svg_to_png/16155/milker-X-icon.png" alt="">
+                </button>
+            </div>
+            <div class="habilidade" data-custo="0" data-info="Sem skill">
+                <button onclick="comprarHabilidade(0)" onmouseover="mostrarInfo(event)" onmouseout="esconderInfo()">
+                    <img src="https://openclipart.org/image/2400px/svg_to_png/16155/milker-X-icon.png" alt="">
+                </button>
+            </div>
+            <div class="habilidade" data-custo="0" data-info="Sem skill">
+                <button onclick="comprarHabilidade(0)" onmouseover="mostrarInfo(event)" onmouseout="esconderInfo()">
+                    <img src="https://openclipart.org/image/2400px/svg_to_png/16155/milker-X-icon.png" alt="">
+                </button>
+            </div>
         </div>
         <span id="info"></span>
     </div>
@@ -37,8 +98,8 @@
             const mensagem = habilidade.getAttribute("data-info");
 
             info.textContent = mensagem;
-            info.style.left = `${event.pageX + 10}px`;
-            info.style.top = `${event.pageY + 10}px`;
+            info.style.left = `${event.pageX - 10}px`;
+            info.style.top = `${event.pageY - 95}px`;
             info.style.display = "block";
         }
 

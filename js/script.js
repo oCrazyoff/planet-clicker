@@ -229,6 +229,8 @@ function carregarProgresso() {
         //legado
         pontos_prestigio = progresso.pontos_prestigio || 0;
         max_pontos_prestigio = progresso.max_pontos_prestigio || 10;
+        legado_click = progresso.legado_click || 0;
+        legado_passivo = progresso.legado_passivo || 0;
         atualizarInterface();
 
         trocarPlaneta();
@@ -298,6 +300,8 @@ function salvarProgresso() {
         //legado
         pontos_prestigio,
         max_pontos_prestigio,
+        legado_click,
+        legado_passivo,
 
         //planetas
         porcentagem,
@@ -620,3 +624,4 @@ btn_click.addEventListener("click", () => {
 
 // Carrega o progresso ao iniciar o jogo
 carregarProgresso();
+localStorage.removeItem("progressoJogo");

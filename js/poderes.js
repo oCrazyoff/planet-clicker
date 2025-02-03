@@ -4,7 +4,7 @@ let miner_preco = 10;
 let miner_preco_display = document.getElementById("miner-preco");
 let count_miner_display = document.getElementById("count-btn-miner");
 let count_miner = 0;
-let valor_click = 1;
+let valor_click = 1 + legado_click;
 let valor_click_display = document.getElementById("valor-click");
 let upgrade_miner = 0;
 
