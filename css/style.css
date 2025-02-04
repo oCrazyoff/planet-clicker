@@ -603,6 +603,7 @@ body {
 }
 
 #reset-btn {
+    display: none;
     background-color: #9d0208;
     color: white;
     font-weight: 600;

@@ -10,6 +10,11 @@ function atualizarProgresso() {
     verificarPoderes();
     verificarUpgrades();
     salvarProgresso();
+    salvarLegado();
+    if (localStorage.getItem('resetar') === 'true') {
+        localStorage.removeItem('resetar');
+        resetarProgresso();
+    }
 }
 
 setInterval(atualizarProgresso, 100);
@@ -182,8 +187,6 @@ function ativarHack() {
     trocarPlaneta();
 }
 
-
-
 // Carrega o progresso do jogo
 function carregarProgresso() {
     const progresso = JSON.parse(localStorage.getItem("progressoJogo"));
@@ -225,13 +228,6 @@ function carregarProgresso() {
         info_planeta.innerHTML = progresso.info_planeta || "Esse é Aqualis, o primeiro planeta que você encontrou em suas jornadas espaciais. <span>Não tem nenhum atributo</span>";
         atual_planeta = progresso.atual_planeta || "Aqualis";
         img_planeta.src = progresso.img_planeta_src || "https://th.bing.com/th/id/R.5264daf3c450582421fc4b0ff3467221?rik=blmf9VQ7278LCA&pid=ImgRaw&r=0";
-
-        //legado
-        pontos_prestigio = progresso.pontos_prestigio || 0;
-        max_pontos_prestigio = progresso.max_pontos_prestigio || 10;
-        legado_click = progresso.legado_click || 0;
-        legado_passivo = progresso.legado_passivo || 0;
-        atualizarInterface();
 
         trocarPlaneta();
 
@@ -296,12 +292,6 @@ function salvarProgresso() {
         comprou_pic_ferro,
         comprou_perfuracao,
         comprou_propulsores,
-
-        //legado
-        pontos_prestigio,
-        max_pontos_prestigio,
-        legado_click,
-        legado_passivo,
 
         //planetas
         porcentagem,
@@ -608,7 +598,6 @@ document.addEventListener('click', function handleClick() {
         audio.volume = 0.1;
         audio.play();
     }
-
     document.removeEventListener("click", handleClick);
 });
 

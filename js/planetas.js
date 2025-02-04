@@ -1,5 +1,4 @@
 let img_planeta = document.getElementById("img-planeta");
-let upgrade_planeta = 1;
 
 let info_planeta = document.getElementById("info-planeta");
 let atual_planeta = "Aqualis";
