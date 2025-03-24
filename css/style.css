@@ -123,8 +123,10 @@ body {
     transition: 0.3s ease all;
     filter: drop-shadow(0 0 0.75rem #000);
     animation: spin 10s linear infinite;
-    pointer-events: none;
     user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .valor-clique {
