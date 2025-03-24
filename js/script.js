@@ -12,9 +12,9 @@ const ganhoUpgradeElements = document.querySelectorAll('.ganho-upgrade');
 let planetas = 0;
 let planetasPassivos = 0;
 let valorDeClique = 1;
-let upgrades = [0, 0]; // Array de upgrades
-let precoUpgrades = [10, 50]; // Preços dos upgrades
-let ganhoUpgrades = [1, 1]; // Ganhos por upgrade
+let upgrades = [0, 0, 0]; // Array de upgrades
+let precoUpgrades = [10, 50, 100]; // Preços dos upgrades
+let ganhoUpgrades = [1, 1, 5]; // Ganhos por upgrade
 
 // Salvar progresso no localStorage
 function salvarProgresso(){
@@ -124,10 +124,12 @@ btnUpgrades.forEach((btn, index) => {
                 valorDeClique += ganhoUpgrades[index]; // Aumentar valor de clique
             } else if (index === 1) { // Mineradores
                 planetasPassivos += ganhoUpgrades[index]; // Aumentar ganho passivo
-            }
+            } else if (index === 2) { // Braco mecanico
+                valorDeClique += ganhoUpgrades[index];
+            } 
 
             // Aumentar o preço do upgrade e o ganho
-            precoUpgrades[index] = Math.floor(precoUpgrades[index] * 1.2);
+            precoUpgrades[index] = Math.floor(precoUpgrades[index] * 1.5);
             ganhoUpgrades[index] += 1;
 
             // Atualizar a interface
@@ -150,3 +152,4 @@ setInterval(ganharPlanetasPassivos, 1000);
 // Carregar o progresso ao iniciar o jogo
 carregarProgresso();
 atualizarInterface();
+

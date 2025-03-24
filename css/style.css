@@ -112,6 +112,10 @@ body {
     cursor: pointer;
     transition: 0.3s ease all;
     z-index: 1;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 #btn-click img {
@@ -208,7 +212,12 @@ body {
         top: 40%;
     }
 
+    #btn-click img {
+        height: 20em;
+    }
+
     .info {
+        width: 40%;
         left: 50%;
         top: 1em;
     }
