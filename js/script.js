@@ -12,19 +12,19 @@ const ganhoUpgradeElements = document.querySelectorAll('.ganho-upgrade');
 let planetas = 0;
 let planetasPassivos = 0;
 let valorDeClique = 1;
-let upgrades = [0, 0, 0]; // Array de upgrades
-let precoUpgrades = [10, 50, 100]; // Preços dos upgrades
-let ganhoUpgrades = [1, 1, 5]; // Ganhos por upgrade
+let upgrades = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Array de upgrades
+let precoUpgrades = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000]; // Preços dos upgrades
+let ganhoUpgrades = [1, 1, 5, 5, 10, 10, 50, 50, 100, 100]; // Ganhos por upgrade
 
 // Salvar progresso no localStorage
-function salvarProgresso(){
-    localStorage.setItem('planetas', planetas);
-    localStorage.setItem('planetasPassivos', planetasPassivos);
-    localStorage.setItem('valorDeClique', valorDeClique);
-    localStorage.setItem('upgrades', JSON.stringify(upgrades));
-    localStorage.setItem('precoUpgrades', JSON.stringify(precoUpgrades));
-    localStorage.setItem('ganhoUpgrades', JSON.stringify(ganhoUpgrades));
-}
+// function salvarProgresso(){
+//     localStorage.setItem('planetas', planetas);
+//     localStorage.setItem('planetasPassivos', planetasPassivos);
+//     localStorage.setItem('valorDeClique', valorDeClique);
+//     localStorage.setItem('upgrades', JSON.stringify(upgrades));
+//     localStorage.setItem('precoUpgrades', JSON.stringify(precoUpgrades));
+//     localStorage.setItem('ganhoUpgrades', JSON.stringify(ganhoUpgrades));
+// }
 
 // Carregar progresso do localStorage
 function carregarProgresso(){
@@ -120,13 +120,11 @@ btnUpgrades.forEach((btn, index) => {
             upgrades[index] += 1;
 
             // Atualizar o valor de clique ou o ganho passivo, dependendo do tipo de upgrade
-            if (index === 0) { // Mão Robótica
-                valorDeClique += ganhoUpgrades[index]; // Aumentar valor de clique
-            } else if (index === 1) { // Mineradores
-                planetasPassivos += ganhoUpgrades[index]; // Aumentar ganho passivo
-            } else if (index === 2) { // Braco mecanico
-                valorDeClique += ganhoUpgrades[index];
-            } 
+            if (index % 2 === 0) {
+                valorDeClique += ganhoUpgrades[index]; // Aumenta o valor do clique
+            } else {
+                planetasPassivos += ganhoUpgrades[index]; // Aumenta o ganho passivo
+            }
 
             // Aumentar o preço do upgrade e o ganho
             precoUpgrades[index] = Math.floor(precoUpgrades[index] * 1.5);
@@ -150,6 +148,6 @@ function ganharPlanetasPassivos() {
 setInterval(ganharPlanetasPassivos, 1000);
 
 // Carregar o progresso ao iniciar o jogo
-carregarProgresso();
-atualizarInterface();
+// carregarProgresso();
+// atualizarInterface();
 

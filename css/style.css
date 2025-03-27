@@ -116,6 +116,8 @@ body {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 #btn-click img {
@@ -124,9 +126,8 @@ body {
     filter: drop-shadow(0 0 0.75rem #000);
     animation: spin 10s linear infinite;
     user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .valor-clique {
@@ -204,9 +205,10 @@ body {
     }
 
     .container-upgrades {
-        top: 70%;
+        top: 100%;
         width: 100%;
-        height: 20em;
+        height: 15em;
+        transform: translateY(-15em);
     }
 
     #btn-click {
@@ -219,7 +221,7 @@ body {
     }
 
     .info {
-        width: 40%;
+        width: 75%;
         left: 50%;
         top: 1em;
     }

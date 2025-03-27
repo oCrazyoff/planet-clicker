@@ -17,21 +17,22 @@
 
     <!-- Botão de clicar no planeta -->
     <button id="btn-click">
-        <img src="https://cdn-icons-png.flaticon.com/512/3327/3327324.png" alt="Ícone de planeta" id="planet">
+        <img src="https://cdn-icons-png.flaticon.com/512/3327/3327324.png" alt="Ícone de planeta" id="planet"
+            draggable="false">
         <p class="valor-clique">+<span id="valor-clique">1</span></p>
     </button>
 
     <!-- Container de upgrades -->
     <div class="container-upgrades">
         <!-- Upgrade 1: Mão Robótica -->
-        <button class="btn-upgrade" data-nome="maoRobotica" data-preco="10" data-bonus="1">
+        <button class="btn-upgrade">
             <img src="https://cdn-icons-png.flaticon.com/512/2602/2602591.png" alt="Mão Robótica"
                 class="planet-upgrade">
             <div class="container-info">
                 <p class="nome">Mão Robótica</p>
                 <div class="baixo">
-                    <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade">10</span></p>
-                    <p>+<span class="ganho-upgrade">1</span> Clique</p>
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
+                    <p>+<span class="ganho-upgrade"></span> Clique</p>
                 </div>
             </div>
             <div class="count-upgrade">
@@ -40,13 +41,13 @@
         </button>
 
         <!-- Upgrade 2: Mineradores -->
-        <button class="btn-upgrade" data-nome="mineradores" data-preco="50" data-bonus="1">
+        <button class="btn-upgrade">
             <img src="https://cdn-icons-png.flaticon.com/512/2586/2586058.png" alt="Mineradores" class="planet-upgrade">
             <div class="container-info">
                 <p class="nome">Mineradores</p>
                 <div class="baixo">
-                    <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade">50</span></p>
-                    <p>+<span class="ganho-upgrade">1</span> Passivo</p>
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
+                    <p>+<span class="ganho-upgrade"></span> Passivo</p>
                 </div>
             </div>
             <div class="count-upgrade">
@@ -55,14 +56,123 @@
         </button>
 
         <!-- Upgrade 3: Braço mecanico -->
-        <button class="btn-upgrade" data-nome="braco-mecanico" data-preco="100" data-bonus="5">
+        <button class="btn-upgrade">
             <img src="https://cdn-icons-png.flaticon.com/256/924/924633.png" alt="Braço Mecânico"
                 class="planet-upgrade">
             <div class="container-info">
                 <p class="nome">Braço Mecânico</p>
                 <div class="baixo">
-                    <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade">100</span></p>
-                    <p>+<span class="ganho-upgrade">5</span> Clique</p>
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
+                    <p>+<span class="ganho-upgrade"></span> Clique</p>
+                </div>
+            </div>
+            <div class="count-upgrade">
+                <p class="count">0</p>
+            </div>
+        </button>
+
+        <!-- Upgrade 4: Satélite coletor -->
+        <button class="btn-upgrade">
+            <img src="https://th.bing.com/th/id/R.d6010acdc3bb107fe80b57eba78c604d?rik=l0qBLPJ0gFY8QQ&pid=ImgRaw&r=0"
+                alt="Satélite Coletor" class="planet-upgrade">
+            <div class="container-info">
+                <p class="nome">Satélite Coletor</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
+                    <p>+<span class="ganho-upgrade"></span> Passivo</p>
+                </div>
+            </div>
+            <div class="count-upgrade">
+                <p class="count">0</p>
+            </div>
+        </button>
+
+        <!-- Upgrade 5: Buraco de Minhoca -->
+        <button class="btn-upgrade">
+            <img src="https://cdn-icons-png.flaticon.com/512/5570/5570956.png" alt="Satélite Coletor"
+                class="planet-upgrade">
+            <div class="container-info">
+                <p class="nome">Buraco de Minhoca</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
+                    <p>+<span class="ganho-upgrade"></span> Clique</p>
+                </div>
+            </div>
+            <div class="count-upgrade">
+                <p class="count">0</p>
+            </div>
+        </button>
+
+        <!-- Upgrade 6: Fábrica -->
+        <button class="btn-upgrade">
+            <img src="https://cdn-icons-png.flaticon.com/512/3256/3256216.png" alt="Fábrica" class="planet-upgrade">
+            <div class="container-info">
+                <p class="nome">Fábrica</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
+                    <p>+<span class="ganho-upgrade"></span> Passivo</p>
+                </div>
+            </div>
+            <div class="count-upgrade">
+                <p class="count">0</p>
+            </div>
+        </button>
+
+        <!-- Upgrade 7: Fusão Nuclear -->
+        <button class="btn-upgrade">
+            <img src="https://cdn-icons-png.flaticon.com/512/6813/6813689.png" alt="Fusão Nuclear"
+                class="planet-upgrade">
+            <div class="container-info">
+                <p class="nome">Fusão Nuclear</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
+                    <p>+<span class="ganho-upgrade"></span> Clique</p>
+                </div>
+            </div>
+            <div class="count-upgrade">
+                <p class="count">0</p>
+            </div>
+        </button>
+
+        <!-- Upgrade 8: Foguete -->
+        <button class="btn-upgrade">
+            <img src="https://cdn-icons-png.flaticon.com/512/912/912218.png" alt="Foguete" class="planet-upgrade">
+            <div class="container-info">
+                <p class="nome">Foguete</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
+                    <p>+<span class="ganho-upgrade"></span> Passivo</p>
+                </div>
+            </div>
+            <div class="count-upgrade">
+                <p class="count">0</p>
+            </div>
+        </button>
+
+        <!-- Upgrade 9: Garra Cibernética -->
+        <button class="btn-upgrade">
+            <img src="https://cdn-icons-png.flaticon.com/512/4244/4244713.png" alt="Garra Cibernética"
+                class="planet-upgrade">
+            <div class="container-info">
+                <p class="nome">Garra Cibernética</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
+                    <p>+<span class="ganho-upgrade"></span> Clique</p>
+                </div>
+            </div>
+            <div class="count-upgrade">
+                <p class="count">0</p>
+            </div>
+        </button>
+
+        <!-- Upgrade 10: I.A -->
+        <button class="btn-upgrade">
+            <img src="https://cdn-icons-png.flaticon.com/512/4829/4829581.png" alt="I.A" class="planet-upgrade">
+            <div class="container-info">
+                <p class="nome">I.A</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
+                    <p>+<span class="ganho-upgrade"></span> Passivo</p>
                 </div>
             </div>
             <div class="count-upgrade">
