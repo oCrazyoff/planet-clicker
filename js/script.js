@@ -17,14 +17,14 @@ let precoUpgrades = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000]
 let ganhoUpgrades = [1, 1, 5, 5, 10, 10, 50, 50, 100, 100]; // Ganhos por upgrade
 
 // Salvar progresso no localStorage
-// function salvarProgresso(){
-//     localStorage.setItem('planetas', planetas);
-//     localStorage.setItem('planetasPassivos', planetasPassivos);
-//     localStorage.setItem('valorDeClique', valorDeClique);
-//     localStorage.setItem('upgrades', JSON.stringify(upgrades));
-//     localStorage.setItem('precoUpgrades', JSON.stringify(precoUpgrades));
-//     localStorage.setItem('ganhoUpgrades', JSON.stringify(ganhoUpgrades));
-// }
+function salvarProgresso(){
+    localStorage.setItem('planetas', planetas);
+    localStorage.setItem('planetasPassivos', planetasPassivos);
+    localStorage.setItem('valorDeClique', valorDeClique);
+    localStorage.setItem('upgrades', JSON.stringify(upgrades));
+    localStorage.setItem('precoUpgrades', JSON.stringify(precoUpgrades));
+    localStorage.setItem('ganhoUpgrades', JSON.stringify(ganhoUpgrades));
+}
 
 // Carregar progresso do localStorage
 function carregarProgresso(){
@@ -98,6 +98,8 @@ function atualizarInterface() {
 
         // Atualizar a contagem do upgrade
         countUpgrades[index].textContent = upgrades[index];
+
+        btn.classList.toggle("inativo", planetas < precoUpgrade);
     });
 }
 
@@ -148,6 +150,6 @@ function ganharPlanetasPassivos() {
 setInterval(ganharPlanetasPassivos, 1000);
 
 // Carregar o progresso ao iniciar o jogo
-// carregarProgresso();
-// atualizarInterface();
+carregarProgresso();
+atualizarInterface();
 

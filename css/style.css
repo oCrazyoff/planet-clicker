@@ -48,6 +48,11 @@ body {
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
+.inativo {
+    opacity: .5;
+    pointer-events: none;
+}
+
 .container-upgrades button:hover {
     background-color: #2a4d5f;
     transform: scale(1.05);
@@ -69,10 +74,14 @@ body {
 }
 
 .container-upgrades .count-upgrade p {
-    font-size: 2.5em;
+    font-size: 2.3em;
     font-weight: bold;
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: #1e3747;
+    color: white;
+    text-shadow:
+        -2px -2px 0 #1e3747,
+        2px -2px 0 #1e3747,
+        -2px 2px 0 #1e3747,
+        2px 2px 0 #1e3747;
 }
 
 .container-upgrades button .container-info {
