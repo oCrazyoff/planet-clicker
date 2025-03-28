@@ -86,7 +86,7 @@ function carregarProgresso(){
 function atualizarInterface() {
     countPlanetas.textContent = formatarNumero(planetas);
     countPlanetasPassivo.textContent = formatarNumero(planetasPassivos);
-    valorClique.textContent = valorDeClique;
+    valorClique.textContent = formatarNumero(valorDeClique);
 
     btnUpgrades.forEach((btn, index) => {
         const precoUpgrade = precoUpgrades[index];
