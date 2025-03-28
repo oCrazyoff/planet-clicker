@@ -15,18 +15,110 @@ body {
     position: relative;
 }
 
+.game {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+#btn-click {
+    background-color: transparent;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease all;
+    position: relative;
+    z-index: 1;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+#btn-click:active {
+    transform: scale(1.1);
+}
+
+#btn-click img {
+    height: 30em;
+    transition: 0.3s ease all;
+    filter: drop-shadow(0 0 0.75rem #000);
+    animation: spin 10s linear infinite;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.valor-clique {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 0.5em;
+    border-radius: 1em;
+    opacity: 0;
+}
+
+@keyframes subir {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-200px);
+        opacity: 0;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.info {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 0.5em;
+    border-radius: 1em;
+    width: 20em;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.info span {
+    font-weight: bold;
+}
+
 .container-upgrades {
+    position: absolute;
+    right: 0;
+    top: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1em;
-    position: absolute;
-    right: 0;
-    top: 0;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.8);
     height: 100%;
-    width: 25em;
+    width: 30%;
     padding: 1em;
+    border-left: 5px solid #000;
     overflow-y: auto;
     box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
@@ -51,6 +143,22 @@ body {
 .inativo {
     opacity: .5;
     pointer-events: none;
+}
+
+.hide {
+    position: relative;
+}
+
+.hide::after {
+    content: "???";
+    position: absolute;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
 }
 
 .container-upgrades button:hover {
@@ -110,119 +218,34 @@ body {
     font-weight: bold;
 }
 
-#btn-click {
-    position: absolute;
-    top: 60%;
-    left: 30%;
-    transform: translate(-50%, -50%);
-    background-color: transparent;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s ease all;
-    z-index: 1;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    outline: none;
-}
-
-#btn-click img {
-    height: 30em;
-    transition: 0.3s ease all;
-    filter: drop-shadow(0 0 0.75rem #000);
-    animation: spin 10s linear infinite;
-    user-select: none;
-    -webkit-user-drag: none;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.valor-clique {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    font-size: 2em;
-    font-weight: bold;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 0.5em;
-    border-radius: 1em;
-    opacity: 0;
-}
-
-@keyframes subir {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(-200px);
-        opacity: 0;
-    }
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes pulse {
-    0% {
-        transform: translate(-50%, -50%) scale(1);
-    }
-
-    50% {
-        transform: translate(-50%, -50%) scale(1.05);
-    }
-
-    100% {
-        transform: translate(-50%, -50%) scale(1);
-    }
-}
-
-.info {
-    position: absolute;
-    top: 3em;
-    left: 30%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    padding: 0.5em;
-    border-radius: 1em;
-    width: 20em;
-    text-align: center;
-    font-size: 1.5em;
-}
-
-.info span {
-    font-weight: bold;
-}
-
 @media (max-width: 768px) {
-    body {
+    .game {
         width: 100%;
+        height: 60%;
     }
 
     .container-upgrades {
-        top: 100%;
         width: 100%;
-        height: 15em;
-        transform: translateY(-15em);
+        height: 40%;
+        top: 60%;
+        border: none;
+        border-top: 5px solid #000;
     }
 
-    #btn-click {
-        left: 50%;
-        top: 40%;
+    .container-upgrades button .container-info {
+        padding: .3em;
+    }
+
+    .container-upgrades button .container-info .nome {
+        font-size: 1.2em;
+    }
+
+    .container-upgrades button img {
+        width: 25%;
+    }
+
+    .container-upgrades .count-upgrade p {
+        font-size: 2em;
     }
 
     #btn-click img {
@@ -231,7 +254,5 @@ body {
 
     .info {
         width: 75%;
-        left: 50%;
-        top: 1em;
     }
 }

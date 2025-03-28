@@ -14,7 +14,7 @@ let planetasPassivos = 0;
 let valorDeClique = 1;
 let upgrades = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Array de upgrades
 let precoUpgrades = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000]; // Preços dos upgrades
-let ganhoUpgrades = [1, 1, 5, 5, 10, 10, 50, 50, 100, 100]; // Ganhos por upgrade
+let ganhoUpgrades = [1, 1, 10, 10, 50, 50, 150, 150, 300, 300]; // Ganhos por upgrade
 
 // Salvar progresso no localStorage
 function salvarProgresso(){
@@ -100,6 +100,8 @@ function atualizarInterface() {
         countUpgrades[index].textContent = upgrades[index];
 
         btn.classList.toggle("inativo", planetas < precoUpgrade);
+
+        btn.classList.toggle("hide", planetas*5 < precoUpgrade);
     });
 }
 
