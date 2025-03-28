@@ -4,6 +4,7 @@ const countPlanetas = document.getElementById('count-planetas');
 const countPlanetasPassivo = document.getElementById('count-planetas-passivo');
 const valorClique = document.getElementById('valor-clique');
 const btnUpgrades = document.querySelectorAll('.btn-upgrade');
+const btnMenu = document.querySelector('.btn-menu');
 const countUpgrades = document.querySelectorAll('.count-upgrade p');
 const precoUpgradeElements = document.querySelectorAll('.preco-upgrade');
 const ganhoUpgradeElements = document.querySelectorAll('.ganho-upgrade');
@@ -101,7 +102,7 @@ function atualizarInterface() {
 
         btn.classList.toggle("inativo", planetas < precoUpgrade);
 
-        btn.classList.toggle("hide", planetas*5 < precoUpgrade);
+        btn.classList.toggle("hide", planetas*5 < precoUpgrade && upgrades[index] === 0);
     });
 }
 
@@ -139,6 +140,12 @@ btnUpgrades.forEach((btn, index) => {
             salvarProgresso();
         }
     });
+});
+
+// Lógica de trocar menus
+btnMenu.addEventListener('click', () => {
+    const containerUpgrades = document.querySelector('.container-upgrades');
+    containerUpgrades.classList.toggle('desativado');
 });
 
 // Lógica de ganho passivo

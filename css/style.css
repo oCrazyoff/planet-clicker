@@ -106,6 +106,16 @@ body {
     font-weight: bold;
 }
 
+.btn-container {
+    position: absolute;
+    right: 40%;
+    bottom: 10%;
+}
+
+.desativado {
+    transform: translateX(100%);
+}
+
 .container-upgrades {
     position: absolute;
     right: 0;
