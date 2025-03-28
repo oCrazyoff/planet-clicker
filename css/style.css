@@ -252,6 +252,11 @@ body {
         height: 20em;
     }
 
+    .valor-clique {
+        width: auto;
+        font-size: 1.4em;
+    }
+
     .info {
         width: 75%;
     }
