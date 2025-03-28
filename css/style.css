@@ -106,16 +106,33 @@ body {
     font-weight: bold;
 }
 
-.btn-container {
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    padding: 1em 0;
     position: absolute;
-    right: 40%;
-    bottom: 10%;
+    right: 30%;
+    bottom: 0%;
+    border-right: 5px solid #000;
+    height: 100%;
+}
+
+.menu .btn-menu {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    font-size: 1.5em;
+    padding: .3em;
+    border-radius: .5em 0 0 .5em;
+    cursor: pointer;
 }
 
 .desativado {
     transform: translateX(100%);
 }
 
+/* Upgrades */
 .container-upgrades {
     position: absolute;
     right: 0;
@@ -128,7 +145,6 @@ body {
     height: 100%;
     width: 30%;
     padding: 1em;
-    border-left: 5px solid #000;
     overflow-y: auto;
     box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
@@ -140,7 +156,7 @@ body {
     color: #fff;
     align-items: center;
     background-color: #356a85;
-    border: none;
+    border: 2px solid #1e3747;
     width: 100%;
     min-height: 5em;
     max-height: 5em;
@@ -173,12 +189,11 @@ body {
 
 .container-upgrades button:hover {
     background-color: #2a4d5f;
-    transform: scale(1.05);
 }
 
 .container-upgrades button:active {
     background-color: #1e3747;
-    transform: scale(1);
+    transform: scale(1.1);
 }
 
 .container-upgrades button img {
@@ -228,18 +243,105 @@ body {
     font-weight: bold;
 }
 
+/* Poderes */
+.container-poderes {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 100%;
+    width: 30%;
+    padding: 1em;
+    overflow-y: auto;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.container-poderes button {
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    align-items: center;
+    background-color: #663399;
+    border: 2px solid #522888;
+    width: 100%;
+    min-height: 5em;
+    max-height: 5em;
+    border-radius: 1em;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.container-poderes button:hover {
+    background-color: #7209b7;
+}
+
+.container-poderes button:active {
+    background-color: #240046;
+    transform: scale(1.1);
+}
+
+.container-poderes button img {
+    margin-top: .5em;
+    width: 30%;
+}
+
+.container-poderes button .container-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #240046;
+    padding: 0 .5em;
+    height: 100%;
+    width: 65%;
+    border-radius: 1em;
+}
+
+.container-poderes button .container-info .baixo {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.container-poderes button .container-info .nome {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
 @media (max-width: 768px) {
     .game {
         width: 100%;
         height: 60%;
     }
 
-    .container-upgrades {
+    .menu {
+        flex-direction: row;
+        padding: 0 1em;
+        right: 0%;
+        bottom: 40%;
+        border: none;
+        border-bottom: 5px solid #000;
+        height: auto;
+        width: 100%;
+    }
+
+    .menu .btn-menu {
+        border-radius: .5em .5em 0 0;
+    }
+
+    .container-upgrades,
+    .container-poderes {
         width: 100%;
         height: 40%;
         top: 60%;
         border: none;
-        border-top: 5px solid #000;
     }
 
     .container-upgrades button .container-info {
@@ -250,12 +352,17 @@ body {
         font-size: 1.2em;
     }
 
-    .container-upgrades button img {
+    .container-upgrades button img,
+    .container-poderes button img {
         width: 25%;
     }
 
     .container-upgrades .count-upgrade p {
         font-size: 2em;
+    }
+
+    .desativado {
+        transform: translateY(100%);
     }
 
     #btn-click img {

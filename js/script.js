@@ -4,7 +4,8 @@ const countPlanetas = document.getElementById('count-planetas');
 const countPlanetasPassivo = document.getElementById('count-planetas-passivo');
 const valorClique = document.getElementById('valor-clique');
 const btnUpgrades = document.querySelectorAll('.btn-upgrade');
-const btnMenu = document.querySelector('.btn-menu');
+const menuUpgrades = document.getElementById('menu-upgrades');
+const menuPoderes = document.getElementById('menu-poderes');
 const countUpgrades = document.querySelectorAll('.count-upgrade p');
 const precoUpgradeElements = document.querySelectorAll('.preco-upgrade');
 const ganhoUpgradeElements = document.querySelectorAll('.ganho-upgrade');
@@ -16,6 +17,8 @@ let valorDeClique = 1;
 let upgrades = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Array de upgrades
 let precoUpgrades = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000]; // Preços dos upgrades
 let ganhoUpgrades = [1, 1, 10, 10, 50, 50, 150, 150, 300, 300]; // Ganhos por upgrade
+let poderes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Array de poderes
+let precoPoderes = [50000, 150000, 500000, 750000, 900000, 1000000, 1100000, 1500000, 2000000, 2500000]; // Preços de poderes
 
 // Salvar progresso no localStorage
 function salvarProgresso(){
@@ -89,6 +92,7 @@ function atualizarInterface() {
     countPlanetasPassivo.textContent = formatarNumero(planetasPassivos);
     valorClique.textContent = formatarNumero(valorDeClique);
 
+    // Atualizar upgrades
     btnUpgrades.forEach((btn, index) => {
         const precoUpgrade = precoUpgrades[index];
         const ganhoUpgrade = ganhoUpgrades[index];
@@ -143,9 +147,16 @@ btnUpgrades.forEach((btn, index) => {
 });
 
 // Lógica de trocar menus
-btnMenu.addEventListener('click', () => {
-    const containerUpgrades = document.querySelector('.container-upgrades');
-    containerUpgrades.classList.toggle('desativado');
+const containerUpgrades = document.querySelector('.container-upgrades');
+const containerPoderes = document.querySelector('.container-poderes');
+menuUpgrades.addEventListener('click', () => {
+    containerUpgrades.classList.add('desativado');
+    containerPoderes.classList.remove('desativado');
+});
+
+menuPoderes.addEventListener('click', () =>{
+    containerUpgrades.classList.remove('desativado');
+    containerPoderes.classList.add('desativado');
 });
 
 // Lógica de ganho passivo
