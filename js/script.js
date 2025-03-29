@@ -109,8 +109,15 @@ function atualizarInterface() {
         const ganhoPoder = ganhoPoderes[index];
 
         // Atualizar o preço e o ganho
-        precoPoderElements[index].textContent = formatarNumero(precoPoder);
-        ganhoPoderElements[index].textContent = formatarNumero(ganhoPoder);
+        precoPoderElements[index].innerHTML = "<i class='bi bi-globe-americas'></i> " + formatarNumero(precoPoder);
+
+        if (index % 2 === 0) {
+            var iconeGanho = " <i class='bi bi-hand-index'></i>";
+        } else {
+            var iconeGanho = " <i class='bi bi-clock-history'></i>";
+        }
+
+        ganhoPoderElements[index].innerHTML = "+ " + formatarNumero(ganhoPoder) + iconeGanho;
 
         // Atualizar a contagem do poder
         countPoderes[index].textContent = poderes[index];
@@ -165,7 +172,7 @@ btnClick.addEventListener('click', () => {
 
 // Lógica do hack
 document.getElementById('btn-hack').addEventListener('click', () =>{
-    planetas += 50000;
+    planetas += 500000;
 
     atualizarInterface();
 });
