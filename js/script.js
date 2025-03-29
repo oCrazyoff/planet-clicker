@@ -170,7 +170,25 @@ btnClick.addEventListener('click', () => {
     salvarProgresso();
 });
 
-// Lógica do hack
+// Lógica do DEBUG
+document.getElementById('btn-debug').addEventListener('click', () =>{
+    const senha = prompt("Digite a senha: ");
+
+    if (senha === '1234'){
+        abrirMenuDebug();
+    } else {
+        alert("Senha incorreta!");
+    }
+});
+
+document.getElementById('fechar').addEventListener('click', () =>{
+    document.querySelector(".debug-menu").style.display = 'none';
+});
+
+function abrirMenuDebug() {
+    document.querySelector(".debug-menu").style.display = 'block';
+}
+
 document.getElementById('btn-hack').addEventListener('click', () =>{
     planetas += 500000;
 

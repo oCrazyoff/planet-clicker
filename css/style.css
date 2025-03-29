@@ -70,6 +70,74 @@ body {
     opacity: 0;
 }
 
+/* DEBUG */
+#btn-debug {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    border: none;
+    background-color: #e4b61a;
+    border-radius: .5em;
+    padding: .5em;
+    border: 2px solid #6d6009;
+    cursor: pointer;
+}
+
+.debug-menu {
+    display: none;
+}
+
+.debug-menu .buttons {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #e4b61a;
+    border: 2px solid #6d6009;
+    border-radius: 1em;
+    height: 20em;
+    width: 30em;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.debug-menu .buttons #fechar {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    background-color: rgb(160, 27, 27);
+    padding: .5em;
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+    color: #fff;
+    border: 2px solid rgb(102, 18, 18);
+    cursor: pointer;
+}
+
+.debug-menu .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 900;
+    width: 100%;
+    height: 100%;
+    background-color: #000000c0;
+}
+
+#btn-hack {
+    padding: .5em;
+    border-radius: .5em;
+    border: 2px solid #6d6009;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
 @keyframes subir {
     0% {
         transform: translateY(0);
