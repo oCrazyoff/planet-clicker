@@ -55,7 +55,7 @@ function carregarProgresso(){
 
  // Função de formatação personalizada
  function formatarNumero(numero) {
-    const unidades = ["", "Mil", "Milhão", "Bilhão", "Trilhão", "Quadrilhão"];
+    const unidades = ["", "Mil", "Milhões", "Bilhões", "Trilhões", "Quadrilhões"];
     const letrasMinusc = 'abcdefghijklmnopqrstuvwxyz';
     const letrasMaiusc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     
