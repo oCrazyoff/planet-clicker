@@ -11,8 +11,11 @@
 
 <body>
     <div class="game">
+        <div class="container-hack">
+            <button id="btn-hack">+50Mil</button>
+        </div>
         <div class="info">
-            <p><span id="count-planetas">0</span> Planetas</p>
+            <p><span id="count-planetas">0</span> <i class="bi bi-globe-americas"></i></p>
             <p><span id="count-planetas-passivo">0</span>/s</p>
         </div>
 
@@ -27,58 +30,203 @@
 
     <!-- Menu -->
     <div class="menu">
-        <button id="menu-poderes" class="btn-menu"><i class="bi bi-rocket-takeoff"></i></button>
-        <button id="menu-upgrades" class="btn-menu"><i class="bi bi-arrow-up-circle"></i></button>
+        <button id="menu-upgrades" class="btn-menu"><i class="bi bi-rocket-takeoff"></i></button>
+        <button id="menu-poderes" class="btn-menu"><i class="bi bi-arrow-up-circle"></i></button>
     </div>
 
-    <!-- Container de upgrades -->
-    <div class="container-upgrades">
-        <!-- Upgrade 1: Mão Robótica -->
+    <!-- Container de poderes -->
+    <div class="container-poderes">
+        <!-- Poder 1: Mão Robótica -->
+        <button class="btn-poder">
+            <img src="https://cdn-icons-png.flaticon.com/512/2602/2602591.png" alt="Mão Robótica">
+            <div class="container-info">
+                <p class="nome">Mão Robótica</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
+                    <p>+<span class="ganho-poder"></span> Clique</p>
+                </div>
+            </div>
+            <div class="count-poder">
+                <p class="count">0</p>
+            </div>
+        </button>
+
+        <!-- Poder 2: Mineradores -->
+        <button class="btn-poder">
+            <img src="https://cdn-icons-png.flaticon.com/512/2586/2586058.png" alt="Mineradores">
+            <div class="container-info">
+                <p class="nome">Mineradores</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
+                    <p>+<span class="ganho-poder"></span> Passivo</p>
+                </div>
+            </div>
+            <div class="count-poder">
+                <p class="count">0</p>
+            </div>
+        </button>
+
+        <!-- Poder 3: Braço mecanico -->
+        <button class="btn-poder">
+            <img src="https://cdn-icons-png.flaticon.com/256/924/924633.png" alt="Braço Mecânico">
+            <div class="container-info">
+                <p class="nome">Braço Mecânico</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
+                    <p>+<span class="ganho-poder"></span> Clique</p>
+                </div>
+            </div>
+            <div class="count-poder">
+                <p class="count">0</p>
+            </div>
+        </button>
+
+        <!-- Poder 4: Satélite coletor -->
+        <button class="btn-poder">
+            <img src="https://th.bing.com/th/id/R.d6010acdc3bb107fe80b57eba78c604d?rik=l0qBLPJ0gFY8QQ&pid=ImgRaw&r=0"
+                alt="Satélite Coletor">
+            <div class="container-info">
+                <p class="nome">Satélite Coletor</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
+                    <p>+<span class="ganho-poder"></span> Passivo</p>
+                </div>
+            </div>
+            <div class="count-poder">
+                <p class="count">0</p>
+            </div>
+        </button>
+
+        <!-- Poder 5: Buraco de Minhoca -->
+        <button class="btn-poder">
+            <img src="https://cdn-icons-png.flaticon.com/512/5570/5570956.png" alt="Satélite Coletor">
+            <div class="container-info">
+                <p class="nome">Buraco de Minhoca</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
+                    <p>+<span class="ganho-poder"></span> Clique</p>
+                </div>
+            </div>
+            <div class="count-poder">
+                <p class="count">0</p>
+            </div>
+        </button>
+
+        <!-- Poder 6: Fábrica -->
+        <button class="btn-poder">
+            <img src="https://cdn-icons-png.flaticon.com/512/3256/3256216.png" alt="Fábrica">
+            <div class="container-info">
+                <p class="nome">Fábrica</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
+                    <p>+<span class="ganho-poder"></span> Passivo</p>
+                </div>
+            </div>
+            <div class="count-poder">
+                <p class="count">0</p>
+            </div>
+        </button>
+
+        <!-- Poder 7: Fusão Nuclear -->
+        <button class="btn-poder">
+            <img src="https://cdn-icons-png.flaticon.com/512/6813/6813689.png" alt="Fusão Nuclear">
+            <div class="container-info">
+                <p class="nome">Fusão Nuclear</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
+                    <p>+<span class="ganho-poder"></span> Clique</p>
+                </div>
+            </div>
+            <div class="count-poder">
+                <p class="count">0</p>
+            </div>
+        </button>
+
+        <!-- Poder 8: Foguete -->
+        <button class="btn-poder">
+            <img src="https://cdn-icons-png.flaticon.com/512/912/912218.png" alt="Foguete">
+            <div class="container-info">
+                <p class="nome">Foguete</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
+                    <p>+<span class="ganho-poder"></span> Passivo</p>
+                </div>
+            </div>
+            <div class="count-poder">
+                <p class="count">0</p>
+            </div>
+        </button>
+
+        <!-- Poder 9: Garra Cibernética -->
+        <button class="btn-poder">
+            <img src="https://cdn-icons-png.flaticon.com/512/4244/4244713.png" alt="Garra Cibernética">
+            <div class="container-info">
+                <p class="nome">Garra Cibernética</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
+                    <p>+<span class="ganho-poder"></span> Clique</p>
+                </div>
+            </div>
+            <div class="count-poder">
+                <p class="count">0</p>
+            </div>
+        </button>
+
+        <!-- Poder 10: I.A -->
+        <button class="btn-poder">
+            <img src="https://cdn-icons-png.flaticon.com/512/4829/4829581.png" alt="I.A">
+            <div class="container-info">
+                <p class="nome">I.A</p>
+                <div class="baixo">
+                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
+                    <p>+<span class="ganho-poder"></span> Passivo</p>
+                </div>
+            </div>
+            <div class="count-poder">
+                <p class="count">0</p>
+            </div>
+        </button>
+    </div>
+
+    <!-- Container upgrades -->
+    <div class="container-upgrades desativado">
+        <!-- Mão Robótica -->
         <button class="btn-upgrade">
             <img src="https://cdn-icons-png.flaticon.com/512/2602/2602591.png" alt="Mão Robótica">
             <div class="container-info">
                 <p class="nome">Mão Robótica</p>
                 <div class="baixo">
                     <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
-                    <p>+<span class="ganho-upgrade"></span> Clique</p>
+                    <p>+ <span class="ganho-upgrade"></span>% de eficiência</p>
                 </div>
-            </div>
-            <div class="count-upgrade">
-                <p class="count">0</p>
             </div>
         </button>
 
-        <!-- Upgrade 2: Mineradores -->
+        <!-- Mineradores -->
         <button class="btn-upgrade">
             <img src="https://cdn-icons-png.flaticon.com/512/2586/2586058.png" alt="Mineradores">
             <div class="container-info">
                 <p class="nome">Mineradores</p>
                 <div class="baixo">
                     <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
-                    <p>+<span class="ganho-upgrade"></span> Passivo</p>
+                    <p>+ <span class="ganho-upgrade"></span>% de eficiência</p>
                 </div>
-            </div>
-            <div class="count-upgrade">
-                <p class="count">0</p>
             </div>
         </button>
 
-        <!-- Upgrade 3: Braço mecanico -->
+        <!-- Braço Mecânico -->
         <button class="btn-upgrade">
             <img src="https://cdn-icons-png.flaticon.com/256/924/924633.png" alt="Braço Mecânico">
             <div class="container-info">
                 <p class="nome">Braço Mecânico</p>
                 <div class="baixo">
                     <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
-                    <p>+<span class="ganho-upgrade"></span> Clique</p>
+                    <p>+ <span class="ganho-upgrade"></span>% de eficiência</p>
                 </div>
-            </div>
-            <div class="count-upgrade">
-                <p class="count">0</p>
             </div>
         </button>
 
-        <!-- Upgrade 4: Satélite coletor -->
+        <!-- Satélite Coletor -->
         <button class="btn-upgrade">
             <img src="https://th.bing.com/th/id/R.d6010acdc3bb107fe80b57eba78c604d?rik=l0qBLPJ0gFY8QQ&pid=ImgRaw&r=0"
                 alt="Satélite Coletor">
@@ -86,224 +234,79 @@
                 <p class="nome">Satélite Coletor</p>
                 <div class="baixo">
                     <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
-                    <p>+<span class="ganho-upgrade"></span> Passivo</p>
+                    <p>+ <span class="ganho-upgrade"></span>% de eficiência</p>
                 </div>
-            </div>
-            <div class="count-upgrade">
-                <p class="count">0</p>
             </div>
         </button>
 
-        <!-- Upgrade 5: Buraco de Minhoca -->
+        <!-- Buraco de Minhoca -->
         <button class="btn-upgrade">
-            <img src="https://cdn-icons-png.flaticon.com/512/5570/5570956.png" alt="Satélite Coletor">
+            <img src="https://cdn-icons-png.flaticon.com/512/5570/5570956.png" alt="Buraco de Minhoca">
             <div class="container-info">
                 <p class="nome">Buraco de Minhoca</p>
                 <div class="baixo">
                     <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
-                    <p>+<span class="ganho-upgrade"></span> Clique</p>
+                    <p>+ <span class="ganho-upgrade"></span>% de eficiência</p>
                 </div>
-            </div>
-            <div class="count-upgrade">
-                <p class="count">0</p>
             </div>
         </button>
 
-        <!-- Upgrade 6: Fábrica -->
+        <!-- Fábrica -->
         <button class="btn-upgrade">
             <img src="https://cdn-icons-png.flaticon.com/512/3256/3256216.png" alt="Fábrica">
             <div class="container-info">
                 <p class="nome">Fábrica</p>
                 <div class="baixo">
                     <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
-                    <p>+<span class="ganho-upgrade"></span> Passivo</p>
+                    <p>+ <span class="ganho-upgrade"></span>% de eficiência</p>
                 </div>
-            </div>
-            <div class="count-upgrade">
-                <p class="count">0</p>
             </div>
         </button>
 
-        <!-- Upgrade 7: Fusão Nuclear -->
+        <!-- Fusão Nuclear -->
         <button class="btn-upgrade">
             <img src="https://cdn-icons-png.flaticon.com/512/6813/6813689.png" alt="Fusão Nuclear">
             <div class="container-info">
                 <p class="nome">Fusão Nuclear</p>
                 <div class="baixo">
                     <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
-                    <p>+<span class="ganho-upgrade"></span> Clique</p>
+                    <p>+ <span class="ganho-upgrade"></span>% de eficiência</p>
                 </div>
-            </div>
-            <div class="count-upgrade">
-                <p class="count">0</p>
             </div>
         </button>
 
-        <!-- Upgrade 8: Foguete -->
+        <!-- Foguete -->
         <button class="btn-upgrade">
             <img src="https://cdn-icons-png.flaticon.com/512/912/912218.png" alt="Foguete">
             <div class="container-info">
                 <p class="nome">Foguete</p>
                 <div class="baixo">
                     <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
-                    <p>+<span class="ganho-upgrade"></span> Passivo</p>
+                    <p>+ <span class="ganho-upgrade"></span>% de eficiência</p>
                 </div>
-            </div>
-            <div class="count-upgrade">
-                <p class="count">0</p>
             </div>
         </button>
 
-        <!-- Upgrade 9: Garra Cibernética -->
+        <!-- Garra Cibernética -->
         <button class="btn-upgrade">
             <img src="https://cdn-icons-png.flaticon.com/512/4244/4244713.png" alt="Garra Cibernética">
             <div class="container-info">
                 <p class="nome">Garra Cibernética</p>
                 <div class="baixo">
                     <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
-                    <p>+<span class="ganho-upgrade"></span> Clique</p>
+                    <p>+ <span class="ganho-upgrade"></span>% de eficiência</p>
                 </div>
-            </div>
-            <div class="count-upgrade">
-                <p class="count">0</p>
             </div>
         </button>
 
-        <!-- Upgrade 10: I.A -->
+        <!-- I.A -->
         <button class="btn-upgrade">
             <img src="https://cdn-icons-png.flaticon.com/512/4829/4829581.png" alt="I.A">
             <div class="container-info">
                 <p class="nome">I.A</p>
                 <div class="baixo">
                     <p><i class="bi bi-globe-americas"></i> <span class="preco-upgrade"></span></p>
-                    <p>+<span class="ganho-upgrade"></span> Passivo</p>
-                </div>
-            </div>
-            <div class="count-upgrade">
-                <p class="count">0</p>
-            </div>
-        </button>
-    </div>
-
-    <!-- Container poderes -->
-    <div class="container-poderes desativado">
-        <!-- Buraco negro -->
-        <button class="btn-poder">
-            <img src="https://cdn-icons-png.freepik.com/512/6704/6704392.png" alt="Buraco Negro">
-            <div class="container-info">
-                <p class="nome">Buraco Negro</p>
-                <div class="baixo">
-                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
-                    <p>Aumenta em 50% o ganho passivo</p>
-                </div>
-            </div>
-        </button>
-
-        <!-- Exploração -->
-        <button class="btn-poder">
-            <img src="https://cdn-icons-png.flaticon.com/512/1830/1830867.png" alt="Exploração">
-            <div class="container-info">
-                <p class="nome">Exploração</p>
-                <div class="baixo">
-                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
-                    <p>Envia drones espaciais para explorar planetas</p>
-                </div>
-            </div>
-        </button>
-
-        <!-- Núcleo de Antimatéria -->
-        <button class="btn-poder">
-            <img src="https://cdn-icons-png.flaticon.com/512/1582/1582042.png" alt="Núcleo de Antimatéria">
-            <div class="container-info">
-                <p class="nome">Núcleo de Antimatéria</p>
-                <div class="baixo">
-                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
-                    <p>Dobra a eficiência dos satélites</p>
-                </div>
-            </div>
-        </button>
-
-        <!-- Terraformação -->
-        <button class="btn-poder">
-            <img src="https://cdn-icons-png.flaticon.com/512/315/315274.png" alt="Terraformação">
-            <div class="container-info">
-                <p class="nome">Terraformação</p>
-                <div class="baixo">
-                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
-                    <p>Dobra a produção passiva</p>
-                </div>
-            </div>
-        </button>
-
-        <!-- Nanorrobôs -->
-        <button class="btn-poder">
-            <img src="https://cdn-icons-png.flaticon.com/512/2584/2584917.png" alt="Nanorrobôs">
-            <div class="container-info">
-                <p class="nome">Nanorrobôs</p>
-                <div class="baixo">
-                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
-                    <p>Dobra a eficiência dos mineradores</p>
-                </div>
-            </div>
-        </button>
-
-        <!-- Space X -->
-        <button class="btn-poder">
-            <img src="https://cdn.icon-icons.com/icons2/2221/PNG/512/logo_orange_spacex_icon_134372.png" alt="Space X">
-            <div class="container-info">
-                <p class="nome">Space X</p>
-                <div class="baixo">
-                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
-                    <p>Dobra a produção dos foguetes</p>
-                </div>
-            </div>
-        </button>
-
-        <!-- Campo de Dobra -->
-        <button class="btn-poder">
-            <img src="https://cdn-icons-png.freepik.com/512/6255/6255165.png" alt="Campo de Dobra">
-            <div class="container-info">
-                <p class="nome">Campo de Dobra</p>
-                <div class="baixo">
-                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
-                    <p>O tempo do ganho passivo muda para meio segundo</p>
-                </div>
-            </div>
-        </button>
-
-        <!-- Inteligência Coletiva -->
-        <button class="btn-poder">
-            <img src="https://cdn-icons-png.flaticon.com/512/6672/6672142.png" alt="Inteligência Coletiva">
-            <div class="container-info">
-                <p class="nome">Inteligência Coletiva</p>
-                <div class="baixo">
-                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
-                    <p>Upgrades ficam com 50% de desconto</p>
-                </div>
-            </div>
-        </button>
-
-        <!-- Energia Cósmica -->
-        <button class="btn-poder">
-            <img src="https://cdn2.iconfinder.com/data/icons/electricity-colored-outline/64/b_1-1024.png"
-                alt="Energia Cósmica">
-            <div class="container-info">
-                <p class="nome">Energia Cósmica</p>
-                <div class="baixo">
-                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
-                    <p>Aumenta todos ganhos em 100%</p>
-                </div>
-            </div>
-        </button>
-
-        <!-- Placa de Vídeo -->
-        <button class="btn-poder">
-            <img src="https://cdn-icons-png.flaticon.com/512/7910/7910230.png" alt="Placa de Vídeo">
-            <div class="container-info">
-                <p class="nome">Placa de Vídeo</p>
-                <div class="baixo">
-                    <p><i class="bi bi-globe-americas"></i> <span class="preco-poder"></span></p>
-                    <p>Dobra a produção da I.A</p>
+                    <p>+ <span class="ganho-upgrade"></span>% de eficiência</p>
                 </div>
             </div>
         </button>

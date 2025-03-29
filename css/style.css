@@ -132,8 +132,8 @@ body {
     transform: translateX(100%);
 }
 
-/* Upgrades */
-.container-upgrades {
+/* Poderes */
+.container-poderes {
     position: absolute;
     right: 0;
     top: 0;
@@ -150,7 +150,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.container-upgrades button {
+.container-poderes button {
     display: flex;
     justify-content: space-between;
     color: #fff;
@@ -163,6 +163,7 @@ body {
     border-radius: 1em;
     overflow: hidden;
     cursor: pointer;
+    user-select: none;
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -187,26 +188,26 @@ body {
     font-size: 1.5em;
 }
 
-.container-upgrades button:hover {
+.container-poderes button:hover {
     background-color: #2a4d5f;
 }
 
-.container-upgrades button:active {
+.container-poderes button:active {
     background-color: #1e3747;
     transform: scale(1.1);
 }
 
-.container-upgrades button img {
+.container-poderes button img {
     margin-top: 0.5em;
-    width: 30%;
+    width: 25%;
 }
 
-.container-upgrades .count-upgrade {
-    margin-right: 1em;
+.container-poderes .count-poder {
+    margin: 0 .5em;
     border-radius: 1em;
 }
 
-.container-upgrades .count-upgrade p {
+.container-poderes .count-poder p {
     font-size: 2.3em;
     font-weight: bold;
     color: white;
@@ -217,34 +218,31 @@ body {
         2px 2px 0 #1e3747;
 }
 
-.container-upgrades button .container-info {
+.container-poderes button .container-info {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: #1e3747;
+    padding: 0 .5em;
+    height: 100%;
     width: 60%;
-    padding: 0.5em;
-    border-radius: 1em;
 }
 
-.container-upgrades button .container-info .baixo {
+.container-poderes button .container-info .baixo {
     display: flex;
     justify-content: space-between;
     width: 100%;
     align-items: center;
 }
 
-.container-upgrades button .container-info p {
-    font-size: 1.2em;
-}
-
-.container-upgrades button .container-info .nome {
+.container-poderes button .container-info .nome {
     font-size: 1.5em;
     font-weight: bold;
 }
 
-/* Poderes */
-.container-poderes {
+/* Upgrades */
+.container-upgrades {
     position: absolute;
     right: 0;
     top: 0;
@@ -261,56 +259,75 @@ body {
     transition: all 0.3s ease;
 }
 
-.container-poderes button {
+.container-upgrades button {
     display: flex;
     justify-content: space-between;
     color: #fff;
     align-items: center;
-    background-color: #663399;
-    border: 2px solid #522888;
+    background-color: #edf2f4;
+    border: 2px solid #8d99ae;
     width: 100%;
     min-height: 5em;
     max-height: 5em;
     border-radius: 1em;
     overflow: hidden;
     cursor: pointer;
+    user-select: none;
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.container-poderes button:hover {
-    background-color: #7209b7;
+.lvl2 {
+    background-color: #7b2cbf !important;
+    border: 2px solid #3c096c !important;
 }
 
-.container-poderes button:active {
-    background-color: #240046;
+.lvl2 .container-info {
+    background-color: #3c096c !important;
+}
+
+.lvl3 {
+    background-color: #fbe134 !important;
+    border: 2px solid #e4b61a !important;
+}
+
+.lvl3 .container-info {
+    background-color: #e4b61a !important;
+}
+
+.container-upgrades button:hover {
+    background-color: #1f2029;
+}
+
+.container-upgrades button:active {
+    background-color: #001219;
     transform: scale(1.1);
 }
 
-.container-poderes button img {
+.container-upgrades button img {
     margin-top: .5em;
     width: 30%;
 }
 
-.container-poderes button .container-info {
+.container-upgrades button .container-info {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #240046;
+    background-color: #2b2d42;
     padding: 0 .5em;
     height: 100%;
     width: 65%;
     border-radius: 1em;
 }
 
-.container-poderes button .container-info .baixo {
+.container-upgrades button .container-info .baixo {
     display: flex;
     justify-content: space-between;
     width: 100%;
     align-items: center;
 }
 
-.container-poderes button .container-info .nome {
+.container-upgrades button .container-info .nome {
     font-size: 1.5em;
     font-weight: bold;
 }
@@ -336,28 +353,28 @@ body {
         border-radius: .5em .5em 0 0;
     }
 
-    .container-upgrades,
-    .container-poderes {
+    .container-poderes,
+    .container-upgrades {
         width: 100%;
         height: 40%;
         top: 60%;
         border: none;
     }
 
-    .container-upgrades button .container-info {
+    .container-poderes button .container-info {
         padding: .3em;
     }
 
-    .container-upgrades button .container-info .nome {
+    .container-poderes button .container-info .nome {
         font-size: 1.2em;
     }
 
-    .container-upgrades button img,
-    .container-poderes button img {
+    .container-poderes button img,
+    .container-upgrades button img {
         width: 25%;
     }
 
-    .container-upgrades .count-upgrade p {
+    .container-poderes .count-upgrade p {
         font-size: 2em;
     }
 

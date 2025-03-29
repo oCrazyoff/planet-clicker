@@ -3,28 +3,36 @@ const btnClick = document.getElementById('btn-click');
 const countPlanetas = document.getElementById('count-planetas');
 const countPlanetasPassivo = document.getElementById('count-planetas-passivo');
 const valorClique = document.getElementById('valor-clique');
+const btnPoderes = document.querySelectorAll('.btn-poder');
 const btnUpgrades = document.querySelectorAll('.btn-upgrade');
-const menuUpgrades = document.getElementById('menu-upgrades');
 const menuPoderes = document.getElementById('menu-poderes');
-const countUpgrades = document.querySelectorAll('.count-upgrade p');
+const menuUpgrades = document.getElementById('menu-upgrades');
+const countPoderes = document.querySelectorAll('.count-poder .count');
+const precoPoderElements = document.querySelectorAll('.preco-poder');
+const ganhoPoderElements = document.querySelectorAll('.ganho-poder');
 const precoUpgradeElements = document.querySelectorAll('.preco-upgrade');
 const ganhoUpgradeElements = document.querySelectorAll('.ganho-upgrade');
+const infoUpgradeBaixo = document.querySelectorAll('.btn-upgrade .container-info .baixo');
 
 // Variáveis do jogo
 let planetas = 0;
 let planetasPassivos = 0;
 let valorDeClique = 1;
-let upgrades = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Array de upgrades
-let precoUpgrades = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000]; // Preços dos upgrades
-let ganhoUpgrades = [1, 1, 10, 10, 50, 50, 150, 150, 300, 300]; // Ganhos por upgrade
 let poderes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Array de poderes
-let precoPoderes = [50000, 150000, 500000, 750000, 900000, 1000000, 1100000, 1500000, 2000000, 2500000]; // Preços de poderes
+let precoPoderes = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000]; // Preços dos poderes
+let ganhoPoderes = [1, 1, 10, 10, 50, 50, 150, 150, 300, 300]; // Ganhos por poder
+let upgrades = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Array de upgrades
+let precoUpgrades = [50000, 150000, 500000, 750000, 900000, 1000000, 1100000, 1500000, 2000000, 2500000]; // Preços de upgrades
+let ganhoUpgrades = [50, 50, 50, 50, 50, 50, 50, 50, 50, 50]; // Ganhos em % dos upgrades
 
 // Salvar progresso no localStorage
 function salvarProgresso(){
     localStorage.setItem('planetas', planetas);
     localStorage.setItem('planetasPassivos', planetasPassivos);
     localStorage.setItem('valorDeClique', valorDeClique);
+    localStorage.setItem('poderes', JSON.stringify(poderes));
+    localStorage.setItem('precoPoderes', JSON.stringify(precoPoderes));
+    localStorage.setItem('ganhoPoderes', JSON.stringify(ganhoPoderes));
     localStorage.setItem('upgrades', JSON.stringify(upgrades));
     localStorage.setItem('precoUpgrades', JSON.stringify(precoUpgrades));
     localStorage.setItem('ganhoUpgrades', JSON.stringify(ganhoUpgrades));
@@ -36,6 +44,9 @@ function carregarProgresso(){
         planetas = parseInt(localStorage.getItem('planetas'));
         planetasPassivos = parseInt(localStorage.getItem('planetasPassivos'));
         valorDeClique = parseInt(localStorage.getItem('valorDeClique'));
+        poderes = JSON.parse(localStorage.getItem('poderes'));
+        precoPoderes = JSON.parse(localStorage.getItem('precoPoderes'));
+        ganhoPoderes = JSON.parse(localStorage.getItem('ganhoPoderes'));
         upgrades = JSON.parse(localStorage.getItem('upgrades'));
         precoUpgrades = JSON.parse(localStorage.getItem('precoUpgrades'));
         ganhoUpgrades = JSON.parse(localStorage.getItem('ganhoUpgrades'));
@@ -92,21 +103,53 @@ function atualizarInterface() {
     countPlanetasPassivo.textContent = formatarNumero(planetasPassivos);
     valorClique.textContent = formatarNumero(valorDeClique);
 
+    // Atualizar poderes
+    btnPoderes.forEach((btn, index) => {
+        const precoPoder = precoPoderes[index];
+        const ganhoPoder = ganhoPoderes[index];
+
+        // Atualizar o preço e o ganho
+        precoPoderElements[index].textContent = formatarNumero(precoPoder);
+        ganhoPoderElements[index].textContent = formatarNumero(ganhoPoder);
+
+        // Atualizar a contagem do poder
+        countPoderes[index].textContent = poderes[index];
+
+        // Desativando e escondendo conforme o preço
+        btn.classList.toggle("inativo", planetas < precoPoder);
+        btn.classList.toggle("hide", planetas*5 < precoPoder && poderes[index] === 0);
+    });
+
     // Atualizar upgrades
-    btnUpgrades.forEach((btn, index) => {
+    btnUpgrades.forEach((btn, index) =>{
         const precoUpgrade = precoUpgrades[index];
-        const ganhoUpgrade = ganhoUpgrades[index];
 
         // Atualizar o preço e o ganho
         precoUpgradeElements[index].textContent = formatarNumero(precoUpgrade);
-        ganhoUpgradeElements[index].textContent = formatarNumero(ganhoUpgrade);
+        ganhoUpgradeElements[index].textContent = ganhoUpgrades[index];
 
-        // Atualizar a contagem do upgrade
-        countUpgrades[index].textContent = upgrades[index];
+        // Atualizar css conforme o lvl
+        if (upgrades[index] === 0) {
+            btn.classList.add("lvl1");
+        } else if (upgrades[index] === 1) {
+            btn.classList.add("lvl2");
+            btn.classList.remove("lvl1");
+        } else if (upgrades[index] === 2) {
+            btn.classList.add("lvl3");
+            btn.classList.remove("lvl2");
+        } else if (upgrades[index] === 3) {
+            infoUpgradeBaixo[index].textContent = "MÁXIMO";
+            btn.classList.add("lvl3");
+            infoUpgradeBaixo[index].style.justifyContent = "center";
+            btn.style.pointerEvents = "none";
+        }
 
-        btn.classList.toggle("inativo", planetas < precoUpgrade);
-
-        btn.classList.toggle("hide", planetas*5 < precoUpgrade && upgrades[index] === 0);
+        // Desativando e escondendo conforme o preço
+        if (upgrades[index] != 3) {
+            btn.classList.toggle("inativo", planetas < precoUpgrade);
+            btn.classList.toggle("hide", planetas*5 < precoUpgrade && upgrades[index] === 0);
+        }
+        
     });
 }
 
@@ -120,24 +163,64 @@ btnClick.addEventListener('click', () => {
     salvarProgresso();
 });
 
-// Lógica de compra de upgrades
-btnUpgrades.forEach((btn, index) => {
+// Lógica do hack
+document.getElementById('btn-hack').addEventListener('click', () =>{
+    planetas += 50000;
+
+    atualizarInterface();
+});
+
+// Lógica de compra de poderes
+btnPoderes.forEach((btn, index) => {
     btn.addEventListener('click', () => {
-        if (planetas >= precoUpgrades[index]) {
+        if (planetas >= precoPoderes[index]) {
+            // Comprar poder
+            planetas -= precoPoderes[index];
+            poderes[index] += 1;
+
+            // Atualizar o valor de clique ou o ganho passivo, dependendo do tipo de poder
+            if (index % 2 === 0) {
+                valorDeClique += ganhoPoderes[index]; // Aumenta o valor do clique
+            } else {
+                planetasPassivos += ganhoPoderes[index]; // Aumenta o ganho passivo
+            }
+
+            // Aumentar o preço do poder e o ganho
+            precoPoderes[index] = Math.floor(precoPoderes[index] * 1.5);
+            ganhoPoderes[index] += 1;
+
+            // Atualizar a interface
+            atualizarInterface();
+            salvarProgresso();
+        }
+    });
+});
+
+// Lógica de comprar os upgrades
+btnUpgrades.forEach((btn, index) =>{
+    btn.addEventListener('click', () =>{
+        if (planetas >= precoUpgrades[index]){
             // Comprar upgrade
             planetas -= precoUpgrades[index];
             upgrades[index] += 1;
 
-            // Atualizar o valor de clique ou o ganho passivo, dependendo do tipo de upgrade
-            if (index % 2 === 0) {
-                valorDeClique += ganhoUpgrades[index]; // Aumenta o valor do clique
-            } else {
-                planetasPassivos += ganhoUpgrades[index]; // Aumenta o ganho passivo
+            // Atualizar o multiplicador e o ganho
+            let multiplicador = 1;
+            if (upgrades[index] === 1) {
+                multiplicador = 1.5;
+                ganhoUpgrades[index] = 100;
+            } else if (upgrades[index] === 2) {
+                multiplicador = 2;
+                ganhoUpgrades[index] = 200;
+            } else if (upgrades[index] === 3) {
+                multiplicador = 3;
             }
 
-            // Aumentar o preço do upgrade e o ganho
-            precoUpgrades[index] = Math.floor(precoUpgrades[index] * 1.5);
-            ganhoUpgrades[index] += 1;
+            // Aplicar melhoria
+            ganhoPoderes[index] *= multiplicador;
+
+            // Atualizar o preço
+            precoUpgrades[index] *= 1.8;
 
             // Atualizar a interface
             atualizarInterface();
@@ -147,16 +230,16 @@ btnUpgrades.forEach((btn, index) => {
 });
 
 // Lógica de trocar menus
-const containerUpgrades = document.querySelector('.container-upgrades');
 const containerPoderes = document.querySelector('.container-poderes');
-menuUpgrades.addEventListener('click', () => {
-    containerUpgrades.classList.add('desativado');
-    containerPoderes.classList.remove('desativado');
+const containerUpgrades = document.querySelector('.container-upgrades');
+menuPoderes.addEventListener('click', () => {
+    containerPoderes.classList.add('desativado');
+    containerUpgrades.classList.remove('desativado');
 });
 
-menuPoderes.addEventListener('click', () =>{
-    containerUpgrades.classList.remove('desativado');
-    containerPoderes.classList.add('desativado');
+menuUpgrades.addEventListener('click', () =>{
+    containerPoderes.classList.remove('desativado');
+    containerUpgrades.classList.add('desativado');
 });
 
 // Lógica de ganho passivo
