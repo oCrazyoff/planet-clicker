@@ -119,13 +119,17 @@ body {
 }
 
 .menu .btn-menu {
-    background-color: #000;
+    background-color: #393939;
     color: #fff;
     border: none;
     font-size: 1.5em;
-    padding: .3em;
+    padding: 1em .3em;
     border-radius: .5em 0 0 .5em;
     cursor: pointer;
+}
+
+.menu #menu-poderes {
+    background-color: #000;
 }
 
 .desativado {
@@ -351,6 +355,7 @@ body {
 
     .menu .btn-menu {
         border-radius: .5em .5em 0 0;
+        padding: .1em 1em;
     }
 
     .container-poderes,

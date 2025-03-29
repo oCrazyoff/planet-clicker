@@ -233,13 +233,17 @@ btnUpgrades.forEach((btn, index) =>{
 const containerPoderes = document.querySelector('.container-poderes');
 const containerUpgrades = document.querySelector('.container-upgrades');
 menuPoderes.addEventListener('click', () => {
-    containerPoderes.classList.add('desativado');
-    containerUpgrades.classList.remove('desativado');
+    containerUpgrades.classList.add('desativado');
+    containerPoderes.classList.remove('desativado');
+    menuPoderes.style.backgroundColor = "#000";
+    menuUpgrades.style.backgroundColor = "#393939";
 });
 
 menuUpgrades.addEventListener('click', () =>{
-    containerPoderes.classList.remove('desativado');
-    containerUpgrades.classList.add('desativado');
+    containerUpgrades.classList.remove('desativado');
+    containerPoderes.classList.add('desativado');
+    menuUpgrades.style.backgroundColor = "#000";
+    menuPoderes.style.backgroundColor = "#393939";
 });
 
 // Lógica de ganho passivo
