@@ -13,9 +13,21 @@ const ganhoPoderElements = document.querySelectorAll('.ganho-poder');
 const precoUpgradeElements = document.querySelectorAll('.preco-upgrade');
 const ganhoUpgradeElements = document.querySelectorAll('.ganho-upgrade');
 const infoUpgradeBaixo = document.querySelectorAll('.btn-upgrade .container-info .baixo');
+const barraProgressoElement = document.getElementById('barra-progresso');
+const ganhoPlanetaPassivoElement = document.getElementById('ganho-planeta-passivo');
+
+// Progresso de planetas (os ganhos devem ser em porcentagem)
+const planetasProgresso = [
+    { nome: "Planeta 1", img: "https://cdn-icons-png.flaticon.com/512/3327/3327324.png", meta: 1000, ganhoPassivo: 0, ganhoClique: 0 },
+    { nome: "Planeta 2", img: "https://cdn-icons-png.flaticon.com/512/6989/6989417.png", meta: 10000, ganhoPassivo: 0, ganhoClique: 50 },
+    { nome: "Planeta 3", img: "https://cdn-icons-png.flaticon.com/512/2739/2739628.png", meta: 20000, ganhoPassivo: 50, ganhoClique: 0 },
+];
 
 // Variáveis do jogo
 let planetas = 0;
+let planetaAtual = 0;
+let upgradePlanetaClique = 0;
+let upgradePlanetaPassivo = 0;
 let planetasPassivos = 0;
 let valorDeClique = 1;
 let poderes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Array de poderes
@@ -26,7 +38,7 @@ let precoUpgrades = [50000, 150000, 500000, 750000, 900000, 1000000, 1100000, 15
 let ganhoUpgrades = [50, 50, 50, 50, 50, 50, 50, 50, 50, 50]; // Ganhos em % dos upgrades
 
 // Salvar progresso no localStorage
-function salvarProgresso(){
+function salvarProgresso() {
     localStorage.setItem('planetas', planetas);
     localStorage.setItem('planetasPassivos', planetasPassivos);
     localStorage.setItem('valorDeClique', valorDeClique);
@@ -39,8 +51,8 @@ function salvarProgresso(){
 }
 
 // Carregar progresso do localStorage
-function carregarProgresso(){
-    if(localStorage.getItem('planetas')){
+function carregarProgresso() {
+    if (localStorage.getItem('planetas')) {
         planetas = parseInt(localStorage.getItem('planetas'));
         planetasPassivos = parseInt(localStorage.getItem('planetasPassivos'));
         valorDeClique = parseInt(localStorage.getItem('valorDeClique'));
@@ -53,54 +65,61 @@ function carregarProgresso(){
     }
 }
 
- // Função de formatação personalizada
- function formatarNumero(numero) {
+// Função de formatação personalizada
+function formatarNumero(numero) {
     const unidades = ["", "Mil", "Milhões", "Bilhões", "Trilhões", "Quadrilhões"];
     const letrasMinusc = 'abcdefghijklmnopqrstuvwxyz';
-    const letrasMaiusc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    
+
     let unidadeIndex = 0;
     let unidade = '';
-    
+
+    // Divide o número para encontrar a unidade adequada
     while (numero >= 1000 && unidadeIndex < unidades.length - 1) {
         numero /= 1000;
         unidadeIndex++;
     }
 
-    let decimalPart = (numero % 1).toFixed(2).substring(2);  // Pega os decimais com 2 casas decimais
-    numero = Math.floor(numero);
+    // Pega a parte decimal (se houver) e formata para 2 casas
+    let decimalPart = (numero % 1).toFixed(2).substring(2);
+    numero = Math.floor(numero); // Remover a parte decimal para números maiores
+
     let numeroFormatado = numero.toLocaleString();
 
+    // Se não houver parte decimal ou for igual a "00", não mostrar decimais
     if (decimalPart === "00") {
-        decimalPart = "";  // Remove os decimais se forem 00
+        decimalPart = "";
     }
 
+    // Aplica a unidade adequada (Mil, Milhões, etc.)
     if (unidadeIndex > 0) {
         unidade = ' ' + unidades[unidadeIndex];
     }
 
-    if (unidadeIndex >= 4) {
+    // Após "Quadrilhões", utiliza letras
+    if (unidadeIndex >= 5) {
         let base = numero % 26;
         let sequencia = letrasMinusc[base];
         numero = Math.floor(numero / 26);
         let letras = '';
-        
+
         if (numero > 0) {
             letras = letrasMinusc[Math.floor(numero % 26)] + sequencia;
         } else {
             letras = sequencia;
         }
 
-        return letras + (decimalPart ? '.' + decimalPart : '');  // Se houver parte decimal, adiciona
-    } 
+        // Retorna a letra combinada sem a parte decimal
+        return letras;
+    }
 
-    return numeroFormatado + (decimalPart ? '.' + decimalPart : '') + unidade;  // Adiciona decimais se houver
+    // Retorna o número formatado com ou sem decimais, dependendo da necessidade
+    return numeroFormatado + (decimalPart ? '.' + decimalPart : '') + unidade;
 }
 
 // Atualizar interface com os valores do jogo
 function atualizarInterface() {
     countPlanetas.textContent = formatarNumero(planetas);
-    countPlanetasPassivo.textContent = formatarNumero(planetasPassivos);
+    countPlanetasPassivo.textContent = formatarNumero(planetasPassivos) + "/s";
     valorClique.textContent = formatarNumero(valorDeClique);
 
     // Atualizar poderes
@@ -124,11 +143,11 @@ function atualizarInterface() {
 
         // Desativando e escondendo conforme o preço
         btn.classList.toggle("inativo", planetas < precoPoder);
-        btn.classList.toggle("hide", planetas*5 < precoPoder && poderes[index] === 0);
+        btn.classList.toggle("hide", planetas * 5 < precoPoder && poderes[index] === 0);
     });
 
     // Atualizar upgrades
-    btnUpgrades.forEach((btn, index) =>{
+    btnUpgrades.forEach((btn, index) => {
         const precoUpgrade = precoUpgrades[index];
 
         // Atualizar o preço e o ganho
@@ -154,34 +173,77 @@ function atualizarInterface() {
         // Desativando e escondendo conforme o preço
         if (upgrades[index] != 3) {
             btn.classList.toggle("inativo", planetas < precoUpgrade);
-            btn.classList.toggle("hide", planetas*5 < precoUpgrade && upgrades[index] === 0);
+            btn.classList.toggle("hide", planetas * 5 < precoUpgrade && upgrades[index] === 0);
         }
-        
+
     });
+
+    // Atualizar o planeta atual e valores do ganho
+    const imgPlaneta = document.querySelector('#btn-click img');
+    if (imgPlaneta && planetasProgresso[planetaAtual]) {
+        imgPlaneta.src = planetasProgresso[planetaAtual].img; // Atualiza o src da imagem
+    }
+
+    if (upgradePlanetaPassivo === 0) {
+        ganhoPlanetaPassivoElement.style.display = "none";
+    } else {
+        ganhoPlanetaPassivoElement.style.display = "block";
+        ganhoPlanetaPassivoElement.textContent = "+ " + upgradePlanetaPassivo + "%";
+    }
+
 }
 
 // Lógica de clicar no planeta
-btnClick.addEventListener('click', () => {
-    planetas += valorDeClique;
-    document.querySelector('.valor-clique').style.animation = 'none';
-    document.querySelector('.valor-clique').offsetHeight;
-    document.querySelector('.valor-clique').style.animation = 'subir 1s ease-out forwards';
+btnClick.addEventListener('click', (event) => {
+    planetas += valorDeClique + upgradePlanetaClique;
+
+    // Criar vários valores
+    for (let i = 0; i < 5; i++) {
+        const valorElemento = document.createElement('div');
+        valorElemento.classList.add('valor-clique');
+        valorElemento.textContent = `+${formatarNumero(valorDeClique + upgradePlanetaClique)}`;
+
+        // Capturar a posição do mouse antes de adicionar o elemento
+        const posX = event.clientX;
+        const posY = event.clientY;
+
+        // Aguarda para definir as posições do valor
+        setTimeout(() => {
+            valorElemento.style.left = `${posX}px`;
+            valorElemento.style.top = `${posY}px`;
+
+            // Adicionar o valor à página
+            document.body.appendChild(valorElemento);
+
+            setTimeout(() => {
+                valorElemento.style.animation = 'subir 1s ease-out forwards';
+            }, 100);
+
+            // Remover o valor após a animação
+            setTimeout(() => {
+                valorElemento.remove();
+            }, 1000);
+        }, 10);
+
+    }
+
     atualizarInterface();
     salvarProgresso();
 });
 
+
 // Lógica do DEBUG
-document.getElementById('btn-debug').addEventListener('click', () =>{
+document.getElementById('btn-debug').addEventListener('click', () => {
     const senha = prompt("Digite a senha: ");
 
-    if (senha === '123@adm'){
+    if (senha === '123@adm') {
         abrirMenuDebug();
     } else {
         alert("Senha incorreta!");
     }
 });
 
-document.getElementById('fechar').addEventListener('click', () =>{
+document.getElementById('fechar').addEventListener('click', () => {
     document.querySelector(".debug-menu").style.display = 'none';
 });
 
@@ -189,8 +251,26 @@ function abrirMenuDebug() {
     document.querySelector(".debug-menu").style.display = 'block';
 }
 
-document.getElementById('btn-hack').addEventListener('click', () =>{
+document.getElementById('btn-hack-500k').addEventListener('click', () => {
     planetas += 500000;
+
+    atualizarInterface();
+});
+
+document.getElementById('btn-hack-1M').addEventListener('click', () => {
+    planetas += 1000000;
+
+    atualizarInterface();
+});
+
+document.getElementById('btn-hack-1B').addEventListener('click', () => {
+    planetas += 1000000000;
+
+    atualizarInterface();
+});
+
+document.getElementById('btn-hack-10Q').addEventListener('click', () => {
+    planetas += 10000000000000000;
 
     atualizarInterface();
 });
@@ -222,9 +302,9 @@ btnPoderes.forEach((btn, index) => {
 });
 
 // Lógica de comprar os upgrades
-btnUpgrades.forEach((btn, index) =>{
-    btn.addEventListener('click', () =>{
-        if (planetas >= precoUpgrades[index]){
+btnUpgrades.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+        if (planetas >= precoUpgrades[index]) {
             // Comprar upgrade
             planetas -= precoUpgrades[index];
             upgrades[index] += 1;
@@ -254,6 +334,40 @@ btnUpgrades.forEach((btn, index) =>{
     });
 });
 
+// Lógica de trocar planeta
+let progresso = 0;
+
+function updateBarraProgresso() {
+    const progressoPercentual = (planetasProgresso[planetaAtual].meta !== 0)
+        ? (planetas / planetasProgresso[planetaAtual].meta) * 100
+        : 0;
+
+    barraProgressoElement.style.width = `${Math.min(progressoPercentual, 100)}%`;
+
+    if (progressoPercentual >= 100) {
+        trocarPlaneta();
+    }
+}
+
+function trocarPlaneta() {
+    if (planetaAtual < planetasProgresso.length - 1) {
+        planetaAtual++;
+
+        // Atualizar os ganhos do planeta atual
+        upgradePlanetaClique = planetasProgresso[planetaAtual].ganhoClique;
+        upgradePlanetaPassivo = planetasProgresso[planetaAtual].ganhoPassivo;
+
+        // Atualizar os valores de clique e ganho passivo
+        valorDeClique += (valorDeClique * upgradePlanetaClique / 100);
+        planetasPassivos += (planetasPassivos * upgradePlanetaPassivo / 100);
+
+        atualizarInterface();
+        salvarProgresso();
+    } else {
+        clearInterval(intervaloProgresso);
+    }
+}
+
 // Lógica de trocar menus
 const containerPoderes = document.querySelector('.container-poderes');
 const containerUpgrades = document.querySelector('.container-upgrades');
@@ -264,7 +378,7 @@ menuPoderes.addEventListener('click', () => {
     menuUpgrades.style.backgroundColor = "#393939";
 });
 
-menuUpgrades.addEventListener('click', () =>{
+menuUpgrades.addEventListener('click', () => {
     containerUpgrades.classList.remove('desativado');
     containerPoderes.classList.add('desativado');
     menuUpgrades.style.backgroundColor = "#000";
@@ -273,13 +387,16 @@ menuUpgrades.addEventListener('click', () =>{
 
 // Lógica de ganho passivo
 function ganharPlanetasPassivos() {
-    planetas += planetasPassivos; // Adicionar o valor do ganho passivo
+    planetas += planetasPassivos + upgradePlanetaPassivo; // Adicionar o valor do ganho passivo
     atualizarInterface();
     salvarProgresso();
 }
 
 // Atualização do progresso passivo
 setInterval(ganharPlanetasPassivos, 1000);
+
+// Intervalo para atualizar a barra de progresso sozinho
+let intervaloProgresso = setInterval(updateBarraProgresso, 100);
 
 // Carregar o progresso ao iniciar o jogo
 carregarProgresso();

@@ -11,20 +11,28 @@
 
 <body>
     <div class="game">
-
+        <div class="container-barra-progresso">
+            <div id="barra-progresso"></div>
+        </div>
         <!-- DEBUG -->
         <button id="btn-debug">DEBUG</button>
         <div class="debug-menu">
             <div class="overlay"></div>
             <div class="buttons">
                 <button id="fechar">X</button>
-                <button id="btn-hack">+500Mil</button>
+                <button id="btn-hack-500k">+500Mil</button>
+                <button id="btn-hack-1M">+1Milhão</button>
+                <button id="btn-hack-1B">+1Bilhão</button>
+                <button id="btn-hack-10Q">+10Quadrilhões</button>
             </div>
         </div>
 
         <div class="info">
-            <p><span id="count-planetas">0</span> <i class="bi bi-globe-americas"></i></p>
-            <p><span id="count-planetas-passivo">0</span>/s <i class="bi bi-clock-history"></i></p>
+            <p><span id="count-planetas">0</span><i class="bi bi-globe-americas"></i></p>
+            <p>
+                <span id="count-planetas-passivo">0</span> <i class="bi bi-clock-history"></i>
+                <span id="ganho-planeta-passivo"></span>
+            </p>
         </div>
 
         <!-- Botão de clicar no planeta -->
