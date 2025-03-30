@@ -15,12 +15,21 @@ const ganhoUpgradeElements = document.querySelectorAll('.ganho-upgrade');
 const infoUpgradeBaixo = document.querySelectorAll('.btn-upgrade .container-info .baixo');
 const barraProgressoElement = document.getElementById('barra-progresso');
 const ganhoPlanetaPassivoElement = document.getElementById('ganho-planeta-passivo');
+const ganhoPlanetaCliqueElement = document.getElementById('ganho-planeta-clique');
+const containerBuffPlaneta = document.querySelector('.container-buff-planeta');
 
 // Progresso de planetas (os ganhos devem ser em porcentagem)
 const planetasProgresso = [
-    { nome: "Planeta 1", img: "https://cdn-icons-png.flaticon.com/512/3327/3327324.png", meta: 1000, ganhoPassivo: 0, ganhoClique: 0 },
-    { nome: "Planeta 2", img: "https://cdn-icons-png.flaticon.com/512/6989/6989417.png", meta: 10000, ganhoPassivo: 0, ganhoClique: 50 },
-    { nome: "Planeta 3", img: "https://cdn-icons-png.flaticon.com/512/2739/2739628.png", meta: 20000, ganhoPassivo: 50, ganhoClique: 0 },
+    { img: "https://cdn-icons-png.flaticon.com/512/3327/3327324.png", meta: 10000, ganhoPassivo: 0, ganhoClique: 0 },
+    { img: "https://cdn-icons-png.flaticon.com/512/6989/6989417.png", meta: 100000, ganhoPassivo: 0, ganhoClique: 50 },
+    { img: "https://cdn-icons-png.flaticon.com/512/2739/2739628.png", meta: 500000, ganhoPassivo: 50, ganhoClique: 0 },
+    { img: "https://static.vecteezy.com/system/resources/previews/024/596/370/non_2x/pink-planet-illustration-free-png.png", meta: 1000000, ganhoPassivo: 10, ganhoClique: 50 },
+    { img: "https://cdn-icons-png.flaticon.com/512/1789/1789829.png", meta: 5000000, ganhoPassivo: 0, ganhoClique: 70 },
+    { img: "https://cdn-icons-png.flaticon.com/512/433/433845.png", meta: 10000000, ganhoPassivo: 0, ganhoClique: 100 },
+    { img: "https://i.pinimg.com/originals/73/f0/b3/73f0b3408c7d0bc312b0fb2d9fe9f4cb.png", meta: 50000000, ganhoPassivo: -50, ganhoClique: 100 },
+    { img: "https://cdn-icons-png.flaticon.com/512/5088/5088964.png", meta: 100000000, ganhoPassivo: 100, ganhoClique: 100 },
+    { img: "https://cdn-icons-png.flaticon.com/512/2949/2949036.png", meta: 500000000, ganhoPassivo: -100, ganhoClique: 200 },
+    { img: "https://cdn-icons-png.flaticon.com/512/6967/6967700.png", meta: 1000000000, ganhoPassivo: 200, ganhoClique: 200 },
 ];
 
 // Variáveis do jogo
@@ -48,6 +57,9 @@ function salvarProgresso() {
     localStorage.setItem('upgrades', JSON.stringify(upgrades));
     localStorage.setItem('precoUpgrades', JSON.stringify(precoUpgrades));
     localStorage.setItem('ganhoUpgrades', JSON.stringify(ganhoUpgrades));
+    localStorage.setItem('planetaAtual', JSON.stringify(planetaAtual));
+    localStorage.setItem('upgradePlanetaClique', JSON.stringify(upgradePlanetaClique));
+    localStorage.setItem('upgradePlanetaPassivo', JSON.stringify(upgradePlanetaPassivo));
 }
 
 // Carregar progresso do localStorage
@@ -62,6 +74,9 @@ function carregarProgresso() {
         upgrades = JSON.parse(localStorage.getItem('upgrades'));
         precoUpgrades = JSON.parse(localStorage.getItem('precoUpgrades'));
         ganhoUpgrades = JSON.parse(localStorage.getItem('ganhoUpgrades'));
+        planetaAtual = JSON.parse(localStorage.getItem('planetaAtual'));
+        upgradePlanetaClique = JSON.parse(localStorage.getItem('upgradePlanetaClique'));
+        upgradePlanetaPassivo = JSON.parse(localStorage.getItem('upgradePlanetaPassivo'));
     }
 }
 
@@ -184,24 +199,26 @@ function atualizarInterface() {
         imgPlaneta.src = planetasProgresso[planetaAtual].img; // Atualiza o src da imagem
     }
 
-    if (upgradePlanetaPassivo === 0) {
-        ganhoPlanetaPassivoElement.style.display = "none";
-    } else {
-        ganhoPlanetaPassivoElement.style.display = "block";
-        ganhoPlanetaPassivoElement.textContent = "+ " + upgradePlanetaPassivo + "%";
-    }
+    // Exibir ou ocultar containerBuffPlaneta
+    containerBuffPlaneta.style.display = (upgradePlanetaPassivo || upgradePlanetaClique) ? "flex" : "none";
 
+    // Atualizar os valores do ganho
+    ganhoPlanetaCliqueElement.innerHTML = upgradePlanetaClique ? `<i class="bi bi-hand-index-thumb"></i> + ${upgradePlanetaClique}%` : "";
+    ganhoPlanetaPassivoElement.innerHTML = upgradePlanetaPassivo ? `<i class="bi bi-clock-history"></i> + ${upgradePlanetaPassivo}%` : "";
 }
 
 // Lógica de clicar no planeta
 btnClick.addEventListener('click', (event) => {
-    planetas += valorDeClique + upgradePlanetaClique;
+    planetas += valorDeClique;
+
+    console.log(upgradePlanetaClique);
+    console.log(upgradePlanetaPassivo);
 
     // Criar vários valores
     for (let i = 0; i < 5; i++) {
         const valorElemento = document.createElement('div');
         valorElemento.classList.add('valor-clique');
-        valorElemento.textContent = `+${formatarNumero(valorDeClique + upgradePlanetaClique)}`;
+        valorElemento.textContent = `+${formatarNumero(valorDeClique)}`;
 
         // Capturar a posição do mouse antes de adicionar o elemento
         const posX = event.clientX;
@@ -387,7 +404,7 @@ menuUpgrades.addEventListener('click', () => {
 
 // Lógica de ganho passivo
 function ganharPlanetasPassivos() {
-    planetas += planetasPassivos + upgradePlanetaPassivo; // Adicionar o valor do ganho passivo
+    planetas += planetasPassivos; // Adicionar o valor do ganho passivo
     atualizarInterface();
     salvarProgresso();
 }

@@ -212,6 +212,7 @@ body {
 }
 
 .info {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -234,8 +235,17 @@ body {
     font-weight: bold;
 }
 
-#ganho-planeta-passivo {
+.container-buff-planeta {
     display: none;
+    flex-direction: column;
+    position: absolute;
+    right: -5%;
+    bottom: -10%;
+    font-size: 15px;
+    background-color: #0077b6;
+    border: 2px solid #03045e;
+    border-radius: .5em;
+    padding: .2em .3em;
 }
 
 .menu {
@@ -540,7 +550,7 @@ body {
     }
 
     #btn-debug {
-        top: 53%;
+        top: 85%;
         right: 1%;
     }
 
