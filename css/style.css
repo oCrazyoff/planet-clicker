@@ -142,6 +142,21 @@ body {
     pointer-events: none;
 }
 
+/* Btn bug */
+#btn-reset {
+    position: absolute;
+    top: 2%;
+    right: 86%;
+    border: none;
+    background-color: #c1121f;
+    color: #fff;
+    border-radius: .5em;
+    padding: .5em;
+    border: 2px solid #780000;
+    cursor: pointer;
+    z-index: 800;
+}
+
 /* DEBUG */
 #btn-debug {
     position: absolute;
@@ -551,6 +566,11 @@ body {
 
     #btn-debug {
         top: 85%;
+        right: 1%;
+    }
+
+    #btn-reset {
+        top: 74%;
         right: 1%;
     }
 

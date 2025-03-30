@@ -248,6 +248,24 @@ btnClick.addEventListener('click', (event) => {
     salvarProgresso();
 });
 
+// Lógica do Reset caso tenha bug
+document.getElementById('btn-reset').addEventListener('click', () => {
+    localStorage.removeItem('planetas');
+    localStorage.removeItem('planetasPassivos');
+    localStorage.removeItem('valorDeClique');
+    localStorage.removeItem('poderes');
+    localStorage.removeItem('precoPoderes');
+    localStorage.removeItem('ganhoPoderes');
+    localStorage.removeItem('upgrades');
+    localStorage.removeItem('precoUpgrades');
+    localStorage.removeItem('ganhoUpgrades');
+    localStorage.removeItem('planetaAtual');
+    localStorage.removeItem('upgradePlanetaClique');
+    localStorage.removeItem('upgradePlanetaPassivo');
+
+    // Recarrega a página para aplicar as mudanças
+    location.reload();
+});
 
 // Lógica do DEBUG
 document.getElementById('btn-debug').addEventListener('click', () => {
