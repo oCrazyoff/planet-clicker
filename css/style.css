@@ -31,7 +31,7 @@ body {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    height: 60%;
+    height: 50%;
     transition: 0.3s ease all;
     position: relative;
     z-index: 1;
@@ -41,6 +41,7 @@ body {
     -ms-user-select: none;
     -webkit-tap-highlight-color: transparent;
     outline: none;
+    border-radius: 50%;
 }
 
 #btn-click:active {
@@ -48,7 +49,8 @@ body {
 }
 
 #btn-click img {
-    height: 80%;
+    height: 100%;
+    width: 100%;
     transition: 0.3s ease all;
     filter: drop-shadow(0 0 0.75rem #000);
     animation: spin 10s linear infinite;
@@ -428,7 +430,7 @@ body {
 
     .menu .btn-menu {
         border-radius: .5em .5em 0 0;
-        padding: .3em 1em;
+        padding: .2em 1em;
     }
 
     .container-poderes,
@@ -460,8 +462,12 @@ body {
         transform: translateY(100%);
     }
 
+    #btn-click {
+        height: 50%;
+    }
+
     #btn-click img {
-        height: 80%;
+        height: 100%;
     }
 
     .valor-clique {
@@ -471,6 +477,7 @@ body {
 
     .info {
         width: 75%;
+        font-size: 1.2em;
     }
 
     #btn-debug {
