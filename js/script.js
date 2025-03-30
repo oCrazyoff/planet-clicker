@@ -174,7 +174,7 @@ btnClick.addEventListener('click', () => {
 document.getElementById('btn-debug').addEventListener('click', () =>{
     const senha = prompt("Digite a senha: ");
 
-    if (senha === '1234'){
+    if (senha === '123@adm'){
         abrirMenuDebug();
     } else {
         alert("Senha incorreta!");
