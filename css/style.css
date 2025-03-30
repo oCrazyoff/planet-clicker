@@ -26,10 +26,12 @@ body {
 }
 
 #btn-click {
+    display: flex;
+    justify-content: center;
     background-color: transparent;
-    border-radius: 50%;
     border: none;
     cursor: pointer;
+    height: 60%;
     transition: 0.3s ease all;
     position: relative;
     z-index: 1;
@@ -46,7 +48,7 @@ body {
 }
 
 #btn-click img {
-    height: 30em;
+    height: 80%;
     transition: 0.3s ease all;
     filter: drop-shadow(0 0 0.75rem #000);
     animation: spin 10s linear infinite;
@@ -73,14 +75,15 @@ body {
 /* DEBUG */
 #btn-debug {
     position: absolute;
-    top: 1em;
-    left: 1em;
+    top: 1%;
+    right: 95%;
     border: none;
     background-color: #e4b61a;
     border-radius: .5em;
     padding: .5em;
     border: 2px solid #6d6009;
     cursor: pointer;
+    z-index: 800;
 }
 
 .debug-menu {
@@ -425,7 +428,7 @@ body {
 
     .menu .btn-menu {
         border-radius: .5em .5em 0 0;
-        padding: .1em 1em;
+        padding: .3em 1em;
     }
 
     .container-poderes,
@@ -458,7 +461,7 @@ body {
     }
 
     #btn-click img {
-        height: 20em;
+        height: 80%;
     }
 
     .valor-clique {
@@ -468,5 +471,14 @@ body {
 
     .info {
         width: 75%;
+    }
+
+    #btn-debug {
+        top: 53%;
+        right: 1%;
+    }
+
+    .debug-menu .buttons {
+        width: 90%;
     }
 }
