@@ -18,6 +18,9 @@ const ganhoPlanetaPassivoElement = document.getElementById('ganho-planeta-passiv
 const ganhoPlanetaCliqueElement = document.getElementById('ganho-planeta-clique');
 const containerBuffPlaneta = document.querySelector('.container-buff-planeta');
 
+// Audios
+const somClickMenu = document.getElementById('som-click-menu');
+
 // Progresso de planetas (os ganhos devem ser em porcentagem)
 const planetasProgresso = [
     { img: "https://cdn-icons-png.flaticon.com/512/3327/3327324.png", meta: 10000, ganhoPassivo: 0, ganhoClique: 0 },
@@ -29,7 +32,7 @@ const planetasProgresso = [
     { img: "https://i.pinimg.com/originals/73/f0/b3/73f0b3408c7d0bc312b0fb2d9fe9f4cb.png", meta: 50000000, ganhoPassivo: -50, ganhoClique: 100 },
     { img: "https://cdn-icons-png.flaticon.com/512/5088/5088964.png", meta: 100000000, ganhoPassivo: 100, ganhoClique: 100 },
     { img: "https://cdn-icons-png.flaticon.com/512/2949/2949036.png", meta: 500000000, ganhoPassivo: -100, ganhoClique: 200 },
-    { img: "https://cdn-icons-png.flaticon.com/512/6967/6967700.png", meta: 1000000000, ganhoPassivo: 200, ganhoClique: 200 },
+    { img: "https://cdn-icons-png.flaticon.com/512/6967/6967700.png", meta: 0, ganhoPassivo: 200, ganhoClique: 200 },
 ];
 
 // Variáveis do jogo
@@ -60,6 +63,7 @@ function salvarProgresso() {
     localStorage.setItem('planetaAtual', JSON.stringify(planetaAtual));
     localStorage.setItem('upgradePlanetaClique', JSON.stringify(upgradePlanetaClique));
     localStorage.setItem('upgradePlanetaPassivo', JSON.stringify(upgradePlanetaPassivo));
+    localStorage.setItem('pontosProgresso', JSON.stringify(pontosProgresso));
 }
 
 // Carregar progresso do localStorage
@@ -77,6 +81,7 @@ function carregarProgresso() {
         planetaAtual = JSON.parse(localStorage.getItem('planetaAtual'));
         upgradePlanetaClique = JSON.parse(localStorage.getItem('upgradePlanetaClique'));
         upgradePlanetaPassivo = JSON.parse(localStorage.getItem('upgradePlanetaPassivo'));
+        pontosProgresso = JSON.parse(localStorage.getItem('pontosProgresso'));
     }
 }
 
@@ -210,11 +215,19 @@ function atualizarInterface() {
 // Lógica de clicar no planeta
 btnClick.addEventListener('click', (event) => {
     planetas += valorDeClique;
+    pontosProgresso += valorDeClique;
 
-    console.log(upgradePlanetaClique);
-    console.log(upgradePlanetaPassivo);
+    // Animação de clique
+    btnClick.style.animation = "none";
+    void btnClick.offsetWidth;
+    btnClick.style.animation = ".5s click alternate";
 
-    // Criar vários valores
+    // Som
+    const somClique = document.getElementById('som-click-principal');
+    somClique.currentTime = 0;
+    somClique.play();
+
+    // Criar vários valores de clique
     for (let i = 0; i < 5; i++) {
         const valorElemento = document.createElement('div');
         valorElemento.classList.add('valor-clique');
@@ -262,6 +275,7 @@ document.getElementById('btn-reset').addEventListener('click', () => {
     localStorage.removeItem('planetaAtual');
     localStorage.removeItem('upgradePlanetaClique');
     localStorage.removeItem('upgradePlanetaPassivo');
+    localStorage.removeItem('pontosProgresso');
 
     // Recarrega a página para aplicar as mudanças
     location.reload();
@@ -314,6 +328,11 @@ document.getElementById('btn-hack-10Q').addEventListener('click', () => {
 btnPoderes.forEach((btn, index) => {
     btn.addEventListener('click', () => {
         if (planetas >= precoPoderes[index]) {
+            // Som
+            const somPoder = document.getElementById('som-click-poder');
+            somPoder.currentTime = 0;
+            somPoder.play();
+
             // Comprar poder
             planetas -= precoPoderes[index];
             poderes[index] += 1;
@@ -371,16 +390,18 @@ btnUpgrades.forEach((btn, index) => {
 
 // Lógica de trocar planeta
 let progresso = 0;
+let pontosProgresso = 0;
 
 function updateBarraProgresso() {
     const progressoPercentual = (planetasProgresso[planetaAtual].meta !== 0)
-        ? (planetas / planetasProgresso[planetaAtual].meta) * 100
+        ? (pontosProgresso / planetasProgresso[planetaAtual].meta) * 100
         : 0;
 
     barraProgressoElement.style.width = `${Math.min(progressoPercentual, 100)}%`;
 
     if (progressoPercentual >= 100) {
         trocarPlaneta();
+        pontosProgresso = 0;
     }
 }
 
@@ -407,6 +428,10 @@ function trocarPlaneta() {
 const containerPoderes = document.querySelector('.container-poderes');
 const containerUpgrades = document.querySelector('.container-upgrades');
 menuPoderes.addEventListener('click', () => {
+    // Som
+    somClickMenu.currentTime = 0;
+    somClickMenu.play();
+
     containerUpgrades.classList.add('desativado');
     containerPoderes.classList.remove('desativado');
     menuPoderes.style.backgroundColor = "#000";
@@ -414,6 +439,10 @@ menuPoderes.addEventListener('click', () => {
 });
 
 menuUpgrades.addEventListener('click', () => {
+    // Som
+    somClickMenu.currentTime = 0;
+    somClickMenu.play();
+
     containerUpgrades.classList.remove('desativado');
     containerPoderes.classList.add('desativado');
     menuUpgrades.style.backgroundColor = "#000";
@@ -423,6 +452,7 @@ menuUpgrades.addEventListener('click', () => {
 // Lógica de ganho passivo
 function ganharPlanetasPassivos() {
     planetas += planetasPassivos / 10;
+    pontosProgresso += planetasPassivos;
     atualizarInterface();
     salvarProgresso();
 }
