@@ -422,13 +422,13 @@ menuUpgrades.addEventListener('click', () => {
 
 // Lógica de ganho passivo
 function ganharPlanetasPassivos() {
-    planetas += planetasPassivos; // Adicionar o valor do ganho passivo
+    planetas += planetasPassivos / 10;
     atualizarInterface();
     salvarProgresso();
 }
 
 // Atualização do progresso passivo
-setInterval(ganharPlanetasPassivos, 1000);
+setInterval(ganharPlanetasPassivos, 100);
 
 // Intervalo para atualizar a barra de progresso sozinho
 let intervaloProgresso = setInterval(updateBarraProgresso, 100);
