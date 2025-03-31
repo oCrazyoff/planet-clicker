@@ -359,6 +359,11 @@ btnPoderes.forEach((btn, index) => {
 btnUpgrades.forEach((btn, index) => {
     btn.addEventListener('click', () => {
         if (planetas >= precoUpgrades[index]) {
+            // Som
+            const somPoder = document.getElementById('som-click-poder');
+            somPoder.currentTime = 0;
+            somPoder.play();
+
             // Comprar upgrade
             planetas -= precoUpgrades[index];
             upgrades[index] += 1;
