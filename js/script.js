@@ -17,6 +17,7 @@ const barraProgressoElement = document.getElementById('barra-progresso');
 const ganhoPlanetaPassivoElement = document.getElementById('ganho-planeta-passivo');
 const ganhoPlanetaCliqueElement = document.getElementById('ganho-planeta-clique');
 const containerBuffPlaneta = document.querySelector('.container-buff-planeta');
+const btnOvniElement = document.getElementById('btn-ovni');
 
 // Audios
 const somClickMenu = document.getElementById('som-click-menu');
@@ -208,9 +209,44 @@ function atualizarInterface() {
     containerBuffPlaneta.style.display = (upgradePlanetaPassivo || upgradePlanetaClique) ? "flex" : "none";
 
     // Atualizar os valores do ganho
-    ganhoPlanetaCliqueElement.innerHTML = upgradePlanetaClique ? `<i class="bi bi-hand-index-thumb"></i> + ${upgradePlanetaClique}%` : "";
-    ganhoPlanetaPassivoElement.innerHTML = upgradePlanetaPassivo ? `<i class="bi bi-clock-history"></i> + ${upgradePlanetaPassivo}%` : "";
+    ganhoPlanetaCliqueElement.innerHTML = upgradePlanetaClique ? `<i class="bi bi-hand-index-thumb"></i> ${upgradePlanetaClique}%` : "";
+    ganhoPlanetaPassivoElement.innerHTML = upgradePlanetaPassivo ? `<i class="bi bi-clock-history"></i> ${upgradePlanetaPassivo}%` : "";
 }
+
+// Lógica do ovni
+let animacaoAtual = "ovniFly1";
+
+setInterval(() => {
+    if (animacaoAtual === "ovniFly1") {
+        btnOvniElement.style.animation = "ovniFly2 5s";
+        animacaoAtual = "ovniFly2";
+    } else {
+        btnOvniElement.style.animation = "ovniFly1 5s";
+        animacaoAtual = "ovniFly1";
+    }
+}, 10000);
+
+btnOvniElement.addEventListener('click', (event) => {
+    let porcentagemOvni = Math.floor(Math.random() * (100 - 10 + 1)) + 10;
+
+    planetas += (planetas * porcentagemOvni / 100);
+
+    // Pegando a posição do OVNI
+    const posX = event.clientX;
+    const posY = event.clientY;
+
+    btnOvniElement.style.top = `${posY}px`;
+    btnOvniElement.style.left = `${posX}px`;
+    btnOvniElement.style.transform = "translate: (-50%, -50%)";
+
+    // Aplica a animação diretamente no OVNI
+    btnOvniElement.style.animation = "ovniPOP 1s";
+
+    btnOvniElement.addEventListener('animationend', () => {
+        btnOvniElement.style.top = "50%";
+        btnOvniElement.style.left = "-50%";
+    }, { once: true });
+});
 
 // Lógica de clicar no planeta
 btnClick.addEventListener('click', (event) => {

@@ -42,6 +42,108 @@ body {
     gap: 1em;
 }
 
+.container-ovni {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.container-ovni #btn-ovni {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 50%;
+    left: -50%;
+    z-index: 750;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.container-ovni #btn-ovni img {
+    height: 10em;
+}
+
+@keyframes ovniFly1 {
+    0% {
+        left: -50%;
+    }
+
+    25% {
+        left: 25%;
+        top: 30%;
+    }
+
+    50% {
+        left: 50%;
+    }
+
+    75% {
+        top: 70%;
+        left: 80%;
+    }
+
+    90% {
+        left: 90%;
+        top: 30%;
+    }
+
+    100% {
+        left: 50%;
+        top: -50%;
+    }
+}
+
+@keyframes ovniFly2 {
+    0% {
+        left: 50%;
+        top: 100%;
+    }
+
+    25% {
+        top: 80%;
+    }
+
+    50% {
+        left: 30%;
+        top: 50%;
+    }
+
+    75% {
+        top: 70%;
+        left: 80%;
+    }
+
+    90% {
+        left: 90%;
+        top: 30%;
+    }
+
+    100% {
+        left: 50%;
+        top: -50%;
+    }
+}
+
+@keyframes ovniPOP {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
 #btn-click {
     display: flex;
     justify-content: center;
@@ -261,6 +363,7 @@ body {
     bottom: 0%;
     border-right: 5px solid #000;
     height: 100%;
+    z-index: 800;
 }
 
 .menu .btn-menu {
@@ -486,6 +589,46 @@ body {
         padding-top: 1em;
     }
 
+    .container-ovni {
+        width: 100%;
+        height: 100%;
+    }
+
+    .container-ovni #btn-ovni img {
+        height: 8em;
+    }
+
+    @keyframes ovniFly2 {
+        0% {
+            left: 20%;
+            top: 100%;
+        }
+
+        25% {
+            top: 80%;
+        }
+
+        50% {
+            left: 30%;
+            top: 50%;
+        }
+
+        75% {
+            top: 70%;
+            left: 50%;
+        }
+
+        90% {
+            left: 30%;
+            top: 30%;
+        }
+
+        100% {
+            left: 50%;
+            top: -50%;
+        }
+    }
+
     .menu {
         flex-direction: row;
         padding: 0 1em;
@@ -508,6 +651,11 @@ body {
         height: 40%;
         top: 60%;
         border: none;
+        z-index: 800;
+    }
+
+    .container-upgrades button .container-info .nome {
+        font-size: 1.1em;
     }
 
     .container-poderes button .container-info {
