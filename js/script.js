@@ -55,7 +55,7 @@ let poderes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Array de poderes
 let precoPoderes = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000]; // Preços dos poderes
 let ganhoPoderes = [1, 1, 10, 10, 50, 50, 150, 150, 300, 300]; // Ganhos por poder
 let upgrades = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Array de upgrades
-let precoUpgrades = [50000, 150000, 500000, 750000, 900000, 1000000, 1100000, 1500000, 2000000, 2500000]; // Preços de upgrades
+let precoUpgrades = [50000, 150000, 500000, 1000000, 1500000, 2000000, 2500000, 3000000, 5000000, 10000000]; // Preços de upgrades
 let ganhoUpgrades = [50, 50, 50, 50, 50, 50, 50, 50, 50, 50]; // Ganhos em % dos upgrades
 
 // Variável para rastrear se o jogador já clicou no planeta
