@@ -31,8 +31,8 @@ const planetasProgresso = [
     { img: "https://cdn-icons-png.flaticon.com/512/1789/1789829.png", meta: 5000000, ganhoPassivo: 0, ganhoClique: 70 },
     { img: "https://cdn-icons-png.flaticon.com/512/433/433845.png", meta: 10000000, ganhoPassivo: 0, ganhoClique: 100 },
     { img: "https://i.pinimg.com/originals/73/f0/b3/73f0b3408c7d0bc312b0fb2d9fe9f4cb.png", meta: 50000000, ganhoPassivo: -50, ganhoClique: 100 },
-    { img: "https://cdn-icons-png.flaticon.com/512/5088/5088964.png", meta: 100000000, ganhoPassivo: 100, ganhoClique: 100 },
-    { img: "https://cdn-icons-png.flaticon.com/512/2949/2949036.png", meta: 500000000, ganhoPassivo: -100, ganhoClique: 200 },
+    { img: "https://cdn-icons-png.flaticon.com/512/5088/5088964.png", meta: 100000000, ganhoPassivo: -90, ganhoClique: 100 },
+    { img: "https://cdn-icons-png.flaticon.com/512/2949/2949036.png", meta: 500000000, ganhoPassivo: 200, ganhoClique: -50 },
     { img: "https://cdn-icons-png.flaticon.com/512/6967/6967700.png", meta: 0, ganhoPassivo: 200, ganhoClique: 200 },
 ];
 
@@ -216,7 +216,16 @@ function atualizarInterface() {
 // Lógica do ovni
 let animacaoAtual = "ovniFly1";
 
-setInterval(() => {
+function iniciarOvni() {
+    let tempoAleatorio = Math.floor(Math.random() * (30000 - 10000 + 1)) + 10000;
+
+    // Reseta a posição e exibe o OVNI
+    void btnOvniElement.offsetWidth;
+    btnOvniElement.style.left = "-50%";
+    btnOvniElement.style.top = "50%";
+    btnOvniElement.style.display = "block";
+
+    // Alterna entre as animações
     if (animacaoAtual === "ovniFly1") {
         btnOvniElement.style.animation = "ovniFly2 5s";
         animacaoAtual = "ovniFly2";
@@ -224,28 +233,35 @@ setInterval(() => {
         btnOvniElement.style.animation = "ovniFly1 5s";
         animacaoAtual = "ovniFly1";
     }
-}, 10000);
+
+    // Chama a função novamente após um tempo aleatório
+    setTimeout(iniciarOvni, tempoAleatorio);
+}
+
+// Inicia o ciclo
+iniciarOvni();
+
 
 btnOvniElement.addEventListener('click', (event) => {
     let porcentagemOvni = Math.floor(Math.random() * (100 - 10 + 1)) + 10;
 
-    planetas += (planetas * porcentagemOvni / 100);
+    // Calcular o ganho e aplica-lo
+    let ganhoOvni = planetas * (porcentagemOvni / 100)
+    planetas += ganhoOvni;
 
-    // Pegando a posição do OVNI
+    // Pegar a posição do OVNI
     const posX = event.clientX;
     const posY = event.clientY;
 
-    btnOvniElement.style.top = `${posY}px`;
-    btnOvniElement.style.left = `${posX}px`;
-    btnOvniElement.style.transform = "translate: (-50%, -50%)";
+    // Criar uma div para mostrar o ganho
+    const ganhoElemento = document.createElement('div');
+    ganhoElemento.classList.add('ganho-ovni');
+    ganhoElemento.textContent = `+ ${formatarNumero(ganhoOvni)}`;
+    ganhoElemento.style.left = `${posX}px`;
+    ganhoElemento.style.top = `${posY}px`;
+    document.body.appendChild(ganhoElemento);
 
-    // Aplica a animação diretamente no OVNI
-    btnOvniElement.style.animation = "ovniPOP 1s";
-
-    btnOvniElement.addEventListener('animationend', () => {
-        btnOvniElement.style.top = "50%";
-        btnOvniElement.style.left = "-50%";
-    }, { once: true });
+    btnOvniElement.style.display = "none";
 });
 
 // Lógica de clicar no planeta
