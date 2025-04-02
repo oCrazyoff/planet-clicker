@@ -402,11 +402,11 @@ btnPoderes.forEach((btn, index) => {
 
             // Atualizar o valor de clique ou o ganho passivo, dependendo do tipo de poder
             if (index % 2 === 0) {
+                ganhoPoderes[index] += ganhoPoderes[index] * (upgradePlanetaClique / 100);
                 valorDeClique += ganhoPoderes[index]; // Aumenta o valor do clique
-                valorDeClique += valorDeClique * upgradePlanetaClique / 100
             } else {
+                ganhoPoderes[index] += ganhoPoderes[index] * (upgradePlanetaPassivo / 100);
                 planetasPassivos += ganhoPoderes[index]; // Aumenta o ganho passivo
-                planetasPassivos += planetasPassivos * upgradePlanetaPassivo / 100
             }
 
             // Aumentar o preço do poder e o ganho
