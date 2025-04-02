@@ -401,17 +401,17 @@ btnPoderes.forEach((btn, index) => {
             poderes[index] += 1;
 
             // Atualizar o valor de clique ou o ganho passivo, dependendo do tipo de poder
-            const ganhoBase = ganhoPoderes[index];
             if (index % 2 === 0) {
-                const ganhoAdicional = ganhoBase * (upgradePlanetaClique / 200);
-                valorDeClique += ganhoAdicional; // Aumenta o valor do clique
+                valorDeClique += ganhoPoderes[index]; // Aumenta o valor do clique
+                valorDeClique += valorDeClique * (upgradePlanetaClique / 100)
             } else {
-                const ganhoAdicional = ganhoBase * (upgradePlanetaPassivo / 200);
-                planetasPassivos += ganhoAdicional; // Aumenta o ganho passivo
+                planetasPassivos += ganhoPoderes[index]; // Aumenta o ganho passivo
+                planetasPassivos += planetasPassivos * (upgradePlanetaPassivo / 100)
             }
 
-            // Aumentar o preço do poder
+            // Aumentar o preço do poder e o ganho
             precoPoderes[index] = Math.floor(precoPoderes[index] * 2);
+            ganhoPoderes[index] += 1;
 
             // Atualizar a interface
             atualizarInterface();
@@ -548,4 +548,3 @@ let intervaloProgresso = setInterval(updateBarraProgresso, 100);
 // Carregar o progresso ao iniciar o jogo
 carregarProgresso();
 atualizarInterface();
-
