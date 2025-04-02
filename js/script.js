@@ -58,6 +58,9 @@ let upgrades = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Array de upgrades
 let precoUpgrades = [50000, 150000, 500000, 750000, 900000, 1000000, 1100000, 1500000, 2000000, 2500000]; // Preços de upgrades
 let ganhoUpgrades = [50, 50, 50, 50, 50, 50, 50, 50, 50, 50]; // Ganhos em % dos upgrades
 
+// Variável para rastrear se o jogador já clicou no planeta
+let jogadorClicouNoPlaneta = false;
+
 // Salvar progresso no localStorage
 function salvarProgresso() {
     localStorage.setItem('planetas', planetas);
@@ -207,7 +210,10 @@ function atualizarInterface() {
 // Lógica do ovni
 let animacaoAtual = "ovniFly1";
 
+// Modifique a função iniciarOvni para verificar se o jogador já clicou
 function iniciarOvni() {
+    if (!jogadorClicouNoPlaneta) return; // Não inicia o ciclo se o jogador não clicou no planeta
+
     let tempoAleatorio = Math.floor(Math.random() * (30000 - 10000 + 1)) + 10000;
 
     // Reseta a posição e exibe o OVNI
@@ -264,8 +270,13 @@ btnOvniElement.addEventListener('click', (event) => {
     btnOvniElement.style.display = "none";
 });
 
-// Lógica de clicar no planeta
+// Atualize o evento de clique no planeta
 btnClick.addEventListener('click', (event) => {
+    if (!jogadorClicouNoPlaneta) {
+        jogadorClicouNoPlaneta = true; // Marca que o jogador clicou no planeta
+        iniciarOvni(); // Inicia o ciclo do OVNI
+    }
+
     planetas += valorDeClique;
     pontosProgresso += valorDeClique;
 
