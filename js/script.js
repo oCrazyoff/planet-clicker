@@ -18,6 +18,10 @@ const ganhoPlanetaPassivoElement = document.getElementById('ganho-planeta-passiv
 const ganhoPlanetaCliqueElement = document.getElementById('ganho-planeta-clique');
 const containerBuffPlaneta = document.querySelector('.container-buff-planeta');
 const btnOvniElement = document.getElementById('btn-ovni');
+const containerInfoPlanetaElement = document.querySelector('container-planeta-info');
+const infoPlanetaNomeElement = document.getElementById('nome-info-planeta');
+const infoImagemPlaneta = document.getElementById('info-planeta-img');
+const infoPlanetaDescricaoElement = document.getElementById('info-planeta-ganho');
 
 // Audios
 const somClickMenu = document.getElementById('som-click-menu');
