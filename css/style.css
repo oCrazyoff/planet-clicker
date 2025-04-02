@@ -606,6 +606,11 @@ body {
     font-weight: bold;
 }
 
+.container-poderes,
+.container-upgrades {
+    z-index: 800;
+}
+
 @media (max-width: 768px) {
     .game {
         width: 100%;
@@ -676,7 +681,6 @@ body {
         height: 40%;
         top: 60%;
         border: none;
-        z-index: 800;
     }
 
     .container-upgrades button .container-info .nome {

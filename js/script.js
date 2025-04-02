@@ -32,7 +32,7 @@ const planetasProgresso = [
     { img: "https://cdn-icons-png.flaticon.com/512/433/433845.png", meta: 10000000, ganhoPassivo: 0, ganhoClique: 100 },
     { img: "https://i.pinimg.com/originals/73/f0/b3/73f0b3408c7d0bc312b0fb2d9fe9f4cb.png", meta: 50000000, ganhoPassivo: -50, ganhoClique: 100 },
     { img: "https://cdn-icons-png.flaticon.com/512/5088/5088964.png", meta: 100000000, ganhoPassivo: -90, ganhoClique: 100 },
-    { img: "https://cdn-icons-png.flaticon.com/512/2949/2949036.png", meta: 500000000, ganhoPassivo: 200, ganhoClique: -50 },
+    { img: "https://cdn-icons-png.flaticon.com/512/2949/2949036.png", meta: 200000000, ganhoPassivo: 200, ganhoClique: -50 },
     { img: "https://cdn-icons-png.flaticon.com/512/6967/6967700.png", meta: 0, ganhoPassivo: 200, ganhoClique: 200 },
 ];
 
