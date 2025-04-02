@@ -32,10 +32,10 @@ const somInfoPlaneta = document.getElementById('som-info-planeta');
 
 // Progresso de planetas (os ganhos devem ser em porcentagem)
 const planetasProgresso = [
-    { nome: 'Zypharion', img: "https://cdn-icons-png.flaticon.com/512/3327/3327324.png", meta: 10000, ganhoPassivo: 0, ganhoClique: 0 },
-    { nome: 'Nexaris', img: "https://cdn-icons-png.flaticon.com/512/6989/6989417.png", meta: 100000, ganhoPassivo: 0, ganhoClique: 10 },
-    { nome: 'Voltrion', img: "https://cdn-icons-png.flaticon.com/512/2739/2739628.png", meta: 500000, ganhoPassivo: 10, ganhoClique: 0 },
-    { nome: 'Xandoria', img: "https://static.vecteezy.com/system/resources/previews/024/596/370/non_2x/pink-planet-illustration-free-png.png", meta: 1000000, ganhoPassivo: 5, ganhoClique: 10 },
+    { nome: 'Zypharion', img: "https://cdn-icons-png.flaticon.com/512/3327/3327324.png", meta: 20000, ganhoPassivo: 0, ganhoClique: 0 },
+    { nome: 'Nexaris', img: "https://cdn-icons-png.flaticon.com/512/6989/6989417.png", meta: 150000, ganhoPassivo: 0, ganhoClique: 10 },
+    { nome: 'Voltrion', img: "https://cdn-icons-png.flaticon.com/512/2739/2739628.png", meta: 700000, ganhoPassivo: 10, ganhoClique: 0 },
+    { nome: 'Xandoria', img: "https://static.vecteezy.com/system/resources/previews/024/596/370/non_2x/pink-planet-illustration-free-png.png", meta: 1500000, ganhoPassivo: 5, ganhoClique: 10 },
     { nome: 'Cryzalis', img: "https://cdn-icons-png.flaticon.com/512/1789/1789829.png", meta: 5000000, ganhoPassivo: 0, ganhoClique: 10 },
     { nome: 'Drakoris', img: "https://cdn-icons-png.flaticon.com/512/433/433845.png", meta: 10000000, ganhoPassivo: 15, ganhoClique: 5 },
     { nome: 'Velmora', img: "https://i.pinimg.com/originals/73/f0/b3/73f0b3408c7d0bc312b0fb2d9fe9f4cb.png", meta: 50000000, ganhoPassivo: 10, ganhoClique: 10 },
