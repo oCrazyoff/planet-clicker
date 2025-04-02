@@ -18,26 +18,30 @@ const ganhoPlanetaPassivoElement = document.getElementById('ganho-planeta-passiv
 const ganhoPlanetaCliqueElement = document.getElementById('ganho-planeta-clique');
 const containerBuffPlaneta = document.querySelector('.container-buff-planeta');
 const btnOvniElement = document.getElementById('btn-ovni');
-const containerInfoPlanetaElement = document.querySelector('container-planeta-info');
+const containerInfoPlanetaElement = document.querySelector('.container-planeta-info');
 const infoPlanetaNomeElement = document.getElementById('nome-info-planeta');
 const infoImagemPlaneta = document.getElementById('info-planeta-img');
 const infoPlanetaDescricaoElement = document.getElementById('info-planeta-ganho');
+const btnFecharInfoPlaneta = document.getElementById('btn-info-planeta');
 
 // Audios
 const somClickMenu = document.getElementById('som-click-menu');
+const somOvni = document.getElementById('som-ovni');
+const somPopOvni = document.getElementById('som-pop-ovni');
+const somInfoPlaneta = document.getElementById('som-info-planeta');
 
 // Progresso de planetas (os ganhos devem ser em porcentagem)
 const planetasProgresso = [
-    { img: "https://cdn-icons-png.flaticon.com/512/3327/3327324.png", meta: 10000, ganhoPassivo: 0, ganhoClique: 0 },
-    { img: "https://cdn-icons-png.flaticon.com/512/6989/6989417.png", meta: 100000, ganhoPassivo: 0, ganhoClique: 50 },
-    { img: "https://cdn-icons-png.flaticon.com/512/2739/2739628.png", meta: 500000, ganhoPassivo: 50, ganhoClique: 0 },
-    { img: "https://static.vecteezy.com/system/resources/previews/024/596/370/non_2x/pink-planet-illustration-free-png.png", meta: 1000000, ganhoPassivo: 10, ganhoClique: 50 },
-    { img: "https://cdn-icons-png.flaticon.com/512/1789/1789829.png", meta: 5000000, ganhoPassivo: 0, ganhoClique: 70 },
-    { img: "https://cdn-icons-png.flaticon.com/512/433/433845.png", meta: 10000000, ganhoPassivo: 0, ganhoClique: 100 },
-    { img: "https://i.pinimg.com/originals/73/f0/b3/73f0b3408c7d0bc312b0fb2d9fe9f4cb.png", meta: 50000000, ganhoPassivo: -50, ganhoClique: 100 },
-    { img: "https://cdn-icons-png.flaticon.com/512/5088/5088964.png", meta: 100000000, ganhoPassivo: -90, ganhoClique: 100 },
-    { img: "https://cdn-icons-png.flaticon.com/512/2949/2949036.png", meta: 200000000, ganhoPassivo: 200, ganhoClique: -50 },
-    { img: "https://cdn-icons-png.flaticon.com/512/6967/6967700.png", meta: 0, ganhoPassivo: 200, ganhoClique: 200 },
+    { nome: 'Zypharion', img: "https://cdn-icons-png.flaticon.com/512/3327/3327324.png", meta: 10000, ganhoPassivo: 0, ganhoClique: 0 },
+    { nome: 'Nexaris', img: "https://cdn-icons-png.flaticon.com/512/6989/6989417.png", meta: 100000, ganhoPassivo: 0, ganhoClique: 10 },
+    { nome: 'Voltrion', img: "https://cdn-icons-png.flaticon.com/512/2739/2739628.png", meta: 500000, ganhoPassivo: 10, ganhoClique: 0 },
+    { nome: 'Xandoria', img: "https://static.vecteezy.com/system/resources/previews/024/596/370/non_2x/pink-planet-illustration-free-png.png", meta: 1000000, ganhoPassivo: 5, ganhoClique: 10 },
+    { nome: 'Cryzalis', img: "https://cdn-icons-png.flaticon.com/512/1789/1789829.png", meta: 5000000, ganhoPassivo: 0, ganhoClique: 10 },
+    { nome: 'Drakoris', img: "https://cdn-icons-png.flaticon.com/512/433/433845.png", meta: 10000000, ganhoPassivo: 15, ganhoClique: 5 },
+    { nome: 'Velmora', img: "https://i.pinimg.com/originals/73/f0/b3/73f0b3408c7d0bc312b0fb2d9fe9f4cb.png", meta: 50000000, ganhoPassivo: 10, ganhoClique: 10 },
+    { nome: 'Terra', img: "https://cdn-icons-png.flaticon.com/512/5088/5088964.png", meta: 100000000, ganhoPassivo: 20, ganhoClique: 25 },
+    { nome: 'Thalvax', img: "https://cdn-icons-png.flaticon.com/512/2949/2949036.png", meta: 200000000, ganhoPassivo: 25, ganhoClique: 15 },
+    { nome: 'Eldryon', img: "https://cdn-icons-png.flaticon.com/512/6967/6967700.png", meta: 0, ganhoPassivo: 30, ganhoClique: 30 },
 ];
 
 // Variáveis do jogo
@@ -90,56 +94,33 @@ function carregarProgresso() {
     }
 }
 
-// Função de formatação personalizada
+// Formatação personalizada dos numeros
 function formatarNumero(numero) {
-    const unidades = ["", "Mil", "Milhões", "Bilhões", "Trilhões", "Quadrilhões"];
-    const letrasMinusc = 'abcdefghijklmnopqrstuvwxyz';
+    const unidades = [
+        "", "Mil", "Milhões", "Bilhões", "Trilhões", "Quadrilhões",
+        "Quintilhões", "Sextilhões", "Septilhões", "Octilhões", "Nonilhões",
+        "Decilhões", "Undecilhões", "Duodecilhões", "Tredecilhões",
+        "Quatuordecilhões", "Quindecilhões", "Sexdecilhões", "Septendecilhões",
+        "Octodecilhões", "Novendecilhões", "Vigintilhões"
+    ];
+
 
     let unidadeIndex = 0;
-    let unidade = '';
 
-    // Divide o número para encontrar a unidade adequada
     while (numero >= 1000 && unidadeIndex < unidades.length - 1) {
         numero /= 1000;
         unidadeIndex++;
     }
 
-    // Pega a parte decimal (se houver) e formata para 2 casas
-    let decimalPart = (numero % 1).toFixed(2).substring(2);
-    numero = Math.floor(numero); // Remover a parte decimal para números maiores
-
-    let numeroFormatado = numero.toLocaleString();
-
-    // Se não houver parte decimal ou for igual a "00", não mostrar decimais
-    if (decimalPart === "00") {
-        decimalPart = "";
+    // Se ultrapassou Vigintilhões, começa a exibir como "∞1", "∞2", "∞3"...
+    if (unidadeIndex >= unidades.length - 1) {
+        let infinitoNivel = Math.floor(Math.log10(numero) / 3) - 7; // Conta os níveis ∞
+        return `∞${infinitoNivel}`;
     }
 
-    // Aplica a unidade adequada (Mil, Milhões, etc.)
-    if (unidadeIndex > 0) {
-        unidade = ' ' + unidades[unidadeIndex];
-    }
-
-    // Após "Quadrilhões", utiliza letras
-    if (unidadeIndex >= 5) {
-        let base = numero % 26;
-        let sequencia = letrasMinusc[base];
-        numero = Math.floor(numero / 26);
-        let letras = '';
-
-        if (numero > 0) {
-            letras = letrasMinusc[Math.floor(numero % 26)] + sequencia;
-        } else {
-            letras = sequencia;
-        }
-
-        // Retorna a letra combinada sem a parte decimal
-        return letras;
-    }
-
-    // Retorna o número formatado com ou sem decimais, dependendo da necessidade
-    return numeroFormatado + (decimalPart ? '.' + decimalPart : '') + unidade;
+    return numero.toFixed(1).replace(".0", "") + " " + unidades[unidadeIndex];
 }
+
 
 // Atualizar interface com os valores do jogo
 function atualizarInterface() {
@@ -209,12 +190,18 @@ function atualizarInterface() {
         imgPlaneta.src = planetasProgresso[planetaAtual].img; // Atualiza o src da imagem
     }
 
+    // Atualizar div de informações do planeta
+    infoPlanetaNomeElement.textContent = planetasProgresso[planetaAtual].nome;
+    infoImagemPlaneta.src = planetasProgresso[planetaAtual].img;
+    infoPlanetaDescricaoElement.innerHTML = "+ <i class='bi bi-clock-history'></i> " + planetasProgresso[planetaAtual].ganhoPassivo + "% e +" + "<i class='bi bi-hand-index-thumb'></i> " + planetasProgresso[planetaAtual].ganhoClique + "%";
+
+
     // Exibir ou ocultar containerBuffPlaneta
     containerBuffPlaneta.style.display = (upgradePlanetaPassivo || upgradePlanetaClique) ? "flex" : "none";
 
     // Atualizar os valores do ganho
-    ganhoPlanetaCliqueElement.innerHTML = upgradePlanetaClique ? `<i class="bi bi-hand-index-thumb"></i> ${upgradePlanetaClique}%` : "";
-    ganhoPlanetaPassivoElement.innerHTML = upgradePlanetaPassivo ? `<i class="bi bi-clock-history"></i> ${upgradePlanetaPassivo}%` : "";
+    ganhoPlanetaCliqueElement.innerHTML = upgradePlanetaClique ? `+ <i class="bi bi-hand-index-thumb"></i> ${upgradePlanetaClique}%` : "";
+    ganhoPlanetaPassivoElement.innerHTML = upgradePlanetaPassivo ? `+ <i class="bi bi-clock-history"></i> ${upgradePlanetaPassivo}%` : "";
 }
 
 // Lógica do ovni
@@ -231,9 +218,13 @@ function iniciarOvni() {
 
     // Alterna entre as animações
     if (animacaoAtual === "ovniFly1") {
+        somOvni.currentTime = 0;
+        somOvni.play();
         btnOvniElement.style.animation = "ovniFly2 5s";
         animacaoAtual = "ovniFly2";
     } else {
+        somOvni.currentTime = 0;
+        somOvni.play();
         btnOvniElement.style.animation = "ovniFly1 5s";
         animacaoAtual = "ovniFly1";
     }
@@ -248,6 +239,11 @@ iniciarOvni();
 
 btnOvniElement.addEventListener('click', (event) => {
     let porcentagemOvni = Math.floor(Math.random() * (100 - 10 + 1)) + 10;
+
+    // Som
+    somOvni.pause();
+    somPopOvni.currentTime = 0;
+    somPopOvni.play();
 
     // Calcular o ganho e aplica-lo
     let ganhoOvni = planetas * (porcentagemOvni / 100)
@@ -396,12 +392,14 @@ btnPoderes.forEach((btn, index) => {
             // Atualizar o valor de clique ou o ganho passivo, dependendo do tipo de poder
             if (index % 2 === 0) {
                 valorDeClique += ganhoPoderes[index]; // Aumenta o valor do clique
+                valorDeClique += valorDeClique * upgradePlanetaClique / 100
             } else {
                 planetasPassivos += ganhoPoderes[index]; // Aumenta o ganho passivo
+                planetasPassivos += planetasPassivos * upgradePlanetaPassivo / 100
             }
 
             // Aumentar o preço do poder e o ganho
-            precoPoderes[index] = Math.floor(precoPoderes[index] * 1.5);
+            precoPoderes[index] = Math.floor(precoPoderes[index] * 1.6);
             ganhoPoderes[index] += 1;
 
             // Atualizar a interface
@@ -453,6 +451,15 @@ btnUpgrades.forEach((btn, index) => {
 let progresso = 0;
 let pontosProgresso = 0;
 
+// Botão de fechar a div info planeta
+btnFecharInfoPlaneta.addEventListener('click', () => {
+    // Som
+    somClickMenu.currentTime = 0;
+    somClickMenu.play();
+
+    containerInfoPlanetaElement.style.display = 'none';
+});
+
 function updateBarraProgresso() {
     const progressoPercentual = (planetasProgresso[planetaAtual].meta !== 0)
         ? (pontosProgresso / planetasProgresso[planetaAtual].meta) * 100
@@ -470,13 +477,16 @@ function trocarPlaneta() {
     if (planetaAtual < planetasProgresso.length - 1) {
         planetaAtual++;
 
+        // Mostrar div de informações
+        containerInfoPlanetaElement.style.display = "flex";
+
+        // Som
+        somInfoPlaneta.currentTime = 0;
+        somInfoPlaneta.play();
+
         // Atualizar os ganhos do planeta atual
         upgradePlanetaClique = planetasProgresso[planetaAtual].ganhoClique;
         upgradePlanetaPassivo = planetasProgresso[planetaAtual].ganhoPassivo;
-
-        // Atualizar os valores de clique e ganho passivo
-        valorDeClique += (valorDeClique * upgradePlanetaClique / 100);
-        planetasPassivos += (planetasPassivos * upgradePlanetaPassivo / 100);
 
         atualizarInterface();
         salvarProgresso();
