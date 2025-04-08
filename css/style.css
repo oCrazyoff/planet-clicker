@@ -3,6 +3,11 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -158,10 +163,6 @@ body {
     z-index: 600;
     user-select: none;
     transition: .2s ease all;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .container-ovni #btn-ovni img {
@@ -178,11 +179,6 @@ body {
     text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.9);
     z-index: 550;
     animation: ganhoSubir 2s forwards;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-tap-highlight-color: transparent;
     pointer-events: none;
 }
 
@@ -273,11 +269,6 @@ body {
     transition: 1s ease all;
     position: relative;
     z-index: 500;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-tap-highlight-color: transparent;
     outline: none;
     border-radius: 50%;
 }
@@ -343,11 +334,6 @@ body {
     z-index: 500;
     opacity: 0;
     text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-tap-highlight-color: transparent;
     pointer-events: none;
 }
 
@@ -595,11 +581,6 @@ body {
     align-items: center;
     justify-content: center;
     height: 100%;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-tap-highlight-color: transparent;
     pointer-events: none;
 }
 
@@ -709,6 +690,17 @@ body {
 .container-poderes,
 .container-upgrades {
     z-index: 800;
+}
+
+.titulo {
+    background-color: #0077b6;
+    border: 3px solid #001219;
+    width: 100%;
+    padding: .5em;
+    border-radius: .5em;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
 }
 
 @media (max-width: 768px) {
