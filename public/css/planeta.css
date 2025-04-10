@@ -1,0 +1,137 @@
+.container-barra-progresso {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: .5em;
+}
+
+.container-barra-progresso #barra-progresso {
+    background: rgb(33, 131, 128);
+    background: linear-gradient(90deg, rgba(33, 131, 128, 1) 35%, rgba(115, 210, 222, 1) 100%);
+    width: 0%;
+    height: 100%;
+    transition: .2s ease all;
+}
+
+.container-planeta-info {
+    position: absolute;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 850;
+}
+
+.container-planeta-info #info-planeta {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    background-color: #0077b6;
+    border-radius: 1em;
+    z-index: 1;
+}
+
+.container-planeta-info::before,
+.container-planeta-info::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: conic-gradient(from 0deg,
+            rgba(255, 223, 0, 0.3),
+            rgba(255, 223, 0, 0) 30%,
+            rgba(255, 223, 0, 0.3) 60%,
+            rgba(255, 223, 0, 0) 90%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    animation: rotateLightBands 4s linear infinite;
+    z-index: -1;
+    /* Ensure it stays behind the container */
+}
+
+.container-planeta-info::after {
+    animation-direction: reverse;
+    opacity: 0.5;
+}
+
+@keyframes rotateLightBands {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.container-planeta-info #btn-info-planeta {
+    position: absolute;
+    top: -5%;
+    right: -5%;
+    font-size: 1.5em;
+    border-radius: 50%;
+    height: 2em;
+    width: 2em;
+    background-color: #c1121f;
+    border: 2px solid #780000;
+    color: #fff;
+    cursor: pointer;
+    transition: .2s ease all;
+}
+
+.container-planeta-info #btn-info-planeta:hover {
+    background-color: #780000;
+    transform: scale(1.1);
+}
+
+.container-planeta-info #info-planeta #nome-info-planeta {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    background-color: #2a4d5f;
+    color: #fff;
+    padding: .5em;
+    border-radius: .5em;
+}
+
+.container-planeta-info #info-planeta .descricao-planeta {
+    margin-top: 1em;
+    color: #fff;
+    background-color: #1e3747;
+    padding: .5em;
+    border-radius: .5em;
+}
+
+.container-planeta-info #info-planeta img {
+    width: 15em;
+}
+
+@media (max-width: 768px) {
+    .container-planeta-info #info-planeta {
+        width: 90%;
+        padding: 1em;
+        font-size: 0.9em;
+        border-radius: 0.5em;
+    }
+
+    .container-planeta-info #info-planeta #nome-info-planeta {
+        font-size: 1.2em;
+        margin-bottom: 0.5em;
+    }
+
+    .container-planeta-info #info-planeta .descricao-planeta {
+        font-size: 0.9em;
+        margin-top: 0.5em;
+    }
+
+    .container-planeta-info #info-planeta img {
+        width: 10em;
+    }
+}

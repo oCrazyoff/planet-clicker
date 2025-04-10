@@ -1,0 +1,95 @@
+.container-upgrades {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 100%;
+    width: 30%;
+    padding: 1em;
+    overflow-y: auto;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.container-upgrades button {
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    align-items: center;
+    background-color: #edf2f4;
+    border: 2px solid #8d99ae;
+    width: 100%;
+    min-height: 5em;
+    max-height: 5em;
+    border-radius: 1em;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.lvl2 {
+    background-color: #7b2cbf !important;
+    border: 2px solid #3c096c !important;
+}
+
+.lvl2 .container-info {
+    background-color: #3c096c !important;
+}
+
+.lvl3 {
+    background-color: #fbe134 !important;
+    border: 2px solid #e4b61a !important;
+}
+
+.lvl3 .container-info {
+    background-color: #e4b61a !important;
+}
+
+.container-upgrades button:hover {
+    background-color: #1f2029;
+}
+
+.container-upgrades button:active {
+    background-color: #001219;
+    transform: scale(1.1);
+}
+
+.container-upgrades button img {
+    margin-top: .5em;
+    width: 30%;
+}
+
+.container-upgrades button .container-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #2b2d42;
+    padding: 0 .5em;
+    height: 100%;
+    width: 65%;
+    border-radius: 1em;
+}
+
+.container-upgrades button .container-info .baixo {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.container-upgrades button .container-info .nome {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .container-upgrades button .container-info .nome {
+        font-size: 1.1em;
+    }
+}

@@ -1,0 +1,98 @@
+.container-poderes {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 100%;
+    width: 30%;
+    padding: 1em;
+    overflow-y: auto;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.container-poderes button {
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    align-items: center;
+    background-color: #356a85;
+    border: 2px solid #1e3747;
+    width: 100%;
+    min-height: 5em;
+    max-height: 5em;
+    border-radius: 1em;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.container-poderes button:hover {
+    background-color: #2a4d5f;
+}
+
+.container-poderes button:active {
+    background-color: #1e3747;
+    transform: scale(1.1);
+}
+
+.container-poderes button img {
+    margin-top: 0.5em;
+    width: 25%;
+}
+
+.container-poderes .count-poder {
+    margin: 0 .5em;
+    border-radius: 1em;
+}
+
+.container-poderes .count-poder p {
+    font-size: 2.3em;
+    font-weight: bold;
+    color: white;
+    text-shadow:
+        -2px -2px 0 #1e3747,
+        2px -2px 0 #1e3747,
+        -2px 2px 0 #1e3747,
+        2px 2px 0 #1e3747;
+}
+
+.container-poderes button .container-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    pointer-events: none;
+}
+
+.container-poderes button .container-info .baixo {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.container-poderes button .container-info .nome {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .container-poderes button .container-info {
+        padding: .3em;
+    }
+
+    .container-poderes button .container-info .nome {
+        font-size: 1.2em;
+    }
+
+    .container-poderes .count-upgrade p {
+        font-size: 2em;
+    }
+}

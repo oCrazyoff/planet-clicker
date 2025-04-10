@@ -1,0 +1,153 @@
+.container-ovni {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.container-ovni #btn-ovni {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 50%;
+    left: -50%;
+    z-index: 600;
+    user-select: none;
+    transition: .2s ease all;
+}
+
+.container-ovni #btn-ovni img {
+    height: 10em;
+}
+
+.ganho-ovni {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 2em;
+    font-weight: bold;
+    color: #858ae3;
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.9);
+    z-index: 550;
+    animation: ganhoSubir 2s forwards;
+    pointer-events: none;
+}
+
+@keyframes ganhoSubir {
+    0% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+@keyframes ovniFly1 {
+    0% {
+        left: -50%;
+    }
+
+    25% {
+        left: 25%;
+        top: 30%;
+    }
+
+    50% {
+        left: 50%;
+    }
+
+    75% {
+        top: 70%;
+        left: 80%;
+    }
+
+    90% {
+        left: 90%;
+        top: 30%;
+    }
+
+    100% {
+        left: 50%;
+        top: -50%;
+    }
+}
+
+@keyframes ovniFly2 {
+    0% {
+        left: 50%;
+        top: 100%;
+    }
+
+    25% {
+        top: 80%;
+    }
+
+    50% {
+        left: 30%;
+        top: 50%;
+    }
+
+    75% {
+        top: 70%;
+        left: 80%;
+    }
+
+    90% {
+        left: 90%;
+        top: 30%;
+    }
+
+    100% {
+        left: 50%;
+        top: -50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-ovni {
+        width: 100%;
+        height: 100%;
+    }
+
+    .container-ovni #btn-ovni img {
+        height: 8em;
+    }
+
+    @keyframes ovniFly2 {
+        0% {
+            left: 20%;
+            top: 100%;
+        }
+
+        25% {
+            top: 80%;
+        }
+
+        50% {
+            left: 30%;
+            top: 50%;
+        }
+
+        75% {
+            top: 70%;
+            left: 50%;
+        }
+
+        90% {
+            left: 30%;
+            top: 30%;
+        }
+
+        100% {
+            left: 50%;
+            top: -50%;
+        }
+    }
+}
