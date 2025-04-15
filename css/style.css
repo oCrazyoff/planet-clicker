@@ -1,0 +1,375 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-image: url('https://4kwallpapers.com/images/walls/thumbs_3t/21279.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.game {
+    position: relative;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+#btn-click {
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    height: 50%;
+    transition: 1s ease all;
+    position: relative;
+    z-index: 500;
+    outline: none;
+    border-radius: 50%;
+}
+
+#btn-click img {
+    height: 100%;
+    width: 100%;
+    transition: 0.3s ease all;
+    filter: drop-shadow(0 0 0.75rem #000);
+    animation: spin 30s linear infinite;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes subir {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-200px);
+        opacity: 0;
+    }
+}
+
+@keyframes click {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.95);
+    }
+
+    75% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.valor-clique {
+    position: absolute;
+    color: #fff;
+    font-size: 1.6em;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 1em;
+    z-index: 500;
+    opacity: 0;
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+/* Btn bug */
+#btn-reset {
+    position: absolute;
+    top: 2%;
+    right: 86%;
+    border: none;
+    background-color: #c1121f;
+    color: #fff;
+    border-radius: .5em;
+    padding: .5em;
+    border: 2px solid #780000;
+    cursor: pointer;
+    z-index: 800;
+}
+
+/* DEBUG */
+#btn-debug {
+    position: absolute;
+    top: 2%;
+    right: 94%;
+    border: none;
+    background-color: #e4b61a;
+    border-radius: .5em;
+    padding: .5em;
+    border: 2px solid #6d6009;
+    cursor: pointer;
+    z-index: 800;
+}
+
+.debug-menu {
+    display: none;
+}
+
+.debug-menu .buttons {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #000;
+    border: 2px solid #fff;
+    border-radius: 1em;
+    height: 20em;
+    width: 30em;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.debug-menu .buttons #fechar {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    background-color: rgb(160, 27, 27);
+    padding: .5em;
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+    color: #fff;
+    border: 2px solid rgb(102, 18, 18);
+    cursor: pointer;
+}
+
+.debug-menu .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 900;
+    width: 100%;
+    height: 100%;
+    background-color: #000000c0;
+}
+
+#btn-hack {
+    padding: .5em;
+    border-radius: .5em;
+    border: 2px solid #6d6009;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 0.5em;
+    border-radius: 1em;
+    width: 20em;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.info p {
+    display: flex;
+    gap: .5em;
+}
+
+.info span {
+    font-weight: bold;
+}
+
+.container-buff-planeta {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    right: -5%;
+    bottom: -10%;
+    font-size: 15px;
+    background-color: #0077b6;
+    border: 2px solid #03045e;
+    border-radius: .5em;
+    padding: .2em .3em;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    padding: 1em 0;
+    position: absolute;
+    right: 30%;
+    bottom: 0%;
+    border-right: 5px solid #000;
+    height: 100%;
+    z-index: 800;
+}
+
+.menu .btn-menu {
+    background-color: #393939;
+    color: #fff;
+    border: none;
+    font-size: 1.5em;
+    padding: 1em .3em;
+    border-radius: .5em 0 0 .5em;
+    cursor: pointer;
+}
+
+.menu #menu-poderes {
+    background-color: #000;
+}
+
+.desativado {
+    transform: translateX(100%);
+}
+
+.inativo {
+    opacity: .5;
+    pointer-events: none;
+}
+
+.hide {
+    position: relative;
+}
+
+.hide::after {
+    content: "???";
+    position: absolute;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+}
+
+.titulo {
+    background-color: #0077b6;
+    border: 3px solid #001219;
+    width: 100%;
+    padding: .5em;
+    border-radius: .5em;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
+
+.container-poderes,
+.container-upgrades {
+    z-index: 800;
+}
+
+@media (max-width: 768px) {
+    .game {
+        width: 100%;
+        height: 60%;
+        justify-content: flex-start;
+        padding-top: 1em;
+    }
+
+    .menu {
+        flex-direction: row;
+        padding: 0 1em;
+        right: 0%;
+        bottom: 40%;
+        border: none;
+        border-bottom: 5px solid #000;
+        height: auto;
+        width: 100%;
+    }
+
+    .menu .btn-menu {
+        border-radius: .5em .5em 0 0;
+        padding: .2em 1em;
+    }
+
+    .container-poderes,
+    .container-upgrades {
+        width: 100% !important;
+        height: 40% !important;
+        top: 60% !important;
+        border: none;
+    }
+
+    .container-poderes button img,
+    .container-upgrades button img {
+        width: 25%;
+    }
+
+    .desativado {
+        transform: translateY(100%);
+    }
+
+    #btn-click {
+        height: 50%;
+    }
+
+    #btn-click img {
+        height: 100%;
+    }
+
+    .valor-clique {
+        width: auto;
+        font-size: 1.4em;
+    }
+
+    .info {
+        width: 75%;
+        font-size: 1.2em;
+    }
+
+    #btn-debug {
+        top: 85%;
+        right: 1%;
+    }
+
+    #btn-reset {
+        top: 74%;
+        right: 1%;
+    }
+
+    .debug-menu .buttons {
+        width: 90%;
+    }
+
+
+}
