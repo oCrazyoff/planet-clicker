@@ -1,23 +1,26 @@
 const containerPoderes = document.querySelector('.container-poderes');
 const containerUpgrades = document.querySelector('.container-upgrades');
-menuPoderes.addEventListener('click', () => {
-    // Som
+const containerConfig = document.querySelector('.container-config');
+const menuPoderes = document.getElementById('menu-poderes');
+const menuUpgrades = document.getElementById('menu-upgrades');
+const menuConfig = document.getElementById('menu-config');
+const menus = [
+    { button: menuPoderes, container: containerPoderes },
+    { button: menuUpgrades, container: containerUpgrades },
+    { button: menuConfig, container: containerConfig },
+];
+
+function handleMenuClick(activeMenu) {
     somClickMenu.currentTime = 0;
     somClickMenu.play();
 
-    containerUpgrades.classList.add('desativado');
-    containerPoderes.classList.remove('desativado');
-    menuPoderes.style.backgroundColor = "#000";
-    menuUpgrades.style.backgroundColor = "#393939";
-});
+    menus.forEach(({ button, container }) => {
+        const isActive = button === activeMenu.button;
+        container.classList.toggle('desativado', !isActive);
+        button.style.backgroundColor = isActive ? "#000" : "#393939";
+    });
+}
 
-menuUpgrades.addEventListener('click', () => {
-    // Som
-    somClickMenu.currentTime = 0;
-    somClickMenu.play();
-
-    containerUpgrades.classList.remove('desativado');
-    containerPoderes.classList.add('desativado');
-    menuUpgrades.style.backgroundColor = "#000";
-    menuPoderes.style.backgroundColor = "#393939";
-});
+menuPoderes.addEventListener('click', () => handleMenuClick(menus[0]));
+menuUpgrades.addEventListener('click', () => handleMenuClick(menus[1]));
+menuConfig.addEventListener('click', () => handleMenuClick(menus[2]));

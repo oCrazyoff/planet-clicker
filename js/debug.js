@@ -18,7 +18,6 @@ document.getElementById('btn-reset').addEventListener('click', () => {
 });
 
 // ==================== Lógica de Debug ====================
-// Pode ser movido para um arquivo chamado `debugLogic.js`
 document.getElementById('btn-debug').addEventListener('click', () => {
     const senha = prompt("Digite a senha: ");
 
