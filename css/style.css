@@ -308,6 +308,7 @@ body {
 
     .menu {
         flex-direction: row;
+        justify-content: space-around;
         padding: 0 1em;
         right: 0%;
         bottom: 40%;
@@ -358,12 +359,11 @@ body {
     }
 
     #btn-debug {
-        top: 85%;
+        top: 13%;
         right: 1%;
     }
 
     #btn-reset {
-        top: 74%;
         right: 1%;
     }
 
