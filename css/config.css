@@ -108,12 +108,9 @@
 }
 
 @media (max-width: 768px) {
-    .container-config {
-        padding: .3em;
-    }
 
     /* DEBUG */
     .debug-menu .buttons {
-        width: 90%;
+        width: 100%;
     }
 }

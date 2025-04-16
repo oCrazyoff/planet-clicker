@@ -210,7 +210,9 @@ body {
 }
 
 .container-poderes,
-.container-upgrades {
+.container-upgrades,
+.container-avancos,
+.container-config {
     z-index: 800;
 }
 
@@ -241,6 +243,7 @@ body {
 
     .container-poderes,
     .container-upgrades,
+    .container-avancos,
     .container-config {
         width: 100% !important;
         height: 40% !important;
